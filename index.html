@@ -1877,15 +1877,20 @@
 
         // Update progress on scroll
         const observerOptions = {
-            threshold: 0.3,
-            rootMargin: '-120px 0px -50% 0px'
+            threshold: 0.15,
+            rootMargin: '-100px 0px -60% 0px'
         };
+
+        let currentActiveStep = 1; // Track current active step
 
         const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const stepNum = entry.target.id.replace('step', '');
-                    updateProgress(parseInt(stepNum));
+                    const stepNum = parseInt(entry.target.id.replace('step', ''));
+                    if (stepNum !== currentActiveStep) {
+                        currentActiveStep = stepNum;
+                        updateProgress(stepNum);
+                    }
                 }
             });
         }, observerOptions);
@@ -1904,6 +1909,9 @@
                 }
             });
         }
+
+        // Initialize first step as active on page load
+        updateProgress(1);
 
         // Fade in animation on scroll
         const fadeElements = document.querySelectorAll('.fade-up');
