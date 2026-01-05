@@ -1185,14 +1185,32 @@
         @media (max-width: 768px) {
             .header {
                 padding: 0.75rem 1.25rem;
+                flex-wrap: wrap;
+                gap: 0.75rem;
+            }
+
+            .logo-container {
+                width: 100%;
+                justify-content: space-between;
             }
 
             .progress-nav {
+                width: 100%;
                 gap: 6px;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                padding-bottom: 0.25rem;
+            }
+
+            .progress-nav::-webkit-scrollbar {
+                display: none;
             }
 
             .progress-step {
                 padding: 8px 10px;
+                flex-shrink: 0;
             }
 
             .progress-step .step-num {
