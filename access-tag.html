@@ -736,7 +736,7 @@
     </section>
 
     <!-- Main Content -->
-    <main class="main-content">
+    <main class="py-16 md:py-20 px-8 max-w-7xl mx-auto">
         <!-- Step 1: Unboxing & Components -->
         <section class="mb-24 fade-up" id="step1">
             <div class="flex items-start gap-6 mb-12">
@@ -750,90 +750,124 @@
             </div>
 
             <!-- Package Contents -->
-            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin-bottom: 1rem;">Paket İçeriği</h3>
-            <div class="package-list">
-                <div class="package-item">
-                    <i class="fas fa-qrcode"></i>
-                    <span>Access Tag (QR kod etiketi)</span>
+            <h3 class="text-2xl font-bold text-neutral-900 mb-6">Paket İçeriği</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <div class="flex items-center gap-4 p-6 bg-white rounded-2xl border-2 border-neutral-200 hover:border-tag-blue hover:shadow-soft transition-all duration-300">
+                    <i class="fas fa-qrcode text-3xl text-tag-blue"></i>
+                    <span class="text-neutral-700 font-semibold">Access Tag (QR kod etiketi)</span>
                 </div>
-                <div class="package-item">
-                    <i class="fas fa-screwdriver"></i>
-                    <span>Montaj donanımı (vida, dübel)</span>
+                <div class="flex items-center gap-4 p-6 bg-white rounded-2xl border-2 border-neutral-200 hover:border-tag-blue hover:shadow-soft transition-all duration-300">
+                    <i class="fas fa-screwdriver text-3xl text-tag-blue"></i>
+                    <span class="text-neutral-700 font-semibold">Montaj donanımı (vida, dübel)</span>
                 </div>
-                <div class="package-item">
-                    <i class="fas fa-sticky-note"></i>
-                    <span>Yapışkan pad</span>
+                <div class="flex items-center gap-4 p-6 bg-white rounded-2xl border-2 border-neutral-200 hover:border-tag-blue hover:shadow-soft transition-all duration-300">
+                    <i class="fas fa-sticky-note text-3xl text-tag-blue"></i>
+                    <span class="text-neutral-700 font-semibold">Yapışkan pad</span>
                 </div>
-                <div class="package-item">
-                    <i class="fas fa-book"></i>
-                    <span>Kullanım kılavuzu</span>
+                <div class="flex items-center gap-4 p-6 bg-white rounded-2xl border-2 border-neutral-200 hover:border-tag-blue hover:shadow-soft transition-all duration-300">
+                    <i class="fas fa-book text-3xl text-tag-blue"></i>
+                    <span class="text-neutral-700 font-semibold">Kullanım kılavuzu</span>
                 </div>
-                <div class="package-item">
-                    <i class="fas fa-tag"></i>
-                    <span>Passgage logosu ve markalama</span>
+                <div class="flex items-center gap-4 p-6 bg-white rounded-2xl border-2 border-neutral-200 hover:border-tag-blue hover:shadow-soft transition-all duration-300">
+                    <i class="fas fa-tag text-3xl text-tag-blue"></i>
+                    <span class="text-neutral-700 font-semibold">Passgage logosu ve markalama</span>
                 </div>
             </div>
 
             <!-- Technical Specifications -->
-            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin: 3rem 0 1rem;">Teknik Özellikler</h3>
-            <div class="specs-table">
-                <table>
+            <h3 class="text-2xl font-bold text-neutral-900 mt-12 mb-6">Teknik Özellikler</h3>
+            <div class="bg-white rounded-3xl overflow-hidden shadow-card">
+                <table class="w-full">
                     <thead>
-                        <tr>
-                            <th>Özellik</th>
-                            <th>Değer</th>
+                        <tr class="bg-gradient-to-r from-tag-blue to-tag-navy">
+                            <th class="text-left text-white font-bold p-5">Özellik</th>
+                            <th class="text-left text-white font-bold p-5">Değer</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><strong>Boyutlar</strong></td>
-                            <td>150mm x 150mm (Standart) / 200mm x 200mm (Büyük)</td>
+                        <tr class="border-b border-neutral-200 hover:bg-neutral-50 transition-colors">
+                            <td class="p-5 text-neutral-900 font-semibold">Boyutlar</td>
+                            <td class="p-5 text-neutral-700">150mm x 150mm (Standart) / 200mm x 200mm (Büyük)</td>
                         </tr>
-                        <tr>
-                            <td><strong>Malzeme</strong></td>
-                            <td>Yüksek dayanıklı PVC / Metal (paslanmaz çelik)</td>
+                        <tr class="border-b border-neutral-200 hover:bg-neutral-50 transition-colors">
+                            <td class="p-5 text-neutral-900 font-semibold">Malzeme</td>
+                            <td class="p-5 text-neutral-700">Yüksek dayanıklı PVC / Metal (paslanmaz çelik)</td>
                         </tr>
-                        <tr>
-                            <td><strong>Su geçirmezlik derecesi</strong></td>
-                            <td>IP65 (Dış mekan kullanımı için uygun)</td>
+                        <tr class="border-b border-neutral-200 hover:bg-neutral-50 transition-colors">
+                            <td class="p-5 text-neutral-900 font-semibold">Su geçirmezlik derecesi</td>
+                            <td class="p-5 text-neutral-700">IP65 (Dış mekan kullanımı için uygun)</td>
                         </tr>
-                        <tr>
-                            <td><strong>Operasyon sıcaklığı</strong></td>
-                            <td>-20°C ile +60°C arası</td>
+                        <tr class="border-b border-neutral-200 hover:bg-neutral-50 transition-colors">
+                            <td class="p-5 text-neutral-900 font-semibold">Operasyon sıcaklığı</td>
+                            <td class="p-5 text-neutral-700">-20°C ile +60°C arası</td>
                         </tr>
-                        <tr>
-                            <td><strong>UV koruması</strong></td>
-                            <td><i class="fas fa-check-circle check-icon"></i> Evet</td>
+                        <tr class="border-b border-neutral-200 hover:bg-neutral-50 transition-colors">
+                            <td class="p-5 text-neutral-900 font-semibold">UV koruması</td>
+                            <td class="p-5 text-neutral-700"><i class="fas fa-check-circle text-green-600 text-xl mr-2"></i>Evet</td>
                         </tr>
-                        <tr>
-                            <td><strong>Ömür beklentisi</strong></td>
-                            <td>5+ yıl (dış mekan koşullarında)</td>
+                        <tr class="hover:bg-neutral-50 transition-colors">
+                            <td class="p-5 text-neutral-900 font-semibold">Ömür beklentisi</td>
+                            <td class="p-5 text-neutral-700">5+ yıl (dış mekan koşullarında)</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
             <!-- Required Tools -->
-            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin: 3rem 0 1rem;">Gerekli Araçlar</h3>
-            <div class="tools-section">
-                <div class="tools-card">
-                    <h4><i class="fas fa-tools"></i> Zorunlu Araçlar</h4>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Matkap (vida montajı için)</li>
-                        <li><i class="fas fa-check"></i> Seviye ölçer (düz montaj için)</li>
-                        <li><i class="fas fa-check"></i> Metre/mezura (yükseklik ölçümü)</li>
-                        <li><i class="fas fa-check"></i> Temizlik malzemeleri (yüzey temizliği)</li>
-                        <li><i class="fas fa-check"></i> Kalem/işaretleyici</li>
+            <h3 class="text-2xl font-bold text-neutral-900 mt-12 mb-6">Gerekli Araçlar</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-3xl p-8 border-2 border-neutral-200 hover:border-tag-blue hover:shadow-card transition-all duration-300">
+                    <h4 class="flex items-center gap-3 text-xl font-bold text-neutral-900 mb-6">
+                        <i class="fas fa-tools text-tag-blue"></i> Zorunlu Araçlar
+                    </h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-neutral-700">
+                            <i class="fas fa-check text-tag-blue"></i>
+                            <span>Matkap (vida montajı için)</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-neutral-700">
+                            <i class="fas fa-check text-tag-blue"></i>
+                            <span>Seviye ölçer (düz montaj için)</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-neutral-700">
+                            <i class="fas fa-check text-tag-blue"></i>
+                            <span>Metre/mezura (yükseklik ölçümü)</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-neutral-700">
+                            <i class="fas fa-check text-tag-blue"></i>
+                            <span>Temizlik malzemeleri (yüzey temizliği)</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-neutral-700">
+                            <i class="fas fa-check text-tag-blue"></i>
+                            <span>Kalem/işaretleyici</span>
+                        </li>
                     </ul>
                 </div>
-                <div class="tools-card">
-                    <h4><i class="fas fa-plus-circle"></i> Opsiyonel Araçlar</h4>
-                    <ul>
-                        <li><i class="fas fa-circle"></i> Duvar dedektörü (kablo/boru kontrolü)</li>
-                        <li><i class="fas fa-circle"></i> Sıcak hava tabancası (yapışkan aktivasyonu)</li>
-                        <li><i class="fas fa-circle"></i> Tork tornavidası (hassas sıkma)</li>
-                        <li><i class="fas fa-circle"></i> Koruyucu eldiven</li>
-                        <li><i class="fas fa-circle"></i> Güvenlik gözlüğü</li>
+                <div class="bg-white rounded-3xl p-8 border-2 border-neutral-200 hover:border-tag-blue hover:shadow-card transition-all duration-300">
+                    <h4 class="flex items-center gap-3 text-xl font-bold text-neutral-900 mb-6">
+                        <i class="fas fa-plus-circle text-tag-blue"></i> Opsiyonel Araçlar
+                    </h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-neutral-700">
+                            <i class="fas fa-circle text-tag-blue text-sm"></i>
+                            <span>Duvar dedektörü (kablo/boru kontrolü)</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-neutral-700">
+                            <i class="fas fa-circle text-tag-blue text-sm"></i>
+                            <span>Sıcak hava tabancası (yapışkan aktivasyonu)</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-neutral-700">
+                            <i class="fas fa-circle text-tag-blue text-sm"></i>
+                            <span>Tork tornavidası (hassas sıkma)</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-neutral-700">
+                            <i class="fas fa-circle text-tag-blue text-sm"></i>
+                            <span>Koruyucu eldiven</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-neutral-700">
+                            <i class="fas fa-circle text-tag-blue text-sm"></i>
+                            <span>Güvenlik gözlüğü</span>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -852,48 +886,48 @@
             </div>
 
             <!-- Ideal Height Diagram -->
-            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin-bottom: 1rem;">İdeal Yerleşim Yüksekliği</h3>
-            <div class="height-diagram">
-                <div class="height-diagram-content">
-                    <div class="height-icon">
+            <h3 class="text-2xl font-bold text-neutral-900 mb-6">İdeal Yerleşim Yüksekliği</h3>
+            <div class="bg-white rounded-3xl p-10 shadow-card flex items-center justify-center min-h-[300px]">
+                <div class="text-center flex flex-col items-center gap-6">
+                    <div class="w-24 h-24 bg-gradient-to-br from-tag-blue to-tag-navy rounded-full flex items-center justify-center text-white text-5xl shadow-strong">
                         <i class="fas fa-arrows-alt-v"></i>
                     </div>
-                    <div class="height-label">1.2m - 1.5m</div>
-                    <p class="height-description">Göz hizası yüksekliği, kolay tarama ve erişim için optimal</p>
+                    <div class="text-4xl font-extrabold text-tag-blue">1.2m - 1.5m</div>
+                    <p class="text-neutral-600 text-lg max-w-md">Göz hizası yüksekliği, kolay tarama ve erişim için optimal</p>
                 </div>
             </div>
 
             <!-- Site Survey Checklist -->
-            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin: 3rem 0 1rem;">Lokasyon Kontrol Listesi</h3>
-            <div class="checklist">
-                <div class="checklist-item">
-                    <input type="checkbox" id="check1">
-                    <label for="check1"><strong>Yüksek trafik alanı:</strong> Çalışanların sık kullandığı giriş-çıkış noktaları</label>
+            <h3 class="text-2xl font-bold text-neutral-900 mt-12 mb-6">Lokasyon Kontrol Listesi</h3>
+            <div class="flex flex-col gap-4">
+                <div class="flex items-start gap-4 p-5 bg-white rounded-xl border-2 border-neutral-200 hover:border-tag-blue hover:bg-tag-blue/5 transition-all">
+                    <input type="checkbox" id="check1" class="w-6 h-6 cursor-pointer accent-tag-blue flex-shrink-0 mt-0.5">
+                    <label for="check1" class="text-neutral-700 leading-relaxed cursor-pointer flex-1"><strong>Yüksek trafik alanı:</strong> Çalışanların sık kullandığı giriş-çıkış noktaları</label>
                 </div>
-                <div class="checklist-item">
-                    <input type="checkbox" id="check2">
-                    <label for="check2"><strong>İyi aydınlatma:</strong> Doğal veya yapay ışık ile QR kod net görünür</label>
+                <div class="flex items-start gap-4 p-5 bg-white rounded-xl border-2 border-neutral-200 hover:border-tag-blue hover:bg-tag-blue/5 transition-all">
+                    <input type="checkbox" id="check2" class="w-6 h-6 cursor-pointer accent-tag-blue flex-shrink-0 mt-0.5">
+                    <label for="check2" class="text-neutral-700 leading-relaxed cursor-pointer flex-1"><strong>İyi aydınlatma:</strong> Doğal veya yapay ışık ile QR kod net görünür</label>
                 </div>
-                <div class="checklist-item">
-                    <input type="checkbox" id="check3">
-                    <label for="check3"><strong>Hava koşullarından korunma:</strong> Dış mekanda saçak veya koruma altında</label>
+                <div class="flex items-start gap-4 p-5 bg-white rounded-xl border-2 border-neutral-200 hover:border-tag-blue hover:bg-tag-blue/5 transition-all">
+                    <input type="checkbox" id="check3" class="w-6 h-6 cursor-pointer accent-tag-blue flex-shrink-0 mt-0.5">
+                    <label for="check3" class="text-neutral-700 leading-relaxed cursor-pointer flex-1"><strong>Hava koşullarından korunma:</strong> Dış mekanda saçak veya koruma altında</label>
                 </div>
-                <div class="checklist-item">
-                    <input type="checkbox" id="check4">
-                    <label for="check4"><strong>Wi-Fi/cellular erişimi:</strong> Doğrulama için internet bağlantısı (mobil cihaz)</label>
+                <div class="flex items-start gap-4 p-5 bg-white rounded-xl border-2 border-neutral-200 hover:border-tag-blue hover:bg-tag-blue/5 transition-all">
+                    <input type="checkbox" id="check4" class="w-6 h-6 cursor-pointer accent-tag-blue flex-shrink-0 mt-0.5">
+                    <label for="check4" class="text-neutral-700 leading-relaxed cursor-pointer flex-1"><strong>Wi-Fi/cellular erişimi:</strong> Doğrulama için internet bağlantısı (mobil cihaz)</label>
                 </div>
-                <div class="checklist-item">
-                    <input type="checkbox" id="check5">
-                    <label for="check5"><strong>Temiz, düz yüzey:</strong> Montaj için uygun, düzgün yüzey</label>
+                <div class="flex items-start gap-4 p-5 bg-white rounded-xl border-2 border-neutral-200 hover:border-tag-blue hover:bg-tag-blue/5 transition-all">
+                    <input type="checkbox" id="check5" class="w-6 h-6 cursor-pointer accent-tag-blue flex-shrink-0 mt-0.5">
+                    <label for="check5" class="text-neutral-700 leading-relaxed cursor-pointer flex-1"><strong>Temiz, düz yüzey:</strong> Montaj için uygun, düzgün yüzey</label>
                 </div>
-                <div class="checklist-item">
-                    <input type="checkbox" id="check6">
-                    <label for="check6"><strong>Engelsiz görüş hattı:</strong> Kullanıcıların kolayca görebileceği konum</label>
+                <div class="flex items-start gap-4 p-5 bg-white rounded-xl border-2 border-neutral-200 hover:border-tag-blue hover:bg-tag-blue/5 transition-all">
+                    <input type="checkbox" id="check6" class="w-6 h-6 cursor-pointer accent-tag-blue flex-shrink-0 mt-0.5">
+                    <label for="check6" class="text-neutral-700 leading-relaxed cursor-pointer flex-1"><strong>Engelsiz görüş hattı:</strong> Kullanıcıların kolayca görebileceği konum</label>
                 </div>
             </div>
 
             <!-- Environmental Considerations -->
-            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin: 3rem 0 1rem;">Çevresel Faktörler</h3>
+            <h3 class="text-2xl font-bold text-neutral-900 mt-12 mb-6">Çevresel Faktörler</h3>
             <div class="feature-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -921,11 +955,11 @@
             </div>
 
             <!-- Visibility Factors -->
-            <div class="admin-portal-box">
-                <i class="fas fa-eye"></i>
+            <div class="bg-gradient-to-r from-tag-blue/10 to-tag-navy/10 border-l-4 border-tag-blue rounded-r-3xl p-8 flex gap-5 items-start shadow-soft mt-8">
+                <i class="fas fa-eye text-tag-blue text-3xl flex-shrink-0"></i>
                 <div>
-                    <h4>Görünürlük İpuçları</h4>
-                    <p><strong>Yaklaşma yönü:</strong> Kullanıcıların tag'e hangi yönden yaklaştığını düşünün. Doğal yürüme yolu üzerinde olmalı.<br><br>
+                    <h4 class="text-tag-blue font-extrabold text-xl mb-4">Görünürlük İpuçları</h4>
+                    <p class="text-neutral-800 leading-relaxed"><strong>Yaklaşma yönü:</strong> Kullanıcıların tag'e hangi yönden yaklaştığını düşünün. Doğal yürüme yolu üzerinde olmalı.<br><br>
                     <strong>Arka plan kontrast:</strong> QR kodun net görünmesi için arka plan ile yüksek kontrast sağlayın. Açık duvar üzerinde koyu QR veya tersi.<br><br>
                     <strong>Aydınlatma seviyeleri:</strong> Karanlık alanlarda ek aydınlatma düşünün. Gece vardiyaları için önemli.</p>
                 </div>
@@ -945,7 +979,7 @@
             </div>
 
             <!-- Surface Preparation -->
-            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin-bottom: 1rem;">Yüzey Hazırlığı</h3>
+            <h3 class="text-2xl font-bold text-neutral-900 mb-6">Yüzey Hazırlığı</h3>
             <div class="steps-list">
                 <div class="step-item">
                     <div class="step-item-icon">
@@ -979,90 +1013,93 @@
             </div>
 
             <!-- Mounting Methods -->
-            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin: 3rem 0 1rem;">Montaj Yöntemleri</h3>
-            <div class="mounting-methods">
+            <h3 class="text-2xl font-bold text-neutral-900 mt-12 mb-6">Montaj Yöntemleri</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Adhesive Mounting -->
-                <div class="mounting-card">
-                    <div class="mounting-icon">
-                        <i class="fas fa-sticky-note"></i>
+                <div class="bg-white rounded-3xl p-8 border-2 border-neutral-200 hover:border-tag-blue hover:shadow-strong hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-tag-blue to-tag-navy transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                    <div class="w-18 h-18 bg-tag-blue/10 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-sticky-note text-3xl text-tag-blue"></i>
                     </div>
-                    <h4>Yapışkan Montaj</h4>
-                    <span class="best-for">En Kolay - Hızlı Kurulum</span>
-                    <div class="mounting-steps">
-                        <div class="mounting-step">
-                            <span class="step-number">1</span>
-                            <span>Yüzey temizliği ve kurulama (yukarıdaki adımlar)</span>
+                    <h4 class="text-2xl font-extrabold text-neutral-900 mb-4">Yapışkan Montaj</h4>
+                    <span class="inline-block bg-tag-blue/10 text-tag-blue px-4 py-2 rounded-full text-sm font-semibold mb-5">En Kolay - Hızlı Kurulum</span>
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-start gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 bg-tag-blue text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5">1</span>
+                            <span class="text-neutral-700 leading-relaxed text-sm">Yüzey temizliği ve kurulama (yukarıdaki adımlar)</span>
                         </div>
-                        <div class="mounting-step">
-                            <span class="step-number">2</span>
-                            <span>Yapışkan padın koruyucu filmini çıkarın</span>
+                        <div class="flex items-start gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 bg-tag-blue text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5">2</span>
+                            <span class="text-neutral-700 leading-relaxed text-sm">Yapışkan padın koruyucu filmini çıkarın</span>
                         </div>
-                        <div class="mounting-step">
-                            <span class="step-number">3</span>
-                            <span>Tag'i yüzeye yerleştirin ve 30 saniye sabit basınç uygulayın</span>
+                        <div class="flex items-start gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 bg-tag-blue text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5">3</span>
+                            <span class="text-neutral-700 leading-relaxed text-sm">Tag'i yüzeye yerleştirin ve 30 saniye sabit basınç uygulayın</span>
                         </div>
-                        <div class="mounting-step">
-                            <span class="step-number">4</span>
-                            <span>24 saat boyunca tam yapışma için bekleme süresi</span>
+                        <div class="flex items-start gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 bg-tag-blue text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5">4</span>
+                            <span class="text-neutral-700 leading-relaxed text-sm">24 saat boyunca tam yapışma için bekleme süresi</span>
                         </div>
                     </div>
-                    <p style="margin-top: 1rem; color: var(--gray-600); font-size: 0.9rem; line-height: 1.6;">
+                    <p class="mt-6 text-neutral-600 text-sm leading-relaxed">
                         <strong>Uygun:</strong> Düz yüzeyler, cam, metal, plastik. Geçici kurulumlar için ideal.
                     </p>
                 </div>
 
                 <!-- Screw Mounting -->
-                <div class="mounting-card">
-                    <div class="mounting-icon">
-                        <i class="fas fa-screwdriver"></i>
+                <div class="bg-white rounded-3xl p-8 border-2 border-neutral-200 hover:border-tag-blue hover:shadow-strong hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-tag-blue to-tag-navy transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                    <div class="w-18 h-18 bg-tag-blue/10 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-screwdriver text-3xl text-tag-blue"></i>
                     </div>
-                    <h4>Vida Montaj</h4>
-                    <span class="best-for">En Güvenli - Kalıcı Kurulum</span>
-                    <div class="mounting-steps">
-                        <div class="mounting-step">
-                            <span class="step-number">1</span>
-                            <span>Tag'i yüzeye tutun ve montaj noktalarını kalemle işaretleyin</span>
+                    <h4 class="text-2xl font-extrabold text-neutral-900 mb-4">Vida Montaj</h4>
+                    <span class="inline-block bg-tag-blue/10 text-tag-blue px-4 py-2 rounded-full text-sm font-semibold mb-5">En Güvenli - Kalıcı Kurulum</span>
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-start gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 bg-tag-blue text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5">1</span>
+                            <span class="text-neutral-700 leading-relaxed text-sm">Tag'i yüzeye tutun ve montaj noktalarını kalemle işaretleyin</span>
                         </div>
-                        <div class="mounting-step">
-                            <span class="step-number">2</span>
-                            <span>Matkap ile pilot delikler açın (genellikle 6mm)</span>
+                        <div class="flex items-start gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 bg-tag-blue text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5">2</span>
+                            <span class="text-neutral-700 leading-relaxed text-sm">Matkap ile pilot delikler açın (genellikle 6mm)</span>
                         </div>
-                        <div class="mounting-step">
-                            <span class="step-number">3</span>
-                            <span>Dübelleri deliklere yerleştirin (beton/tuğla için)</span>
+                        <div class="flex items-start gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 bg-tag-blue text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5">3</span>
+                            <span class="text-neutral-700 leading-relaxed text-sm">Dübelleri deliklere yerleştirin (beton/tuğla için)</span>
                         </div>
-                        <div class="mounting-step">
-                            <span class="step-number">4</span>
-                            <span>Vidaları tornavida ile sıkıştırın, aşırı sıkmayın</span>
+                        <div class="flex items-start gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 bg-tag-blue text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5">4</span>
+                            <span class="text-neutral-700 leading-relaxed text-sm">Vidaları tornavida ile sıkıştırın, aşırı sıkmayın</span>
                         </div>
                     </div>
-                    <p style="margin-top: 1rem; color: var(--gray-600); font-size: 0.9rem; line-height: 1.6;">
+                    <p class="mt-6 text-neutral-600 text-sm leading-relaxed">
                         <strong>Uygun:</strong> Kalıcı kurulumlar, yüksek trafik alanları, dış mekan. En dayanıklı yöntem.
                     </p>
                 </div>
 
                 <!-- Magnetic Mounting -->
-                <div class="mounting-card">
-                    <div class="mounting-icon">
-                        <i class="fas fa-magnet"></i>
+                <div class="bg-white rounded-3xl p-8 border-2 border-neutral-200 hover:border-tag-blue hover:shadow-strong hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-tag-blue to-tag-navy transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                    <div class="w-18 h-18 bg-tag-blue/10 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-magnet text-3xl text-tag-blue"></i>
                     </div>
-                    <h4>Manyetik Montaj</h4>
-                    <span class="best-for">En Esnek - Kolay Pozisyon Değişimi</span>
-                    <div class="mounting-steps">
-                        <div class="mounting-step">
-                            <span class="step-number">1</span>
-                            <span>Manyetik tabanı metal yüzeye yapıştırın veya vidalayın</span>
+                    <h4 class="text-2xl font-extrabold text-neutral-900 mb-4">Manyetik Montaj</h4>
+                    <span class="inline-block bg-tag-blue/10 text-tag-blue px-4 py-2 rounded-full text-sm font-semibold mb-5">En Esnek - Kolay Pozisyon Değişimi</span>
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-start gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 bg-tag-blue text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5">1</span>
+                            <span class="text-neutral-700 leading-relaxed text-sm">Manyetik tabanı metal yüzeye yapıştırın veya vidalayın</span>
                         </div>
-                        <div class="mounting-step">
-                            <span class="step-number">2</span>
-                            <span>Access Tag'in arka yüzeyini manyetik tabana yaklaştırın</span>
+                        <div class="flex items-start gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 bg-tag-blue text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5">2</span>
+                            <span class="text-neutral-700 leading-relaxed text-sm">Access Tag'in arka yüzeyini manyetik tabana yaklaştırın</span>
                         </div>
-                        <div class="mounting-step">
-                            <span class="step-number">3</span>
-                            <span>Pozisyon testini yapın, gerekirse ayarlayın</span>
+                        <div class="flex items-start gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 bg-tag-blue text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5">3</span>
+                            <span class="text-neutral-700 leading-relaxed text-sm">Pozisyon testini yapın, gerekirse ayarlayın</span>
                         </div>
                     </div>
-                    <p style="margin-top: 1rem; color: var(--gray-600); font-size: 0.9rem; line-height: 1.6;">
+                    <p class="mt-6 text-neutral-600 text-sm leading-relaxed">
                         <strong>Uygun:</strong> Metal yüzeyler, kapılar, dolap kenarları. Esnek konumlandırma gerektiğinde.
                     </p>
                 </div>
@@ -1093,7 +1130,7 @@
             </div>
 
             <!-- Admin Portal Setup -->
-            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin-bottom: 1rem;">Admin Portal Kurulumu</h3>
+            <h3 class="text-2xl font-bold text-neutral-900 mb-6">Admin Portal Kurulumu</h3>
             <div class="steps-list">
                 <div class="step-item">
                     <div class="step-item-icon">
@@ -1137,25 +1174,25 @@
             </div>
 
             <!-- QR Code Linking -->
-            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin: 3rem 0 1rem;">QR Kod Eşleştirme</h3>
-            <div class="qr-placeholder">
-                <i class="fas fa-qrcode"></i>
-                <h4>QR Kod Örneği</h4>
-                <p>Her Access Tag benzersiz bir QR kod ile dijital lokasyon kaydına bağlanır</p>
+            <h3 class="text-2xl font-bold text-neutral-900 mt-12 mb-6">QR Kod Eşleştirme</h3>
+            <div class="bg-white rounded-3xl p-12 text-center border-2 border-dashed border-neutral-300">
+                <i class="fas fa-qrcode text-6xl text-tag-blue mb-4"></i>
+                <h4 class="text-xl font-bold text-neutral-900 mb-2">QR Kod Örneği</h4>
+                <p class="text-neutral-600">Her Access Tag benzersiz bir QR kod ile dijital lokasyon kaydına bağlanır</p>
             </div>
 
-            <div class="admin-portal-box">
-                <i class="fas fa-link"></i>
+            <div class="bg-gradient-to-r from-tag-blue/10 to-tag-navy/10 border-l-4 border-tag-blue rounded-r-3xl p-8 flex gap-5 items-start shadow-soft mt-8">
+                <i class="fas fa-link text-tag-blue text-3xl flex-shrink-0"></i>
                 <div>
-                    <h4>Fiziksel ve Dijital Eşleştirme</h4>
-                    <p><strong>Tag ID kontrolü:</strong> Fiziksel tag'in üzerindeki seri numarası ile dijital kayıttaki ID'nin eşleştiğinden emin olun.<br><br>
+                    <h4 class="text-tag-blue font-extrabold text-xl mb-4">Fiziksel ve Dijital Eşleştirme</h4>
+                    <p class="text-neutral-800 leading-relaxed"><strong>Tag ID kontrolü:</strong> Fiziksel tag'in üzerindeki seri numarası ile dijital kayıttaki ID'nin eşleştiğinden emin olun.<br><br>
                     <strong>Konum ataması:</strong> GPS koordinatları veya manuel adres ile lokasyonu tanımlayın. Mobil cihazdan check-in yapıldığında konum doğrulaması bu bilgiyi kullanır.<br><br>
                     <strong>İsim ve açıklama:</strong> Kullanıcı dostu isimler verin. "B Binası 2. Kat Giriş" gibi açıklayıcı isimler tercih edin.</p>
                 </div>
             </div>
 
             <!-- Testing Process -->
-            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin: 3rem 0 1rem;">Test ve Doğrulama</h3>
+            <h3 class="text-2xl font-bold text-neutral-900 mt-12 mb-6">Test ve Doğrulama</h3>
             <div class="steps-list">
                 <div class="step-item">
                     <div class="step-item-icon">
@@ -1213,90 +1250,123 @@
             </div>
 
             <!-- Maintenance Schedule -->
-            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin-bottom: 1rem;">Bakım Takvimi</h3>
-            <div class="maintenance-schedule">
+            <h3 class="text-2xl font-bold text-neutral-900 mb-6">Bakım Takvimi</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Weekly -->
-                <div class="schedule-card">
-                    <div class="schedule-header">
-                        <div class="schedule-icon">
+                <div class="bg-white rounded-3xl p-8 border-2 border-neutral-200 hover:border-tag-blue hover:shadow-card hover:-translate-y-1 transition-all duration-300">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-tag-blue to-tag-navy rounded-xl flex items-center justify-center text-white text-2xl">
                             <i class="fas fa-calendar-week"></i>
                         </div>
-                        <h4>Haftalık</h4>
+                        <h4 class="text-xl font-bold text-neutral-900">Haftalık</h4>
                     </div>
-                    <ul>
-                        <li><i class="fas fa-eye"></i> Görsel kontrol (hasar, kir, konum)</li>
-                        <li><i class="fas fa-broom"></i> Yüzey temizliği (toz ve kir)</li>
-                        <li><i class="fas fa-qrcode"></i> Hızlı QR kod tarama testi</li>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-neutral-700 text-sm leading-relaxed">
+                            <i class="fas fa-eye text-tag-blue mt-1 flex-shrink-0"></i>
+                            <span>Görsel kontrol (hasar, kir, konum)</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-neutral-700 text-sm leading-relaxed">
+                            <i class="fas fa-broom text-tag-blue mt-1 flex-shrink-0"></i>
+                            <span>Yüzey temizliği (toz ve kir)</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-neutral-700 text-sm leading-relaxed">
+                            <i class="fas fa-qrcode text-tag-blue mt-1 flex-shrink-0"></i>
+                            <span>Hızlı QR kod tarama testi</span>
+                        </li>
                     </ul>
                 </div>
 
                 <!-- Monthly -->
-                <div class="schedule-card">
-                    <div class="schedule-header">
-                        <div class="schedule-icon">
+                <div class="bg-white rounded-3xl p-8 border-2 border-neutral-200 hover:border-tag-blue hover:shadow-card hover:-translate-y-1 transition-all duration-300">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-tag-blue to-tag-navy rounded-xl flex items-center justify-center text-white text-2xl">
                             <i class="fas fa-calendar-alt"></i>
                         </div>
-                        <h4>Aylık</h4>
+                        <h4 class="text-xl font-bold text-neutral-900">Aylık</h4>
                     </div>
-                    <ul>
-                        <li><i class="fas fa-spray-can"></i> Detaylı temizlik (dezenfektan ile)</li>
-                        <li><i class="fas fa-mobile-alt"></i> QR kod okunabilirlik testi (farklı cihazlar)</li>
-                        <li><i class="fas fa-screwdriver"></i> Montaj sağlamlığı kontrolü</li>
-                        <li><i class="fas fa-chart-line"></i> Kullanım istatistiklerini inceleme</li>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-neutral-700 text-sm leading-relaxed">
+                            <i class="fas fa-spray-can text-tag-blue mt-1 flex-shrink-0"></i>
+                            <span>Detaylı temizlik (dezenfektan ile)</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-neutral-700 text-sm leading-relaxed">
+                            <i class="fas fa-mobile-alt text-tag-blue mt-1 flex-shrink-0"></i>
+                            <span>QR kod okunabilirlik testi (farklı cihazlar)</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-neutral-700 text-sm leading-relaxed">
+                            <i class="fas fa-screwdriver text-tag-blue mt-1 flex-shrink-0"></i>
+                            <span>Montaj sağlamlığı kontrolü</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-neutral-700 text-sm leading-relaxed">
+                            <i class="fas fa-chart-line text-tag-blue mt-1 flex-shrink-0"></i>
+                            <span>Kullanım istatistiklerini inceleme</span>
+                        </li>
                     </ul>
                 </div>
 
                 <!-- Quarterly -->
-                <div class="schedule-card">
-                    <div class="schedule-header">
-                        <div class="schedule-icon">
+                <div class="bg-white rounded-3xl p-8 border-2 border-neutral-200 hover:border-tag-blue hover:shadow-card hover:-translate-y-1 transition-all duration-300">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-tag-blue to-tag-navy rounded-xl flex items-center justify-center text-white text-2xl">
                             <i class="fas fa-calendar-check"></i>
                         </div>
-                        <h4>3 Aylık</h4>
+                        <h4 class="text-xl font-bold text-neutral-900">3 Aylık</h4>
                     </div>
-                    <ul>
-                        <li><i class="fas fa-cloud-rain"></i> Hava hasarı değerlendirmesi (dış mekan)</li>
-                        <li><i class="fas fa-sun"></i> UV solması kontrolü</li>
-                        <li><i class="fas fa-box"></i> Yedek tag ihtiyacı analizi</li>
-                        <li><i class="fas fa-cogs"></i> Sistem entegrasyon testi</li>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-neutral-700 text-sm leading-relaxed">
+                            <i class="fas fa-cloud-rain text-tag-blue mt-1 flex-shrink-0"></i>
+                            <span>Hava hasarı değerlendirmesi (dış mekan)</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-neutral-700 text-sm leading-relaxed">
+                            <i class="fas fa-sun text-tag-blue mt-1 flex-shrink-0"></i>
+                            <span>UV solması kontrolü</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-neutral-700 text-sm leading-relaxed">
+                            <i class="fas fa-box text-tag-blue mt-1 flex-shrink-0"></i>
+                            <span>Yedek tag ihtiyacı analizi</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-neutral-700 text-sm leading-relaxed">
+                            <i class="fas fa-cogs text-tag-blue mt-1 flex-shrink-0"></i>
+                            <span>Sistem entegrasyon testi</span>
+                        </li>
                     </ul>
                 </div>
             </div>
 
             <!-- Cleaning Instructions -->
-            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin: 3rem 0 1rem;">Temizlik Talimatları</h3>
-            <div class="cleaning-instructions">
-                <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--gray-900); margin-bottom: 1rem;">Doğru Temizlik Yöntemleri</h4>
-                <div class="cleaning-grid">
-                    <div class="cleaning-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span><strong>Yumuşak bez ve ılık su</strong> kullanın</span>
+            <h3 class="text-2xl font-bold text-neutral-900 mt-12 mb-6">Temizlik Talimatları</h3>
+            <div class="bg-white rounded-3xl p-8 border-2 border-neutral-200">
+                <h4 class="text-xl font-bold text-neutral-900 mb-6">Doğru Temizlik Yöntemleri</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="flex items-center gap-3 p-4 bg-neutral-50 rounded-xl hover:bg-tag-blue/5 transition-colors">
+                        <i class="fas fa-check-circle text-tag-blue text-2xl"></i>
+                        <span class="text-neutral-700 text-sm leading-relaxed"><strong>Yumuşak bez ve ılık su</strong> kullanın</span>
                     </div>
-                    <div class="cleaning-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span><strong>Hafif sabunlu su</strong> yağlı kirler için</span>
+                    <div class="flex items-center gap-3 p-4 bg-neutral-50 rounded-xl hover:bg-tag-blue/5 transition-colors">
+                        <i class="fas fa-check-circle text-tag-blue text-2xl"></i>
+                        <span class="text-neutral-700 text-sm leading-relaxed"><strong>Hafif sabunlu su</strong> yağlı kirler için</span>
                     </div>
-                    <div class="cleaning-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span><strong>Microfiber bez</strong> çizilme riski azaltır</span>
+                    <div class="flex items-center gap-3 p-4 bg-neutral-50 rounded-xl hover:bg-tag-blue/5 transition-colors">
+                        <i class="fas fa-check-circle text-tag-blue text-2xl"></i>
+                        <span class="text-neutral-700 text-sm leading-relaxed"><strong>Microfiber bez</strong> çizilme riski azaltır</span>
                     </div>
-                    <div class="cleaning-item warning">
-                        <i class="fas fa-times-circle"></i>
-                        <span><strong>Alkol bazlı temizleyici KULLANMAYIN</strong></span>
+                    <div class="flex items-center gap-3 p-4 bg-neutral-50 rounded-xl hover:bg-red-50 transition-colors">
+                        <i class="fas fa-times-circle text-red-600 text-2xl"></i>
+                        <span class="text-neutral-700 text-sm leading-relaxed"><strong>Alkol bazlı temizleyici KULLANMAYIN</strong></span>
                     </div>
-                    <div class="cleaning-item warning">
-                        <i class="fas fa-times-circle"></i>
-                        <span><strong>Aşındırıcı malzeme KULLANMAYIN</strong></span>
+                    <div class="flex items-center gap-3 p-4 bg-neutral-50 rounded-xl hover:bg-red-50 transition-colors">
+                        <i class="fas fa-times-circle text-red-600 text-2xl"></i>
+                        <span class="text-neutral-700 text-sm leading-relaxed"><strong>Aşındırıcı malzeme KULLANMAYIN</strong></span>
                     </div>
-                    <div class="cleaning-item warning">
-                        <i class="fas fa-times-circle"></i>
-                        <span><strong>Basınçlı su sıkmayın</strong></span>
+                    <div class="flex items-center gap-3 p-4 bg-neutral-50 rounded-xl hover:bg-red-50 transition-colors">
+                        <i class="fas fa-times-circle text-red-600 text-2xl"></i>
+                        <span class="text-neutral-700 text-sm leading-relaxed"><strong>Basınçlı su sıkmayın</strong></span>
                     </div>
                 </div>
             </div>
 
             <!-- Common Issues (Accordion) -->
-            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin: 3rem 0 1rem;">Yaygın Sorunlar ve Çözümleri</h3>
+            <h3 class="text-2xl font-bold text-neutral-900 mt-12 mb-6">Yaygın Sorunlar ve Çözümleri</h3>
             <div class="accordion">
                 <div class="accordion-item active">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
@@ -1310,7 +1380,7 @@
                     </div>
                     <div class="accordion-content">
                         <div class="accordion-body">
-                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                            <p class="text-neutral-700 leading-relaxed mb-4">
                                 <strong>Neden oluşur:</strong> Doğrudan güneş ışığı, UV maruziyeti, hava koşulları, fiziksel aşınma.
                             </p>
                             <div class="steps-list">
@@ -1349,7 +1419,7 @@
                     </div>
                     <div class="accordion-content">
                         <div class="accordion-body">
-                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                            <p class="text-neutral-700 leading-relaxed mb-4">
                                 <strong>Neden oluşur:</strong> Yapışkan eskimesi, vibrasyon, sıcaklık değişimleri, vida gevşemesi.
                             </p>
                             <div class="steps-list">
@@ -1388,7 +1458,7 @@
                     </div>
                     <div class="accordion-content">
                         <div class="accordion-body">
-                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                            <p class="text-neutral-700 leading-relaxed mb-4">
                                 <strong>Neden oluşur:</strong> Karanlık koridor, gece vardiyası, yetersiz doğal/yapay ışık.
                             </p>
                             <div class="steps-list">
@@ -1427,7 +1497,7 @@
                     </div>
                     <div class="accordion-content">
                         <div class="accordion-body">
-                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                            <p class="text-neutral-700 leading-relaxed mb-4">
                                 <strong>Neden oluşur:</strong> Yağmur, kar, dolu, aşırı sıcaklık, rüzgar, nem birikimi.
                             </p>
                             <div class="steps-list">
@@ -1466,7 +1536,7 @@
                     </div>
                     <div class="accordion-content">
                         <div class="accordion-body">
-                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                            <p class="text-neutral-700 leading-relaxed mb-4">
                                 <strong>Neden oluşur:</strong> Kamera odaklanma sorunu, QR kod kirli, kontrast yetersiz, barkod hasarlı.
                             </p>
                             <div class="steps-list">
@@ -1504,12 +1574,12 @@
             </div>
 
             <!-- When to Replace -->
-            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin: 3rem 0 1rem;">Ne Zaman Değiştirmeli?</h3>
-            <div class="admin-portal-box">
-                <i class="fas fa-exclamation-triangle"></i>
+            <h3 class="text-2xl font-bold text-neutral-900 mt-12 mb-6">Ne Zaman Değiştirmeli?</h3>
+            <div class="bg-gradient-to-r from-tag-blue/10 to-tag-navy/10 border-l-4 border-tag-blue rounded-r-3xl p-8 flex gap-5 items-start shadow-soft">
+                <i class="fas fa-exclamation-triangle text-tag-blue text-3xl flex-shrink-0"></i>
                 <div>
-                    <h4>Tag Değiştirme Kriterleri</h4>
-                    <p><strong>QR kod %50'den fazla hasarlı:</strong> Barkod çizikleri, soluklaşma veya yırtık nedeniyle taranamıyorsa.<br><br>
+                    <h4 class="text-tag-blue font-extrabold text-xl mb-4">Tag Değiştirme Kriterleri</h4>
+                    <p class="text-neutral-800 leading-relaxed"><strong>QR kod %50'den fazla hasarlı:</strong> Barkod çizikleri, soluklaşma veya yırtık nedeniyle taranamıyorsa.<br><br>
                     <strong>Montaj kurtarılamaz şekilde hasar görmüş:</strong> Tag kırık, çatlak veya yapışma yüzeyi hasarlı ise.<br><br>
                     <strong>Yeni lokasyon gereksinimi:</strong> Ofis düzenlemesi, taşınma veya yeni şube açılması durumunda.<br><br>
                     <strong>Teknoloji güncellemesi:</strong> Yeni nesil tag'ler (NFC destekli, dijital ekran vb.) kullanmak isterseniz.</p>
