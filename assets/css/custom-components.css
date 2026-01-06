@@ -1,0 +1,953 @@
+/* ============================================
+   PASSGAGE GUIDE - CUSTOM COMPONENTS
+   Components that can't be fully Tailwinded
+   ============================================ */
+
+/* ============================================
+   GLOBAL COMPONENTS (Used across all pages)
+   ============================================ */
+
+/* Header - Fixed navigation */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 1000;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header.scrolled {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 0.75rem 2rem;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo {
+    height: 36px;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.logo-badge {
+    background: linear-gradient(135deg, #FF501D 0%, #FFD700 100%);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 6px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Responsive Header */
+@media (max-width: 768px) {
+    .header {
+        padding: 0.75rem 1.25rem;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .logo-container {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .progress-nav {
+        width: 100%;
+        gap: 6px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        padding-bottom: 0.25rem;
+    }
+
+    .progress-nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    .progress-step {
+        padding: 8px 10px;
+        flex-shrink: 0;
+    }
+
+    .progress-step .step-num {
+        width: 28px;
+        height: 28px;
+        font-size: 0.8rem;
+    }
+}
+
+/* ============================================
+   MODERN MINIMAL PROGRESS NAVIGATION
+   Passgage Corporate Branding (Orange-Gold Gradient)
+   ============================================ */
+
+/* Progress Navigation Container */
+.progress-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    padding: 1.25rem 2rem;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    flex-wrap: nowrap;
+}
+
+.progress-nav::-webkit-scrollbar {
+    display: none;
+}
+
+/* Progress Step Wrapper (includes line) */
+.progress-step-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.progress-step-wrapper:last-child .progress-line {
+    display: none;
+}
+
+/* Individual Progress Step */
+.progress-step {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+/* Step Number Circle */
+.progress-step .step-num {
+    width: 24px;
+    height: 24px;
+    background: #f3f4f6;
+    color: #9ca3af;
+    border: 2px solid #e5e7eb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.75rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Progress Line Between Steps */
+.progress-line {
+    width: 40px;
+    height: 2px;
+    background: #e5e7eb;
+    position: relative;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.progress-line::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #FF501D 0%, #FFD700 100%);
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   STATE STYLES
+   ============================================ */
+
+/* COMPLETED STATE */
+.progress-step.completed .step-num {
+    background: linear-gradient(135deg, #FF501D 0%, #FFD700 100%);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 2px 8px rgba(255, 80, 29, 0.25);
+}
+
+/* Progress line after completed step */
+.progress-step-wrapper:has(.progress-step.completed) .progress-line::before,
+.progress-step.completed ~ .progress-line::before {
+    width: 100%;
+}
+
+/* ACTIVE STATE */
+.progress-step.active .step-num {
+    background: linear-gradient(135deg, #FF501D 0%, #FFD700 100%);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 0 0 4px rgba(255, 80, 29, 0.15),
+                0 4px 12px rgba(255, 80, 29, 0.3);
+    transform: scale(1.15);
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* HOVER STATE */
+.progress-step:hover .step-num {
+    background: linear-gradient(135deg, rgba(255, 80, 29, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%);
+    border-color: #FF501D;
+    color: #FF501D;
+    transform: scale(1.05);
+}
+
+.progress-step.active:hover .step-num,
+.progress-step.completed:hover .step-num {
+    transform: scale(1.2);
+}
+
+/* FOCUS STATE (Keyboard Navigation) */
+.progress-step:focus {
+    outline: none;
+}
+
+.progress-step:focus .step-num {
+    box-shadow: 0 0 0 3px rgba(255, 80, 29, 0.4);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 0 4px rgba(255, 80, 29, 0.15),
+                    0 4px 12px rgba(255, 80, 29, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 0 6px rgba(255, 80, 29, 0.25),
+                    0 6px 20px rgba(255, 80, 29, 0.4);
+    }
+}
+
+@keyframes step-activate {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.25);
+    }
+    100% {
+        transform: scale(1.15);
+    }
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .progress-nav {
+        padding: 1rem 1.25rem;
+        gap: 0;
+        justify-content: flex-start;
+        scroll-snap-type: x proximity;
+    }
+
+    .progress-step {
+        width: 44px;
+        height: 44px;
+        padding: 12px;
+        flex-shrink: 0;
+        scroll-snap-align: center;
+    }
+
+    .progress-step .step-num {
+        width: 20px;
+        height: 20px;
+        font-size: 0.7rem;
+    }
+
+    .progress-line {
+        width: 24px;
+        flex-shrink: 0;
+    }
+
+    /* Fade indicators on scroll edges */
+    .progress-nav::before,
+    .progress-nav::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 40px;
+        height: 100%;
+        pointer-events: none;
+        z-index: 3;
+    }
+
+    .progress-nav::before {
+        left: 0;
+        background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0.98) 0%,
+            transparent 100%);
+    }
+
+    .progress-nav::after {
+        right: 0;
+        background: linear-gradient(270deg,
+            rgba(255, 255, 255, 0.98) 0%,
+            transparent 100%);
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+/* Visually hidden but accessible to screen readers */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .progress-step .step-num {
+        border-width: 3px;
+    }
+
+    .progress-line {
+        height: 3px;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .progress-step .step-num,
+    .progress-line,
+    .progress-line::before {
+        transition: none;
+    }
+
+    .progress-step.active .step-num {
+        animation: none;
+    }
+}
+
+/* Hero Section - Landing page */
+.hero {
+    padding: 160px 2rem 120px;
+    background: #1a1a2e;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.15;
+    background-image:
+        radial-gradient(circle at 20% 50%, #FF501D 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, #FFD700 0%, transparent 50%),
+        radial-gradient(circle at 50% 80%, #2872fa 0%, transparent 50%);
+}
+
+.hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 60px 60px; }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hero-icon {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, #FF501D 0%, #FFD700 100%);
+    border-radius: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2.5rem;
+    font-size: 2.5rem;
+    color: white;
+    box-shadow: 0 0 60px rgba(255, 80, 29, 0.4);
+    animation: float 3s ease-in-out infinite;
+}
+
+.hero h1 {
+    color: white;
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    letter-spacing: -2px;
+}
+
+.hero h1 .gradient-text {
+    background: linear-gradient(135deg, #FF501D 0%, #FFD700 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero p {
+    color: #9ca3af;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    margin-bottom: 3rem;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1.25rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Responsive Hero */
+@media (max-width: 768px) {
+    .hero {
+        padding: 140px 1.5rem 100px;
+    }
+}
+
+/* Gradient Text Effect */
+.gradient-text {
+    background: linear-gradient(135deg, #FF501D 0%, #FFD700 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Phone Mockup - Complex pseudo-elements */
+.phone-mockup {
+    max-width: 380px;
+    margin: 0 auto;
+}
+
+.phone-frame {
+    background: #1f2937;
+    border-radius: 40px;
+    padding: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+                inset 0 0 0 2px rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.phone-frame.android {
+    background: linear-gradient(135deg, #073042 0%, #0a4a62 100%);
+}
+
+.phone-notch {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 28px;
+    background: #000;
+    border-radius: 0 0 20px 20px;
+    z-index: 10;
+}
+
+.phone-notch.android {
+    width: 100px;
+    height: 24px;
+    border-radius: 0 0 12px 12px;
+}
+
+.phone-screen {
+    background: #ffffff;
+    border-radius: 32px;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 9 / 19.5;
+}
+
+.phone-screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Accordion - Toggle logic */
+.accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.accordion-item {
+    background: white;
+    border-radius: 16px;
+    border: 2px solid #e5e7eb;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.accordion-item.active {
+    border-color: #2872fa;
+    box-shadow: 0 4px 20px rgba(40, 114, 250, 0.1);
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.accordion-header:hover {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.accordion-header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+.accordion-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, rgba(40, 114, 250, 0.1) 0%, rgba(26, 95, 217, 0.1) 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2872fa;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.accordion-header h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0;
+}
+
+.accordion-header .chevron {
+    color: #6b7280;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.accordion-item.active .chevron {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 2000px;
+}
+
+.accordion-body {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+/* Settings Path - Monospace with arrows */
+.settings-path {
+    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+    background: #f3f4f6;
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    color: #374151;
+    border-left: 4px solid #2872fa;
+    line-height: 1.6;
+}
+
+.settings-path .arrow {
+    color: #2872fa;
+    font-weight: bold;
+    margin: 0 0.5rem;
+}
+
+/* ============================================
+   ANDROID-SPECIFIC COMPONENTS
+   ============================================ */
+
+/* NFC Message Box */
+.nfc-message-box {
+    background: linear-gradient(135deg, rgba(61, 220, 132, 0.1) 0%, rgba(7, 48, 66, 0.1) 100%);
+    border: 2px solid #3ddc84;
+    border-radius: 20px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+}
+
+.nfc-message-box .icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #3ddc84 0%, #073042 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+}
+
+.nfc-message-box h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #073042;
+    margin: 0;
+}
+
+.nfc-message-box p {
+    color: #4b5563;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin: 0;
+    max-width: 600px;
+}
+
+/* Warning Box */
+.warning-box {
+    background: linear-gradient(135deg, rgba(251, 146, 60, 0.1) 0%, rgba(249, 115, 22, 0.1) 100%);
+    border: 2px solid #fb923c;
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.warning-box .warning-icon {
+    width: 48px;
+    height: 48px;
+    background: #fb923c;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.warning-box h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ea580c;
+    margin: 0 0 0.5rem 0;
+}
+
+.warning-box p {
+    color: #78350f;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Manufacturer Badges */
+.manufacturer-badge {
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.manufacturer-badge.samsung {
+    background: rgba(24, 119, 242, 0.1);
+    color: #1877f2;
+}
+
+.manufacturer-badge.huawei {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.manufacturer-badge.xiaomi {
+    background: rgba(249, 115, 22, 0.1);
+    color: #f97316;
+}
+
+.manufacturer-badge.google {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+}
+
+.manufacturer-badge.other {
+    background: rgba(107, 114, 128, 0.1);
+    color: #6b7280;
+}
+
+/* ============================================
+   SHARED LAYOUT COMPONENTS
+   ============================================ */
+
+/* Step Items - Used across iOS, Android, Access Tag */
+.step-item {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.step-item-icon {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    /* Platform-specific gradient applied via inline styles or Tailwind */
+}
+
+.step-item-content {
+    flex: 1;
+}
+
+.step-item-content h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.75rem;
+}
+
+.step-item-content p {
+    color: #4b5563;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 0.75rem;
+}
+
+/* Feature Cards - Used in Access Tag page */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    background: white;
+    border-radius: 24px;
+    padding: 2.5rem;
+    border: 1px solid #e5e7eb;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(135deg, #FF501D 0%, #FFD700 100%);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.feature-card:hover::before {
+    transform: scaleX(1);
+}
+
+.feature-card:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    transform: translateY(-8px);
+}
+
+.feature-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, rgba(255, 80, 29, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    color: #FF501D;
+}
+
+.feature-card h3 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+.feature-card p {
+    color: #4b5563;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 36px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn:hover::before {
+    opacity: 1;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #FF501D 0%, #FFD700 100%);
+    color: white;
+    box-shadow: 0 6px 24px rgba(255, 80, 29, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 35px rgba(255, 80, 29, 0.5);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Contact Email Button */
+.contact-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    background: linear-gradient(135deg, #FF501D 0%, #FFD700 100%);
+    color: white;
+    padding: 22px 44px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 1.3rem;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 35px rgba(255, 80, 29, 0.4);
+}
+
+.contact-email:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 15px 50px rgba(255, 80, 29, 0.5);
+}
+
+/* Schedule Header - Access Tag specific */
+.schedule-header {
+    background: linear-gradient(135deg, rgba(40, 114, 250, 0.1) 0%, rgba(26, 84, 144, 0.1) 100%);
+    border-left: 5px solid #2872fa;
+    border-radius: 0 16px 16px 0;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.schedule-header h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #2872fa;
+    margin: 0;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* No text decoration for links in components */
+.no-underline {
+    text-decoration: none !important;
+}
+
+/* Ensure proper line height for readability */
+body {
+    line-height: 1.6;
+}

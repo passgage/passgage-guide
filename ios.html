@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOS Kurulum Rehberi | Passgage iPhone iPad</title>
+    <meta name="description" content="Passgage iOS uygulamasını iPhone ve iPad'inize kolayca kurun. Adım adım görsel rehber ile indirme, izinler, giriş, NFC ve sorun giderme.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="https://passgage.com/wp-content/uploads/2023/11/Passgage-Primary-Logo.svg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Primary colors
+                        'passgage-red': '#FF501D',
+                        'passgage-gold': '#FFD700',
+                        'passgage-blue': '#2872fa',
+
+                        // iOS colors
+                        'ios-black': '#1d1d1f',
+                        'ios-gray': '#86868b',
+
+                        // Android colors
+                        'android-green': '#3ddc84',
+                        'android-dark': '#073042',
+
+                        // Access Tag colors
+                        'tag-blue': '#2872fa',
+                        'tag-navy': '#1a5490',
+
+                        // Neutral colors
+                        'neutral-50': '#fafafa',
+                        'neutral-100': '#f5f5f5',
+                        'neutral-200': '#e5e5e5',
+                        'neutral-800': '#1f2937',
+                        'neutral-900': '#111827',
+                    },
+                    boxShadow: {
+                        'soft': '0 2px 20px rgba(0, 0, 0, 0.08)',
+                        'medium': '0 4px 30px rgba(0, 0, 0, 0.12)',
+                        'strong': '0 10px 60px rgba(0, 0, 0, 0.15)',
+                        'card': '0 4px 20px rgba(0, 0, 0, 0.1)',
+                        'phone': '0 20px 60px rgba(0, 0, 0, 0.3)',
+                    },
+                    fontFamily: {
+                        'sans': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+                    },
+                    fontSize: {
+                        'display': ['3.5rem', { lineHeight: '1.1', fontWeight: '800' }],
+                        'hero': ['2.5rem', { lineHeight: '1.2', fontWeight: '700' }],
+                    },
+                    spacing: {
+                        '18': '4.5rem',
+                        '88': '22rem',
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in-up': 'fadeInUp 0.6s ease-out',
+                        'slide-in-left': 'slideInLeft 0.6s ease-out',
+                        'slide-in-right': 'slideInRight 0.6s ease-out',
+                    },
+                },
+            },
+        }
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/custom-components.css">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-374JCV17P7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-374JCV17P7');
+    </script>
+
+    <style>
+        /* iOS Page-Specific Styles */
+
+        /* Back button styling */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            color: var(--ios-dark);
+            transform: translateX(-4px);
+        }
+
+        .back-button i {
+            font-size: 1rem;
+        }
+
+        /* Info box for iOS NFC */
+        .info-box {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.05) 0%, rgba(67, 67, 67, 0.05) 100%);
+            border-left: 5px solid var(--ios-dark);
+            border-radius: 0 20px 20px 0;
+            padding: 2rem;
+            margin-top: 2rem;
+            display: flex;
+            gap: 1.25rem;
+            align-items: flex-start;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .info-box i {
+            color: var(--ios-dark);
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .info-box h4 {
+            color: var(--ios-dark);
+            font-weight: 800;
+            margin-bottom: 0.6rem;
+            font-size: 1.1rem;
+        }
+
+        .info-box p {
+            color: var(--gray-800);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Prominent NFC message box */
+        .nfc-message-box {
+            background: linear-gradient(135deg, #1a1a1a 0%, #434343 100%);
+            border-radius: 24px;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nfc-message-box::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0.1;
+            background-image: radial-gradient(circle at 50% 50%, white 0%, transparent 70%);
+        }
+
+        .nfc-message-box .icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.5rem;
+        }
+
+        .nfc-message-box h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nfc-message-box p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Compatibility table */
+        .compatibility-table {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            margin: 2rem 0;
+        }
+
+        .compatibility-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .compatibility-table th {
+            background: var(--ios-gradient);
+            color: white;
+            padding: 1.25rem;
+            text-align: left;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .compatibility-table td {
+            padding: 1.25rem;
+            border-bottom: 1px solid var(--gray-200);
+            color: var(--gray-700);
+            font-size: 0.95rem;
+        }
+
+        .compatibility-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .compatibility-table tr:hover {
+            background: var(--gray-50);
+        }
+
+        .compatibility-table .check-icon {
+            color: var(--success);
+            font-size: 1.2rem;
+        }
+
+        /* Settings path styling */
+        .settings-path {
+            background: var(--gray-100);
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: var(--gray-800);
+            display: inline-block;
+            margin: 0.5rem 0;
+        }
+
+        .settings-path .arrow {
+            color: var(--gray-500);
+            margin: 0 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="logo-container">
+            <a href="index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+                Ana Sayfa
+            </a>
+            <img src="https://passgage.com/wp-content/uploads/2023/11/Passgage-Primary-Logo.svg" alt="Passgage" class="logo">
+            <span class="logo-badge">iOS Kurulumu</span>
+        </div>
+        <nav class="progress-nav" role="navigation" aria-label="Kurulum adımları">
+            <div class="progress-step-wrapper">
+                <div class="progress-step active"
+                     role="button"
+                     tabindex="0"
+                     aria-current="step"
+                     aria-label="Adım 1 / 6: Uygulamayı indirin"
+                     data-target="step1">
+                    <span class="step-num" aria-hidden="true">1</span>
+                    <span class="visually-hidden">Uygulamayı indirin</span>
+                </div>
+                <div class="progress-line" aria-hidden="true"></div>
+            </div>
+
+            <div class="progress-step-wrapper">
+                <div class="progress-step"
+                     role="button"
+                     tabindex="0"
+                     aria-label="Adım 2 / 6: Gerekli izinleri verin"
+                     data-target="step2">
+                    <span class="step-num" aria-hidden="true">2</span>
+                    <span class="visually-hidden">Gerekli izinleri verin</span>
+                </div>
+                <div class="progress-line" aria-hidden="true"></div>
+            </div>
+
+            <div class="progress-step-wrapper">
+                <div class="progress-step"
+                     role="button"
+                     tabindex="0"
+                     aria-label="Adım 3 / 6: Giriş yapın"
+                     data-target="step3">
+                    <span class="step-num" aria-hidden="true">3</span>
+                    <span class="visually-hidden">Giriş yapın</span>
+                </div>
+                <div class="progress-line" aria-hidden="true"></div>
+            </div>
+
+            <div class="progress-step-wrapper">
+                <div class="progress-step"
+                     role="button"
+                     tabindex="0"
+                     aria-label="Adım 4 / 6: Cihazınızı eşleştirin"
+                     data-target="step4">
+                    <span class="step-num" aria-hidden="true">4</span>
+                    <span class="visually-hidden">Cihazınızı eşleştirin</span>
+                </div>
+                <div class="progress-line" aria-hidden="true"></div>
+            </div>
+
+            <div class="progress-step-wrapper">
+                <div class="progress-step"
+                     role="button"
+                     tabindex="0"
+                     aria-label="Adım 5 / 6: NFC özelliğini kullanın"
+                     data-target="step5">
+                    <span class="step-num" aria-hidden="true">5</span>
+                    <span class="visually-hidden">NFC özelliğini kullanın</span>
+                </div>
+                <div class="progress-line" aria-hidden="true"></div>
+            </div>
+
+            <div class="progress-step-wrapper">
+                <div class="progress-step"
+                     role="button"
+                     tabindex="0"
+                     aria-label="Adım 6 / 6: Sorun giderme"
+                     data-target="step6">
+                    <span class="step-num" aria-hidden="true">6</span>
+                    <span class="visually-hidden">Sorun giderme</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-content">
+            <div class="hero-icon">
+                <i class="fab fa-apple"></i>
+            </div>
+            <h1>Passgage <span class="gradient-text">iOS</span> Kurulumu</h1>
+            <p>iPhone ve iPad için özel hazırlanmış kurulum rehberi. iOS 13 ve üzeri cihazlar için optimize edilmiştir.</p>
+            <div class="hero-actions">
+                <a href="#step1" class="btn btn-primary">
+                    <i class="fas fa-play"></i>
+                    Başlayalım
+                </a>
+                <a href="#step6" class="btn btn-secondary">
+                    <i class="fas fa-question-circle"></i>
+                    Sorun mu Var?
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="py-16 md:py-20 px-8 max-w-7xl mx-auto">
+        <!-- Step 1: Download -->
+        <section class="mb-24 fade-up" id="step1">
+            <div class="flex items-start gap-6 mb-12">
+                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center text-2xl font-bold shadow-medium">
+                    1
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-neutral-900 mb-3">Uygulamayı <span class="gradient-text">İndirin</span></h2>
+                    <p class="text-xl text-neutral-600">App Store'dan ücretsiz indirin</p>
+                </div>
+            </div>
+
+            <div class="max-w-lg mx-auto mb-12">
+                <!-- App Store Only -->
+                <a href="https://apps.apple.com/tr/app/passgage/id1603629297" target="_blank" class="bg-white rounded-3xl p-8 shadow-card hover:shadow-strong transition-all duration-300 hover:-translate-y-2 no-underline flex items-center justify-between group" id="ios-download-btn">
+                    <div class="flex items-center gap-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center text-white text-3xl">
+                            <i class="fab fa-apple"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-neutral-900 mb-1">App Store</h3>
+                            <p class="text-neutral-600">iPhone & iPad için</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 text-blue-600 font-bold group-hover:gap-4 transition-all">
+                        <span>Ücretsiz İndir</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Screenshot Showcase -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <div class="screenshot-placeholder">
+                                <i class="fab fa-apple"></i>
+                                <p>iPhone ekran görüntüsü:<br>App Store indirme</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-8">
+                    <div class="flex gap-6 items-start">
+                        <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                            <i class="fas fa-mobile-alt text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-xl font-bold text-neutral-800 mb-3">iOS 13 ve Üzeri</h4>
+                            <p class="text-neutral-600 leading-relaxed">Uygulama iOS 13 veya daha yeni sürüm gerektirir. Ayarlar → Genel → Yazılım Güncelleştirmesi'nden iOS versiyonunuzu kontrol edin.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 items-start">
+                        <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                            <i class="fas fa-wifi text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-xl font-bold text-neutral-800 mb-3">NFC Uyumluluğu</h4>
+                            <p class="text-neutral-600 leading-relaxed">iPhone 7 ve daha yeni modeller NFC özelliğini destekler. NFC ile hızlı giriş-çıkış kayıtları yapabilirsiniz.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 2: Permissions -->
+        <section class="mb-24 fade-up" id="step2">
+            <div class="flex items-start gap-6 mb-12">
+                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center text-2xl font-bold shadow-medium">
+                    2
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-neutral-900 mb-3">Gerekli <span class="gradient-text">İzinleri</span> Verin</h2>
+                    <p class="text-xl text-neutral-600">iOS ayarlarından izinleri aktifleştirin</p>
+                </div>
+            </div>
+
+            <!-- Permission 1: Location -->
+            <div class="grid grid-cols-1 md:grid-cols-[380px_1fr] lg:grid-cols-[420px_1fr] gap-8 md:gap-12 lg:gap-16 items-center mb-12">
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <div class="screenshot-placeholder">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <p>iPhone ekran görüntüsü:<br>Konum İzni</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                        <i class="fas fa-map-marker-alt text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-neutral-800 mb-3">1. Konum Servisleri</h4>
+                        <p class="text-neutral-600 leading-relaxed mb-3">Giriş-çıkış kayıtlarınızın doğru konumda yapıldığından emin olmak için konum izni gereklidir.</p>
+                        <div class="settings-path">
+                            Ayarlar <span class="arrow">→</span> Gizlilik <span class="arrow">→</span> Konum Servisleri <span class="arrow">→</span> Passgage
+                        </div>
+                        <p class="mt-3 text-neutral-600 text-sm"><strong>Önerilen:</strong> "Uygulama Kullanılırken" veya "Her Zaman" seçeneğini işaretleyin.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Permission 2: Camera -->
+            <div class="grid grid-cols-1 md:grid-cols-[380px_1fr] lg:grid-cols-[420px_1fr] gap-8 md:gap-12 lg:gap-16 items-center mb-12">
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <div class="screenshot-placeholder">
+                                <i class="fas fa-camera"></i>
+                                <p>iPhone ekran görüntüsü:<br>Kamera İzni</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                        <i class="fas fa-camera text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-neutral-800 mb-3">2. Kamera İzni</h4>
+                        <p class="text-neutral-600 leading-relaxed mb-3">QR kod okutma özelliği için kamera iznine ihtiyaç vardır.</p>
+                        <div class="settings-path">
+                            Ayarlar <span class="arrow">→</span> Gizlilik <span class="arrow">→</span> Kamera <span class="arrow">→</span> Passgage
+                        </div>
+                        <p class="mt-3 text-neutral-600 text-sm">Kamera iznini açmak için anahtarı <strong>yeşil</strong> konuma getirin.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Permission 3: Notifications -->
+            <div class="grid grid-cols-1 md:grid-cols-[380px_1fr] lg:grid-cols-[420px_1fr] gap-8 md:gap-12 lg:gap-16 items-center mb-12">
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <div class="screenshot-placeholder">
+                                <i class="fas fa-bell"></i>
+                                <p>iPhone ekran görüntüsü:<br>Bildirim İzni</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                        <i class="fas fa-bell text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-neutral-800 mb-3">Bildirimler</h4>
+                        <p class="text-neutral-600 leading-relaxed mb-3">Önemli duyuru ve hatırlatmalar için bildirim iznini açmanızı öneririz.</p>
+                        <div class="settings-path">
+                            Ayarlar <span class="arrow">→</span> Bildirimler <span class="arrow">→</span> Passgage
+                        </div>
+                        <p class="mt-3 text-neutral-600 text-sm">"Bildirimlere İzin Ver" seçeneğini aktif edin.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screenshot Showcase -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="flex flex-col gap-8 order-2 md:order-1">
+                    <div class="flex gap-6 items-start">
+                        <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                            <i class="fas fa-shield-alt text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-xl font-bold text-neutral-800 mb-3">Gizlilik Güvencesi</h4>
+                            <p class="text-neutral-600 leading-relaxed">Konum bilginiz sadece giriş-çıkış anında kullanılır ve güvenli bir şekilde saklanır. Hiçbir zaman üçüncü taraflarla paylaşılmaz.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 items-start">
+                        <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                            <i class="fas fa-battery-three-quarters text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-xl font-bold text-neutral-800 mb-3">Pil Dostu</h4>
+                            <p class="text-neutral-600 leading-relaxed">Uygulama arka planda optimize edilmiş şekilde çalışır ve pil tüketiminizi minimumda tutar.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="phone-mockup order-1 md:order-2">
+                    <div class="phone-frame">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <div class="screenshot-placeholder">
+                                <i class="fas fa-cog"></i>
+                                <p>iPhone ekran görüntüsü:<br>İzinler ayarları</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 3: Login -->
+        <section class="mb-24 fade-up" id="step3">
+            <div class="flex items-start gap-6 mb-12">
+                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center text-2xl font-bold shadow-medium">
+                    3
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-neutral-900 mb-3">Giriş <span class="gradient-text">Yapın</span></h2>
+                    <p class="text-xl text-neutral-600">Kurumsal bilgilerinizle oturum açın</p>
+                </div>
+            </div>
+
+            <!-- Login Step 1: Kurumsal Bilgiler -->
+            <div class="grid grid-cols-1 md:grid-cols-[380px_1fr] lg:grid-cols-[420px_1fr] gap-8 md:gap-12 lg:gap-16 items-center mb-12">
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <div class="screenshot-placeholder">
+                                <i class="fas fa-sign-in-alt"></i>
+                                <p>iPhone ekran görüntüsü:<br>Giriş ekranı</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                        <i class="fas fa-user text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-neutral-800 mb-3">1. Kurumsal Kullanıcı Bilgileri</h4>
+                        <p class="text-neutral-600 leading-relaxed mb-4">İK departmanınız tarafından size verilen kullanıcı adı veya e-posta adresinizi ve geçici şifrenizi girin.</p>
+                        <div class="bg-gradient-to-r from-passgage-red/5 to-passgage-gold/5 rounded-xl p-4 border-l-4 border-passgage-red">
+                            <p class="text-sm text-neutral-700"><strong>💡 İpucu:</strong> Tüm giriş bilgileriniz 256-bit SSL şifreleme ile korunur.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login Step 2: Face ID / Touch ID -->
+            <div class="grid grid-cols-1 md:grid-cols-[380px_1fr] lg:grid-cols-[420px_1fr] gap-8 md:gap-12 lg:gap-16 items-center mb-12">
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <div class="screenshot-placeholder">
+                                <i class="fas fa-fingerprint"></i>
+                                <p>iPhone ekran görüntüsü:<br>Face ID / Touch ID</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                        <i class="fas fa-fingerprint text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-neutral-800 mb-3">2. Face ID / Touch ID Kurulumu</h4>
+                        <p class="text-neutral-600 leading-relaxed mb-4">İlk girişten sonra Face ID veya Touch ID ile hızlı giriş yapabilirsiniz. Bu özellik tamamen isteğe bağlıdır.</p>
+                        <div class="bg-gradient-to-r from-passgage-red/5 to-passgage-gold/5 rounded-xl p-4 border-l-4 border-passgage-red">
+                            <p class="text-sm text-neutral-700"><strong>🔒 Güvenlik:</strong> Biyometrik verileriniz cihazınızda kalır ve hiçbir zaman sunucularımıza iletilmez.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login Step 3: Şifre Değiştirme -->
+            <div class="grid grid-cols-1 md:grid-cols-[380px_1fr] lg:grid-cols-[420px_1fr] gap-8 md:gap-12 lg:gap-16 items-center mb-12">
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <div class="screenshot-placeholder">
+                                <i class="fas fa-key"></i>
+                                <p>iPhone ekran görüntüsü:<br>Şifre Değiştir</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                        <i class="fas fa-key text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-neutral-800 mb-3">3. İlk Giriş ve Şifre Değiştirme</h4>
+                        <p class="text-neutral-600 leading-relaxed mb-4">Geçici şifrenizle ilk kez giriş yaptığınızda, güvenliğiniz için yeni bir şifre belirlemeniz istenecektir.</p>
+                        <div class="bg-neutral-100 rounded-xl p-4">
+                            <p class="text-sm text-neutral-700"><strong>Şifre Gereksinimleri:</strong></p>
+                            <ul class="text-sm text-neutral-600 mt-2 space-y-1 ml-4">
+                                <li>• En az 8 karakter</li>
+                                <li>• Büyük ve küçük harf</li>
+                                <li>• En az bir rakam</li>
+                            </ul>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-sm text-neutral-600"><strong>Şifremi Unuttum:</strong> Giriş ekranındaki bağlantıya tıklayın, e-postanıza şifre sıfırlama linki gönderilecektir.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 4: Device Pairing -->
+        <section class="mb-24 fade-up" id="step4">
+            <div class="flex items-start gap-6 mb-12">
+                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center text-2xl font-bold shadow-medium">
+                    4
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-neutral-900 mb-3">Cihaz <span class="gradient-text">Eşleştirme</span></h2>
+                    <p class="text-xl text-neutral-600">iPhone'unuzu hesabınıza güvenle bağlayın</p>
+                </div>
+            </div>
+
+            <!-- Pairing Step 1: Device Pairing Request -->
+            <div class="grid grid-cols-1 md:grid-cols-[380px_1fr] lg:grid-cols-[420px_1fr] gap-8 md:gap-12 lg:gap-16 items-center mb-12">
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <div class="screenshot-placeholder">
+                                <i class="fas fa-mobile-alt"></i>
+                                <p>iPhone ekran görüntüsü:<br>Cihaz Eşleştirme</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                        <i class="fas fa-mobile-alt text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-neutral-800 mb-3">1. Cihaz Eşleştirme İsteği</h4>
+                        <p class="text-neutral-600 leading-relaxed">Passgage hesabınız aynı anda sadece bir cihazda kullanılabilir. İlk giriş yaptığınızda veya yeni bir cihazdan bağlandığınızda, sistem otomatik olarak cihaz eşleştirme sürecini başlatır. Kayıtlı telefon numaranıza SMS ile 6 haneli doğrulama kodu gönderilir.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pairing Step 2: SMS Verification -->
+            <div class="grid grid-cols-1 md:grid-cols-[380px_1fr] lg:grid-cols-[420px_1fr] gap-8 md:gap-12 lg:gap-16 items-center mb-12">
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <div class="screenshot-placeholder">
+                                <i class="fas fa-sms"></i>
+                                <p>iPhone ekran görüntüsü:<br>SMS Doğrulama</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                        <i class="fas fa-sms text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-neutral-800 mb-3">2. SMS Doğrulama Kodu</h4>
+                        <p class="text-neutral-600 leading-relaxed">iPhone'unuza gelen 6 haneli kodu uygulama ekranına girin. Kod 5 dakika geçerlidir. Kod gelmezse "Tekrar Gönder" butonunu kullanabilirsiniz (60 saniye bekleme süresi).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pairing Step 3: Pairing Complete -->
+            <div class="grid grid-cols-1 md:grid-cols-[380px_1fr] lg:grid-cols-[420px_1fr] gap-8 md:gap-12 lg:gap-16 items-center mb-12">
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <div class="screenshot-placeholder">
+                                <i class="fas fa-check-circle"></i>
+                                <p>iPhone ekran görüntüsü:<br>Eşleştirme Tamamlandı</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                        <i class="fas fa-check-circle text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-neutral-800 mb-3">3. Eşleştirme Tamamlandı</h4>
+                        <p class="text-neutral-600 leading-relaxed mb-4">Kod doğrulandıktan sonra iPhone'unuz hesabınıza kalıcı olarak bağlanır. Artık uygulama özelliklerin tamamına erişebilir, giriş-çıkış kayıtları oluşturabilirsiniz.</p>
+                        <div class="bg-gradient-to-r from-passgage-red/5 to-passgage-gold/5 rounded-xl p-4 border-l-4 border-passgage-red">
+                            <p class="text-sm text-neutral-700"><strong>💡 Güvenlik:</strong> Yeni bir cihaz eşleştirdiğinizde, önceki cihazınızın erişimi otomatik olarak iptal edilir.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 5: NFC Setup -->
+        <section class="mb-24 fade-up" id="step5">
+            <div class="flex items-start gap-6 mb-12">
+                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center text-2xl font-bold shadow-medium">
+                    5
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-neutral-900 mb-3">NFC <span class="gradient-text">Kurulumu</span></h2>
+                    <p class="text-xl text-neutral-600">iPhone'da NFC kullanımı</p>
+                </div>
+            </div>
+
+            <!-- Prominent NFC Message -->
+            <div class="nfc-message-box">
+                <div class="icon">
+                    <i class="fab fa-apple"></i>
+                </div>
+                <h3>iPhone'da NFC Kurulum Gerekmez</h3>
+                <p>iPhone 7 ve daha yeni modellerde NFC varsayılan olarak açıktır. Herhangi bir ayar yapmanıza gerek yoktur. Doğrudan NFC okuyucuya yaklaştırarak kullanabilirsiniz.</p>
+            </div>
+
+            <!-- Compatibility Table -->
+            <div class="compatibility-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>iPhone Modeli</th>
+                            <th>NFC Desteği</th>
+                            <th>Özellik</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>iPhone 7 / 7 Plus</td>
+                            <td><i class="fas fa-check-circle check-icon"></i> Desteklenir</td>
+                            <td>Background tag reading</td>
+                        </tr>
+                        <tr>
+                            <td>iPhone 8 / 8 Plus</td>
+                            <td><i class="fas fa-check-circle check-icon"></i> Desteklenir</td>
+                            <td>Background tag reading + Core NFC</td>
+                        </tr>
+                        <tr>
+                            <td>iPhone X / XR / XS</td>
+                            <td><i class="fas fa-check-circle check-icon"></i> Desteklenir</td>
+                            <td>Background tag reading + Core NFC</td>
+                        </tr>
+                        <tr>
+                            <td>iPhone 11 / 11 Pro</td>
+                            <td><i class="fas fa-check-circle check-icon"></i> Desteklenir</td>
+                            <td>Background tag reading + Core NFC</td>
+                        </tr>
+                        <tr>
+                            <td>iPhone 12 ve Sonrası</td>
+                            <td><i class="fas fa-check-circle check-icon"></i> Desteklenir</td>
+                            <td>Background tag reading + Core NFC</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="info-box">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <h4>NFC Her Zaman Açık</h4>
+                    <p>iOS'ta NFC özelliği otomatik olarak aktiftir ve manuel olarak açılıp kapatılamaz. iPhone'unuzun arka kısmını NFC okuyucuya yaklaştırmanız yeterlidir. Uygulama açık olmasa bile NFC tag'leri okunabilir.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 6: Troubleshooting -->
+        <section class="mb-24 fade-up" id="step6">
+            <div class="flex items-start gap-6 mb-12">
+                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center text-2xl font-bold shadow-medium">
+                    6
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-neutral-900 mb-3">Sorun <span class="gradient-text">Giderme</span></h2>
+                    <p class="text-xl text-neutral-600">iOS'a özel sorunlar ve çözümleri</p>
+                </div>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-item active">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                            <div class="accordion-icon">
+                                <i class="fab fa-safari"></i>
+                            </div>
+                            <h4>Safari Konum İzni Sorunu</h4>
+                        </div>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                                Safari'de "Bu web sitesi konumunuzu kullanmak istiyor" mesajı çıktığında "İzin Ver" seçeneğini işaretleyin.
+                            </p>
+                            <div class="steps-list">
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-cog"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Ayarları Kontrol Edin</h4>
+                                        <p>Ayarlar → Safari → Konum yolunu izleyerek "Sor" veya "İzin Ver" seçeneğinin aktif olduğundan emin olun.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                            <div class="accordion-icon">
+                                <i class="fas fa-satellite-dish"></i>
+                            </div>
+                            <h4>GPS Yenileme (Uçak Modu)</h4>
+                        </div>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <div class="steps-list">
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-plane"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>1. Uçak Modunu Açın</h4>
+                                        <p>Kontrol Merkezi'ni açın (ekranın sağ üst köşesinden aşağı kaydırın) ve uçak modu simgesine dokunun.</p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-hourglass-half"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>2. 10 Saniye Bekleyin</h4>
+                                        <p>Uçak modu açıkken 10 saniye bekleyin. Bu süre GPS modülünün sıfırlanması için gereklidir.</p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-signal"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>3. Uçak Modunu Kapatın</h4>
+                                        <p>Tekrar uçak modu simgesine dokunarak kapatın. GPS sinyali yenilenecektir.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                            <div class="accordion-icon">
+                                <i class="fab fa-icloud"></i>
+                            </div>
+                            <h4>iCloud Senkronizasyon Sorunları</h4>
+                        </div>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                                Bazı durumlarda iCloud senkronizasyonu uygulama verilerini etkileyebilir.
+                            </p>
+                            <div class="steps-list">
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-sync"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>iCloud'u Yenileyin</h4>
+                                        <p>Ayarlar → [Adınız] → iCloud yolunu izleyin ve "iCloud Drive" kapalı ise açın, açık ise 30 saniye kapatıp tekrar açın.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                            <div class="accordion-icon">
+                                <i class="fas fa-wifi"></i>
+                            </div>
+                            <h4>"Bul" (Find My) NFC Çakışması</h4>
+                        </div>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                                Bazı durumlarda "Bul" (Find My) özelliği NFC okumalarını etkileyebilir.
+                            </p>
+                            <div class="steps-list">
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>NFC Okumayı Yeniden Deneyin</h4>
+                                        <p>Telefonu NFC okuyucuya 2-3 saniye daha uzun süre tutun. iPhone'un arka üst kısmını okuyucuya tam olarak yerleştirdiğinizden emin olun.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                            <div class="accordion-icon">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                            <h4>Arka Plan Uygulama Yenileme</h4>
+                        </div>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                                Uygulamanın arka planda çalışması için bu ayarın açık olması önerilir.
+                            </p>
+                            <div class="steps-list">
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-cog"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Ayarı Aktifleştirin</h4>
+                                        <p>Ayarlar → Genel → Arka Plan Uygulama Yenileme yolunu izleyin ve Passgage için açık olduğundan emin olun.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <i class="fas fa-lightbulb"></i>
+                <div>
+                    <h4>Sorun Devam Ediyorsa</h4>
+                    <p>Yukarıdaki adımlar sorunu çözmediyse, uygulamayı tamamen kapatıp tekrar açmayı deneyin. iPhone'u yeniden başlatmak da çoğu sorunu çözer. Hala sorun yaşıyorsanız destek ekibimizle iletişime geçin.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Contact Section -->
+    <section class="py-20 px-8 bg-gradient-to-br from-neutral-50 to-neutral-100">
+        <div class="max-w-2xl mx-auto text-center">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl mb-8 shadow-medium">
+                <i class="fas fa-headset text-3xl"></i>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-extrabold text-neutral-900 mb-6">Yardıma mı <span class="gradient-text">İhtiyacınız Var?</span></h2>
+            <p class="text-lg md:text-xl text-neutral-600 leading-relaxed mb-8">Her türlü soru, geri bildirim veya öneriniz için destek ekibimize ulaşmaktan çekinmeyin. Size yardımcı olmaktan mutluluk duyarız.</p>
+            <a href="mailto:deneyim@passgage.com" class="inline-flex items-center gap-3 bg-gradient-to-r from-passgage-red to-passgage-gold text-white px-8 py-4 rounded-full font-bold text-lg hover:scale-105 hover:shadow-strong transition-all duration-300 no-underline">
+                <i class="fas fa-envelope"></i>
+                deneyim@passgage.com
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-8 bg-white border-t border-neutral-200">
+        <p class="text-center text-neutral-600">© 2024 <a href="https://passgage.com" target="_blank" class="text-neutral-900 font-semibold hover:text-passgage-red transition-colors no-underline">Passgage</a>. Tüm hakları saklıdır. İK Süper Uygulaması</p>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/navigation.js"></script>
+
+    <script>
+        // Accordion Toggle
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            const wasActive = item.classList.contains('active');
+
+            // Close all
+            document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
+
+            // Open clicked if it wasn't active
+            if (!wasActive) {
+                item.classList.add('active');
+            }
+        }
+
+        // Progress Navigation
+        const progressSteps = document.querySelectorAll('.progress-step');
+        const sections = document.querySelectorAll('.section');
+
+        progressSteps.forEach(step => {
+            step.addEventListener('click', () => {
+                const target = step.dataset.target;
+                const targetElement = document.getElementById(target);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Update progress on scroll
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '-100px 0px -60% 0px'
+        };
+
+        let currentActiveStep = 1;
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const stepNum = parseInt(entry.target.id.replace('step', ''));
+                    if (stepNum !== currentActiveStep) {
+                        currentActiveStep = stepNum;
+                        updateProgress(stepNum);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => sectionObserver.observe(section));
+
+        function updateProgress(activeStep) {
+            progressSteps.forEach((step, index) => {
+                const stepNum = index + 1;
+                step.classList.remove('active', 'completed');
+
+                if (stepNum < activeStep) {
+                    step.classList.add('completed');
+                } else if (stepNum === activeStep) {
+                    step.classList.add('active');
+                }
+            });
+        }
+
+        // Initialize first step as active on page load
+        updateProgress(1);
+
+        // Fade in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-up');
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        fadeElements.forEach(el => fadeObserver.observe(el));
+
+        // Header shadow on scroll
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ========================================
+        // GOOGLE ANALYTICS CUSTOM EVENT TRACKING
+        // ========================================
+
+        // iOS App Store Download Click with Platform Tracking
+        document.getElementById('ios-download-btn').addEventListener('click', function() {
+            gtag('event', 'download_click', {
+                'event_category': 'downloads',
+                'event_label': 'iOS - App Store',
+                'platform': 'ios',
+                'value': 1
+            });
+            console.log('GA Event: iOS App Store download click');
+        });
+
+        // Progress Step Navigation Clicks
+        document.querySelectorAll('.progress-step').forEach((step, index) => {
+            step.addEventListener('click', function() {
+                const stepNumber = index + 1;
+                const stepLabel = this.querySelector('.step-label')?.textContent || `Step ${stepNumber}`;
+                gtag('event', 'navigation_click', {
+                    'event_category': 'navigation',
+                    'event_label': `iOS Step ${stepNumber}: ${stepLabel}`,
+                    'platform': 'ios',
+                    'value': stepNumber
+                });
+                console.log('GA Event: iOS Navigation click - Step', stepNumber);
+            });
+        });
+
+        // Accordion (FAQ) Interactions
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const faqTitle = this.querySelector('h4').textContent;
+                const isOpening = !this.parentElement.classList.contains('active');
+                gtag('event', isOpening ? 'faq_open' : 'faq_close', {
+                    'event_category': 'engagement',
+                    'event_label': `iOS: ${faqTitle}`,
+                    'platform': 'ios',
+                    'value': 1
+                });
+                console.log('GA Event: iOS FAQ', isOpening ? 'opened' : 'closed', '-', faqTitle);
+            });
+        });
+
+        // Contact Email Click
+        document.querySelector('.contact-email')?.addEventListener('click', function() {
+            gtag('event', 'contact_click', {
+                'event_category': 'engagement',
+                'event_label': 'iOS Guide - Email Contact',
+                'platform': 'ios',
+                'value': 1
+            });
+            console.log('GA Event: iOS Guide - Contact email clicked');
+        });
+
+        // Hero CTA Button Clicks
+        document.querySelectorAll('.hero-actions .btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const btnText = this.textContent.trim();
+                gtag('event', 'cta_click', {
+                    'event_category': 'engagement',
+                    'event_label': `iOS Guide: ${btnText}`,
+                    'platform': 'ios',
+                    'value': 1
+                });
+                console.log('GA Event: iOS CTA clicked -', btnText);
+            });
+        });
+
+        // Back Button Click
+        document.querySelector('.back-button')?.addEventListener('click', function() {
+            gtag('event', 'back_button_click', {
+                'event_category': 'navigation',
+                'event_label': 'iOS Guide - Back to Home',
+                'platform': 'ios',
+                'value': 1
+            });
+            console.log('GA Event: iOS Guide - Back button clicked');
+        });
+
+        // Scroll Depth Tracking
+        let scrollDepthMarkers = {
+            '25': false,
+            '50': false,
+            '75': false,
+            '100': false
+        };
+
+        window.addEventListener('scroll', function() {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight - windowHeight;
+            const scrolled = window.scrollY;
+            const scrollPercent = Math.round((scrolled / documentHeight) * 100);
+
+            Object.keys(scrollDepthMarkers).forEach(depth => {
+                if (scrollPercent >= parseInt(depth) && !scrollDepthMarkers[depth]) {
+                    scrollDepthMarkers[depth] = true;
+                    gtag('event', 'scroll_depth', {
+                        'event_category': 'engagement',
+                        'event_label': `iOS Guide: ${depth}%`,
+                        'platform': 'ios',
+                        'value': parseInt(depth)
+                    });
+                    console.log('GA Event: iOS Guide scroll depth -', depth + '%');
+                }
+            });
+        });
+
+        // External Link Clicks
+        document.querySelectorAll('a[target="_blank"]').forEach(link => {
+            link.addEventListener('click', function() {
+                const linkText = this.textContent.trim() || this.href;
+                gtag('event', 'external_link', {
+                    'event_category': 'outbound',
+                    'event_label': `iOS Guide: ${linkText}`,
+                    'platform': 'ios',
+                    'value': 1
+                });
+                console.log('GA Event: iOS Guide - External link -', linkText);
+            });
+        });
+
+        console.log('✅ iOS Guide - Google Analytics custom event tracking initialized');
+    </script>
+</body>
+</html>

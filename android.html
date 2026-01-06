@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Kurulum Rehberi | Passgage Google Play Huawei</title>
+    <meta name="description" content="Passgage Android uygulamasını telefonunuza kolayca kurun. Google Play ve Huawei AppGallery desteği ile adım adım görsel rehber, izinler, NFC kurulumu ve sorun giderme.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="https://passgage.com/wp-content/uploads/2023/11/Passgage-Primary-Logo.svg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Primary colors
+                        'passgage-red': '#FF501D',
+                        'passgage-gold': '#FFD700',
+                        'passgage-blue': '#2872fa',
+
+                        // iOS colors
+                        'ios-black': '#1d1d1f',
+                        'ios-gray': '#86868b',
+
+                        // Android colors
+                        'android-green': '#3ddc84',
+                        'android-dark': '#073042',
+
+                        // Access Tag colors
+                        'tag-blue': '#2872fa',
+                        'tag-navy': '#1a5490',
+
+                        // Neutral colors
+                        'neutral-50': '#fafafa',
+                        'neutral-100': '#f5f5f5',
+                        'neutral-200': '#e5e5e5',
+                        'neutral-800': '#1f2937',
+                        'neutral-900': '#111827',
+                    },
+                    boxShadow: {
+                        'soft': '0 2px 20px rgba(0, 0, 0, 0.08)',
+                        'medium': '0 4px 30px rgba(0, 0, 0, 0.12)',
+                        'strong': '0 10px 60px rgba(0, 0, 0, 0.15)',
+                        'card': '0 4px 20px rgba(0, 0, 0, 0.1)',
+                        'phone': '0 20px 60px rgba(0, 0, 0, 0.3)',
+                    },
+                    fontFamily: {
+                        'sans': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+                    },
+                    fontSize: {
+                        'display': ['3.5rem', { lineHeight: '1.1', fontWeight: '800' }],
+                        'hero': ['2.5rem', { lineHeight: '1.2', fontWeight: '700' }],
+                    },
+                    spacing: {
+                        '18': '4.5rem',
+                        '88': '22rem',
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in-up': 'fadeInUp 0.6s ease-out',
+                        'slide-in-left': 'slideInLeft 0.6s ease-out',
+                        'slide-in-right': 'slideInRight 0.6s ease-out',
+                    },
+                },
+            },
+        }
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/custom-components.css">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-374JCV17P7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-374JCV17P7');
+    </script>
+
+    <style>
+        /* Android Page-Specific Styles */
+
+        /* Back button styling */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            color: var(--android-dark-green);
+            transform: translateX(-4px);
+        }
+
+        .back-button i {
+            font-size: 1rem;
+        }
+
+        /* CRITICAL: Battery Optimization Warning Box */
+        .warning-box {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%);
+            border: 3px solid #ef4444;
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            box-shadow: 0 10px 40px rgba(239, 68, 68, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .warning-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #ef4444 0%, #f59e0b 100%);
+        }
+
+        .warning-box .warning-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ef4444 0%, #f59e0b 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .warning-box h4 {
+            color: #dc2626;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .warning-box p {
+            color: var(--gray-800);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .warning-box strong {
+            color: #dc2626;
+            font-weight: 700;
+        }
+
+        /* Info box for Android features */
+        .info-box {
+            background: linear-gradient(135deg, rgba(61, 220, 132, 0.05) 0%, rgba(52, 168, 83, 0.05) 100%);
+            border-left: 5px solid var(--android-dark-green);
+            border-radius: 0 20px 20px 0;
+            padding: 2rem;
+            margin-top: 2rem;
+            display: flex;
+            gap: 1.25rem;
+            align-items: flex-start;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .info-box i {
+            color: var(--android-dark-green);
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .info-box h4 {
+            color: var(--android-dark-green);
+            font-weight: 800;
+            margin-bottom: 0.6rem;
+            font-size: 1.1rem;
+        }
+
+        .info-box p {
+            color: var(--gray-800);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Prominent NFC message box for Android */
+        .nfc-message-box {
+            background: linear-gradient(135deg, #3DDC84 0%, #34a853 100%);
+            border-radius: 24px;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nfc-message-box::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0.1;
+            background-image: radial-gradient(circle at 50% 50%, white 0%, transparent 70%);
+        }
+
+        .nfc-message-box .icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.5rem;
+        }
+
+        .nfc-message-box h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nfc-message-box p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Manufacturer accordion styling */
+        .manufacturer-accordion .accordion-item {
+            border: 2px solid var(--gray-200);
+        }
+
+        .manufacturer-accordion .accordion-item:hover {
+            border-color: var(--android-green);
+        }
+
+        .manufacturer-accordion .accordion-item.active {
+            border-color: var(--android-dark-green);
+            box-shadow: 0 4px 20px rgba(61, 220, 132, 0.15);
+        }
+
+        .manufacturer-accordion .accordion-icon {
+            background: linear-gradient(135deg, rgba(61, 220, 132, 0.1) 0%, rgba(52, 168, 83, 0.1) 100%);
+            color: var(--android-dark-green);
+        }
+
+        .manufacturer-accordion .accordion-item.active .accordion-icon {
+            background: var(--android-gradient);
+            color: white;
+        }
+
+        /* Settings path styling for Android */
+        .settings-path {
+            background: #f1f5f9;
+            padding: 0.75rem 1.25rem;
+            border-radius: 10px;
+            font-family: 'Roboto', 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.95rem;
+            color: var(--gray-800);
+            display: inline-block;
+            margin: 0.75rem 0;
+            border-left: 4px solid var(--android-dark-green);
+        }
+
+        .settings-path .arrow {
+            color: var(--android-dark-green);
+            margin: 0 0.5rem;
+            font-weight: 700;
+        }
+
+        /* Manufacturer badge */
+        .manufacturer-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: 10px;
+        }
+
+        .manufacturer-badge.samsung {
+            background: linear-gradient(135deg, #1428a0 0%, #0c52ff 100%);
+            color: white;
+        }
+
+        .manufacturer-badge.huawei {
+            background: linear-gradient(135deg, #c7112b 0%, #fa1a3c 100%);
+            color: white;
+        }
+
+        .manufacturer-badge.xiaomi {
+            background: linear-gradient(135deg, #ff6700 0%, #ff8533 100%);
+            color: white;
+        }
+
+        .manufacturer-badge.google {
+            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+            color: white;
+        }
+
+        .manufacturer-badge.other {
+            background: var(--gray-700);
+            color: white;
+        }
+
+        /* Step list inside accordion */
+        .accordion-body .steps-list {
+            margin-top: 1.5rem;
+        }
+
+        .accordion-body .step-item {
+            border-left: 3px solid var(--android-green);
+        }
+
+        /* Android phone mockup adjustments */
+        .phone-frame.android {
+            background: #212121;
+        }
+
+        .phone-notch.android {
+            width: 120px;
+            height: 24px;
+            background: #212121;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="logo-container">
+            <a href="index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+                Ana Sayfa
+            </a>
+            <img src="https://passgage.com/wp-content/uploads/2023/11/Passgage-Primary-Logo.svg" alt="Passgage" class="logo">
+            <span class="logo-badge">Android Kurulumu</span>
+        </div>
+        <nav class="progress-nav" role="navigation" aria-label="Kurulum adımları">
+            <div class="progress-step-wrapper">
+                <div class="progress-step active"
+                     role="button"
+                     tabindex="0"
+                     aria-current="step"
+                     aria-label="Adım 1 / 6: Uygulamayı indirin"
+                     data-target="step1">
+                    <span class="step-num" aria-hidden="true">1</span>
+                    <span class="visually-hidden">Uygulamayı indirin</span>
+                </div>
+                <div class="progress-line" aria-hidden="true"></div>
+            </div>
+
+            <div class="progress-step-wrapper">
+                <div class="progress-step"
+                     role="button"
+                     tabindex="0"
+                     aria-label="Adım 2 / 6: Gerekli izinleri verin"
+                     data-target="step2">
+                    <span class="step-num" aria-hidden="true">2</span>
+                    <span class="visually-hidden">Gerekli izinleri verin</span>
+                </div>
+                <div class="progress-line" aria-hidden="true"></div>
+            </div>
+
+            <div class="progress-step-wrapper">
+                <div class="progress-step"
+                     role="button"
+                     tabindex="0"
+                     aria-label="Adım 3 / 6: Giriş yapın"
+                     data-target="step3">
+                    <span class="step-num" aria-hidden="true">3</span>
+                    <span class="visually-hidden">Giriş yapın</span>
+                </div>
+                <div class="progress-line" aria-hidden="true"></div>
+            </div>
+
+            <div class="progress-step-wrapper">
+                <div class="progress-step"
+                     role="button"
+                     tabindex="0"
+                     aria-label="Adım 4 / 6: Cihazınızı eşleştirin"
+                     data-target="step4">
+                    <span class="step-num" aria-hidden="true">4</span>
+                    <span class="visually-hidden">Cihazınızı eşleştirin</span>
+                </div>
+                <div class="progress-line" aria-hidden="true"></div>
+            </div>
+
+            <div class="progress-step-wrapper">
+                <div class="progress-step"
+                     role="button"
+                     tabindex="0"
+                     aria-label="Adım 5 / 6: NFC özelliğini kullanın"
+                     data-target="step5">
+                    <span class="step-num" aria-hidden="true">5</span>
+                    <span class="visually-hidden">NFC özelliğini kullanın</span>
+                </div>
+                <div class="progress-line" aria-hidden="true"></div>
+            </div>
+
+            <div class="progress-step-wrapper">
+                <div class="progress-step"
+                     role="button"
+                     tabindex="0"
+                     aria-label="Adım 6 / 6: Sorun giderme"
+                     data-target="step6">
+                    <span class="step-num" aria-hidden="true">6</span>
+                    <span class="visually-hidden">Sorun giderme</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-content">
+            <div class="hero-icon">
+                <i class="fab fa-android"></i>
+            </div>
+            <h1>Passgage <span class="gradient-text">Android</span> Kurulumu</h1>
+            <p>Android telefon ve tabletler için özel hazırlanmış kurulum rehberi. Android 7.0 ve üzeri cihazlar için optimize edilmiştir.</p>
+            <div class="hero-actions">
+                <a href="#step1" class="btn btn-primary">
+                    <i class="fas fa-play"></i>
+                    Başlayalım
+                </a>
+                <a href="#step6" class="btn btn-secondary">
+                    <i class="fas fa-question-circle"></i>
+                    Sorun mu Var?
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="py-16 md:py-20 px-8 max-w-7xl mx-auto">
+        <!-- Step 1: Download -->
+        <section class="mb-24 fade-up" id="step1">
+            <div class="flex items-start gap-6 mb-12">
+                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center text-2xl font-bold shadow-medium">
+                    1
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-neutral-900 mb-3">Uygulamayı <span class="gradient-text">İndirin</span></h2>
+                    <p class="text-xl text-neutral-600">Google Play veya Huawei AppGallery'den ücretsiz indirin</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12">
+                <!-- Google Play Store -->
+                <a href="https://play.google.com/store/apps/details?id=com.passgage" target="_blank" class="bg-white rounded-3xl p-8 shadow-card hover:shadow-strong transition-all duration-300 hover:-translate-y-2 no-underline flex flex-col group" id="android-google-play-btn">
+                    <div class="flex items-center gap-6 mb-auto">
+                        <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center text-white text-3xl">
+                            <i class="fab fa-google-play"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-neutral-900 mb-1">Google Play Store</h3>
+                            <p class="text-neutral-600">Android telefonlar için</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 text-green-600 font-bold mt-6 group-hover:gap-4 transition-all">
+                        <span>Ücretsiz İndir</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+
+                <!-- Huawei AppGallery -->
+                <a href="https://appgallery.huawei.com/app/C106558653" target="_blank" class="bg-white rounded-3xl p-8 shadow-card hover:shadow-strong transition-all duration-300 hover:-translate-y-2 no-underline flex flex-col group" id="android-huawei-btn">
+                    <div class="flex items-center gap-6 mb-auto">
+                        <div class="w-16 h-16 bg-gradient-to-br from-red-600 to-red-700 rounded-2xl flex items-center justify-center text-white text-3xl">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-neutral-900 mb-1">Huawei AppGallery</h3>
+                            <p class="text-neutral-600">Huawei cihazlar için</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 text-red-600 font-bold mt-6 group-hover:gap-4 transition-all">
+                        <span>Ücretsiz İndir</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Screenshot Showcase -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="phone-mockup">
+                    <div class="phone-frame android">
+                        <div class="phone-notch android"></div>
+                        <div class="phone-screen">
+                            <img src="screenshots/android/step1-google-play.jpg"
+                                 alt="Google Play Store'da Passgage uygulaması - İK Süper Uygulaması indirme ekranı"
+                                 loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-8">
+                    <div class="flex gap-6 items-start">
+                        <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                            <i class="fab fa-android text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-xl font-bold text-neutral-800 mb-3">Android 7.0 ve Üzeri</h4>
+                            <p class="text-neutral-600 leading-relaxed">Uygulama Android 7.0 (Nougat) veya daha yeni sürüm gerektirir. Ayarlar → Telefon Hakkında → Android Sürümü'nden versiyonunuzu kontrol edebilirsiniz.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 items-start">
+                        <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                            <i class="fab fa-google text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-xl font-bold text-neutral-800 mb-3">Google Play Services Gereklidir</h4>
+                            <p class="text-neutral-600 leading-relaxed">Uygulamanın düzgün çalışması için Google Play Services güncel olmalıdır. Huawei cihazlarda AppGallery sürümünü kullanın.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 2: Permissions - CRITICAL SECTION -->
+        <section class="mb-24 fade-up" id="step2">
+            <div class="flex items-start gap-6 mb-12">
+                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center text-2xl font-bold shadow-medium">
+                    2
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-neutral-900 mb-3">Gerekli <span class="gradient-text">İzinleri</span> Verin</h2>
+                    <p class="text-xl text-neutral-600">Android ayarlarından izinleri aktifleştirin</p>
+                </div>
+            </div>
+
+            <!-- Permission 1: Location -->
+            <div class="grid grid-cols-1 md:grid-cols-[380px_1fr] lg:grid-cols-[420px_1fr] gap-8 md:gap-12 lg:gap-16 items-center mb-12">
+                <div class="phone-mockup">
+                    <div class="phone-frame android">
+                        <div class="phone-notch android"></div>
+                        <div class="phone-screen">
+                            <img src="screenshots/android/step2-location-permission.jpg"
+                                 alt="Passgage konum izni ekranı - Android cihazda hassas konum erişimi izni"
+                                 loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                        <i class="fas fa-map-marker-alt text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-neutral-800 mb-3">1. Konum İzni</h4>
+                        <p class="text-neutral-600 leading-relaxed mb-3">Giriş-çıkış kayıtlarınızın doğru konumda yapıldığından emin olmak için konum izni gereklidir.</p>
+                        <div class="settings-path">
+                            Ayarlar <span class="arrow">→</span> Uygulamalar <span class="arrow">→</span> Passgage <span class="arrow">→</span> İzinler <span class="arrow">→</span> Konum
+                        </div>
+                        <p class="mt-3 text-neutral-600 text-sm"><strong>Önerilen:</strong> "Her zaman izin ver" seçeneğini işaretleyin.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Permission 2: Camera -->
+            <div class="grid grid-cols-1 md:grid-cols-[380px_1fr] lg:grid-cols-[420px_1fr] gap-8 md:gap-12 lg:gap-16 items-center mb-12">
+                <div class="phone-mockup">
+                    <div class="phone-frame android">
+                        <div class="phone-notch android"></div>
+                        <div class="phone-screen">
+                            <img src="screenshots/android/step2-camera-permission.jpg"
+                                 alt="Passgage kamera izni ekranı - QR kod tarama için kamera erişimi"
+                                 loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                        <i class="fas fa-camera text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-neutral-800 mb-3">2. Kamera İzni</h4>
+                        <p class="text-neutral-600 leading-relaxed mb-3">QR kod okutma özelliği için kamera iznine ihtiyaç vardır.</p>
+                        <div class="settings-path">
+                            Ayarlar <span class="arrow">→</span> Uygulamalar <span class="arrow">→</span> Passgage <span class="arrow">→</span> İzinler <span class="arrow">→</span> Kamera
+                        </div>
+                        <p class="mt-3 text-neutral-600 text-sm">Kamera iznini <strong>İzin Ver</strong> olarak ayarlayın.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Permission 3: Notifications -->
+            <div class="grid grid-cols-1 md:grid-cols-[380px_1fr] lg:grid-cols-[420px_1fr] gap-8 md:gap-12 lg:gap-16 items-center mb-12">
+                <div class="phone-mockup">
+                    <div class="phone-frame android">
+                        <div class="phone-notch android"></div>
+                        <div class="phone-screen">
+                            <img src="screenshots/android/step2-notification-permission.jpg"
+                                 alt="Passgage bildirim izni ekranı - Android bildirim izni ayarları"
+                                 loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                        <i class="fas fa-bell text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-neutral-800 mb-3">3. Bildirim İzni</h4>
+                        <p class="text-neutral-600 leading-relaxed mb-3">Önemli duyuru ve hatırlatmalar için bildirim iznini açmanızı öneririz.</p>
+                        <div class="settings-path">
+                            Ayarlar <span class="arrow">→</span> Uygulamalar <span class="arrow">→</span> Passgage <span class="arrow">→</span> Bildirimler
+                        </div>
+                        <p class="mt-3 text-neutral-600 text-sm">"Bildirimlere İzin Ver" seçeneğini aktif edin.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="screenshot-info" style="margin-top: 2rem; display: grid; gap: 1.5rem;">
+                <div class="info-point">
+                    <div class="info-point-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="info-point-content">
+                        <h4>Gizlilik Güvencesi</h4>
+                        <p>Konum bilginiz sadece giriş-çıkış anında kullanılır ve güvenli bir şekilde saklanır. Hiçbir zaman üçüncü taraflarla paylaşılmaz.</p>
+                    </div>
+                </div>
+                <div class="info-point">
+                    <div class="info-point-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="info-point-content">
+                        <h4>Otomatik İzin İstekleri</h4>
+                        <p>Uygulama ilk açıldığında bu izinler otomatik olarak sizden talep edilecektir. Her izin için "İzin Ver" seçeneğine tıklayın.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 3: Login -->
+        <section class="mb-24 fade-up" id="step3">
+            <div class="flex items-start gap-6 mb-12">
+                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center text-2xl font-bold shadow-medium">
+                    3
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-neutral-900 mb-3">Giriş Yapın ve <span class="gradient-text">Şifre Oluşturun</span></h2>
+                    <p class="text-xl text-neutral-600">İlk giriş için şifre oluşturma süreci</p>
+                </div>
+            </div>
+
+            <!-- Step 1: Şifre Al -->
+            <div class="grid grid-cols-1 md:grid-cols-[380px_1fr] lg:grid-cols-[420px_1fr] gap-8 md:gap-12 lg:gap-16 items-center mb-12">
+                <div class="phone-mockup">
+                    <div class="phone-frame android">
+                        <div class="phone-notch android"></div>
+                        <div class="phone-screen">
+                            <img src="screenshots/android/step3-1-login-screen.jpg"
+                                 alt="Passgage giriş ekranı - Şifre Al butonu ile ilk giriş"
+                                 loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                        <i class="fas fa-sign-in-alt text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-neutral-800 mb-3">1. Şifre Al Butonuna Tıklayın</h4>
+                        <p class="text-neutral-600 leading-relaxed">İlk açılış ekranında "Şifre Al / Yenile" linkine tıklayarak şifre oluşturma sürecini başlatın.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Hesap Doğrulama -->
+            <div class="grid grid-cols-1 md:grid-cols-[380px_1fr] lg:grid-cols-[420px_1fr] gap-8 md:gap-12 lg:gap-16 items-center mb-12">
+                <div class="phone-mockup">
+                    <div class="phone-frame android">
+                        <div class="phone-notch android"></div>
+                        <div class="phone-screen">
+                            <img src="screenshots/android/step3-2-account-verification.jpg"
+                                 alt="Passgage hesap doğrulama - E-posta veya telefon ile OTP kodu alma"
+                                 loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-neutral-800 mb-3">2. E-posta veya Telefon Numaranızı Girin</h4>
+                        <p class="text-neutral-600 leading-relaxed">Size bildirilen <strong>e-posta</strong> veya <strong>telefon numaranızı</strong> girin. 6 haneli doğrulama kodu (OTP) gönderilecek.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: OTP Girişi -->
+            <div class="grid grid-cols-1 md:grid-cols-[380px_1fr] lg:grid-cols-[420px_1fr] gap-8 md:gap-12 lg:gap-16 items-center mb-12">
+                <div class="phone-mockup">
+                    <div class="phone-frame android">
+                        <div class="phone-notch android"></div>
+                        <div class="phone-screen">
+                            <img src="screenshots/android/step3-3-otp-entry.jpg"
+                                 alt="Passgage OTP kod girişi - 6 haneli doğrulama kodu"
+                                 loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                        <i class="fas fa-mobile-alt text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-neutral-800 mb-3">3. Gelen 6 Haneli Kodu Girin</h4>
+                        <p class="text-neutral-600 leading-relaxed">E-posta veya SMS'e gelen <strong>6 haneli kodu</strong> ekrana yazın. Kod 5 dakika geçerlidir.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4: Şifre Belirleme -->
+            <div class="grid grid-cols-1 md:grid-cols-[380px_1fr] lg:grid-cols-[420px_1fr] gap-8 md:gap-12 lg:gap-16 items-center mb-12">
+                <div class="phone-mockup">
+                    <div class="phone-frame android">
+                        <div class="phone-notch android"></div>
+                        <div class="phone-screen">
+                            <img src="screenshots/android/step3-4-set-password.jpg"
+                                 alt="Passgage şifre belirleme - Yeni şifre oluşturma ekranı"
+                                 loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                        <i class="fas fa-key text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-neutral-800 mb-3">4. Yeni Şifrenizi Oluşturun</h4>
+                        <p class="text-neutral-600 leading-relaxed">Güvenli bir şifre belirleyin: <strong>En az 8 karakter</strong>, büyük/küçük harf ve rakam içersin. Şifreyi iki kez girin.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-8 mt-8">
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                        <i class="fas fa-lock text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-neutral-800 mb-3">Güvenli Giriş</h4>
+                        <p class="text-neutral-600 leading-relaxed">İlk girişinizde OTP (Tek Kullanımlık Şifre) ile kimliğiniz doğrulanır ve kendi şifrenizi oluşturursunuz. Sonraki girişlerde e-posta/telefon ve oluşturduğunuz şifre ile giriş yapabilirsiniz.</p>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                        <i class="fas fa-shield-alt text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-neutral-800 mb-3">Şifre Güvenliği</h4>
+                        <p class="text-neutral-600 leading-relaxed">Güçlü bir şifre oluşturun: En az 8 karakter, büyük-küçük harf kombinasyonu ve rakam içermelidir. Şifrenizi kimseyle paylaşmayın ve düzenli olarak değiştirin.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 4: Device Pairing -->
+        <section class="mb-24 fade-up" id="step4">
+            <div class="flex items-start gap-6 mb-12">
+                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center text-2xl font-bold shadow-medium">
+                    4
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-neutral-900 mb-3">Cihaz <span class="gradient-text">Eşleştirme</span></h2>
+                    <p class="text-xl text-neutral-600">Telefonunuzu hesabınıza güvenle bağlayın</p>
+                </div>
+            </div>
+
+            <!-- Pairing Step 1: Device Pairing Request -->
+            <div class="grid grid-cols-1 md:grid-cols-[380px_1fr] lg:grid-cols-[420px_1fr] gap-8 md:gap-12 lg:gap-16 items-center mb-12">
+                <div class="phone-mockup">
+                    <div class="phone-frame android">
+                        <div class="phone-notch android"></div>
+                        <div class="phone-screen">
+                            <img src="screenshots/android/step4-device-pairing.jpg"
+                                 alt="Passgage cihaz eşleştirme ekranı - SMS doğrulama ile güvenli bağlantı"
+                                 loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                        <i class="fas fa-mobile-alt text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-neutral-800 mb-3">1. Cihaz Eşleştirme İsteği</h4>
+                        <p class="text-neutral-600 leading-relaxed">Passgage hesabınız aynı anda sadece bir cihazda kullanılabilir. İlk giriş yaptığınızda veya yeni bir cihazdan bağlandığınızda, sistem otomatik olarak cihaz eşleştirme sürecini başlatır. Kayıtlı telefon numaranıza SMS ile 6 haneli doğrulama kodu gönderilir.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pairing Step 2: Add Device -->
+            <div class="grid grid-cols-1 md:grid-cols-[380px_1fr] lg:grid-cols-[420px_1fr] gap-8 md:gap-12 lg:gap-16 items-center mb-12">
+                <div class="phone-mockup">
+                    <div class="phone-frame android">
+                        <div class="phone-notch android"></div>
+                        <div class="phone-screen">
+                            <img src="screenshots/android/step4-add-device.jpg"
+                                 alt="Passgage cihaz ekleme - Yeni cihaz eşleştirme süreci"
+                                 loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                        <i class="fas fa-sms text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-neutral-800 mb-3">2. SMS Doğrulama Kodu</h4>
+                        <p class="text-neutral-600 leading-relaxed">Telefonunuza gelen 6 haneli kodu uygulama ekranına girin. Kod 5 dakika geçerlidir. Kod gelmezse "Tekrar Gönder" butonunu kullanabilirsiniz (60 saniye bekleme süresi).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pairing Step 3: Connected Devices -->
+            <div class="grid grid-cols-1 md:grid-cols-[380px_1fr] lg:grid-cols-[420px_1fr] gap-8 md:gap-12 lg:gap-16 items-center mb-12">
+                <div class="phone-mockup">
+                    <div class="phone-frame android">
+                        <div class="phone-notch android"></div>
+                        <div class="phone-screen">
+                            <img src="screenshots/android/step4-connected-devices.jpg"
+                                 alt="Passgage bağlı cihazlar - Eşleştirme tamamlandı ekranı"
+                                 loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center shadow-medium">
+                        <i class="fas fa-check-circle text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xl font-bold text-neutral-800 mb-3">3. Eşleştirme Tamamlandı</h4>
+                        <p class="text-neutral-600 leading-relaxed mb-4">Kod doğrulandıktan sonra cihazınız hesabınıza kalıcı olarak bağlanır. Artık uygulama özelliklerin tamamına erişebilir, giriş-çıkış kayıtları oluşturabilirsiniz.</p>
+                        <div class="bg-gradient-to-r from-passgage-red/5 to-passgage-gold/5 rounded-xl p-4 border-l-4 border-passgage-red">
+                            <p class="text-sm text-neutral-700"><strong>💡 Güvenlik:</strong> Yeni bir cihaz eşleştirdiğinizde, önceki cihazınızın erişimi otomatik olarak iptal edilir.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 5: NFC Setup - MANUFACTURER-SPECIFIC -->
+        <section class="mb-24 fade-up" id="step5">
+            <div class="flex items-start gap-6 mb-12">
+                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center text-2xl font-bold shadow-medium">
+                    5
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-neutral-900 mb-3">NFC <span class="gradient-text">Kurulumu</span></h2>
+                    <p class="text-xl text-neutral-600">Android'de NFC manuel aktivasyon gerektirir</p>
+                </div>
+            </div>
+
+            <!-- Prominent NFC Message -->
+            <div class="nfc-message-box mb-12">
+                <div class="icon">
+                    <i class="fab fa-android"></i>
+                </div>
+                <h3>Android'de NFC Manuel Aktivasyon Gerektirir</h3>
+                <p>iOS'tan farklı olarak Android cihazlarda NFC özelliğini manuel olarak açmanız gerekmektedir. Aşağıdaki üretici özel talimatları takip ederek NFC'yi aktif hale getirebilirsiniz.</p>
+            </div>
+
+            <!-- Manufacturer-Specific Accordion -->
+            <div class="accordion manufacturer-accordion">
+                <!-- Samsung (One UI) -->
+                <div class="accordion-item active">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                            <div class="accordion-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Samsung (One UI) <span class="manufacturer-badge samsung">Samsung</span></h4>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                                Samsung cihazlarda NFC aktivasyonu basit ve hızlıdır. One UI arayüzü sayesinde kolayca erişebilirsiniz.
+                            </p>
+                            <div class="steps-list">
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-cog"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Adım 1: Ayarları Açın</h4>
+                                        <div class="settings-path">
+                                            Ayarlar <span class="arrow">→</span> Bağlantılar (Connections)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-wifi"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Adım 2: NFC ve Temassız Ödemeler</h4>
+                                        <div class="settings-path">
+                                            NFC and contactless payments <span class="arrow">→</span> NFC
+                                        </div>
+                                        <p style="margin-top: 0.75rem;">NFC anahtarını <strong>AÇIK (ON)</strong> konuma getirin.</p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Adım 3: Doğrulama</h4>
+                                        <p>Hızlı Ayarlar panelini (üstten aşağı kaydırın) açın. NFC simgesinin <strong>mavi</strong> olduğundan emin olun.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Huawei (EMUI/HarmonyOS) -->
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                            <div class="accordion-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Huawei (EMUI / HarmonyOS) <span class="manufacturer-badge huawei">Huawei</span></h4>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                                Huawei cihazlarda EMUI veya HarmonyOS kullanılıyor. Her iki sistemde de NFC aktivasyonu benzerdir.
+                            </p>
+                            <div class="steps-list">
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-cog"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Adım 1: Ayarları Açın</h4>
+                                        <div class="settings-path">
+                                            Ayarlar <span class="arrow">→</span> Cihaz bağlantısı (Device connectivity)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-wifi"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Adım 2: NFC Bölümü</h4>
+                                        <div class="settings-path">
+                                            NFC
+                                        </div>
+                                        <p style="margin-top: 0.75rem;">NFC anahtarını <strong>AÇIK (ON)</strong> konuma getirin.</p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Adım 3: Huawei Wallet (Opsiyonel)</h4>
+                                        <p>Eğer Huawei Wallet kullanıyorsanız, varsayılan ödeme uygulamasını da ayarlayabilirsiniz.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Xiaomi (MIUI) -->
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                            <div class="accordion-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Xiaomi (MIUI) <span class="manufacturer-badge xiaomi">Xiaomi</span></h4>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                                Xiaomi'nin MIUI arayüzünde NFC ayarlarına erişim biraz farklıdır. İki farklı yol mevcuttur.
+                            </p>
+                            <div class="steps-list">
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-cog"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Yöntem 1: Bağlantı ve Paylaşım</h4>
+                                        <div class="settings-path">
+                                            Ayarlar <span class="arrow">→</span> Connection & sharing <span class="arrow">→</span> NFC
+                                        </div>
+                                        <p style="margin-top: 0.75rem;">NFC anahtarını <strong>AÇIK (ON)</strong> konuma getirin.</p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-wifi"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Yöntem 2: Daha Fazla Bağlantı Seçenekleri</h4>
+                                        <div class="settings-path">
+                                            Ayarlar <span class="arrow">→</span> More connectivity options <span class="arrow">→</span> NFC
+                                        </div>
+                                        <p style="margin-top: 0.75rem;">Bazı MIUI versiyonlarında bu yol kullanılabilir.</p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Adım 3: Android Beam (Opsiyonel)</h4>
+                                        <p>NFC açıkken "Android Beam" özelliğini de aktif edebilirsiniz (varsa).</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stock Android (Pixel, etc.) -->
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                            <div class="accordion-icon">
+                                <i class="fab fa-google"></i>
+                            </div>
+                            <div>
+                                <h4>Stock Android (Google Pixel vb.) <span class="manufacturer-badge google">Google</span></h4>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                                Google Pixel veya saf Android kullanan cihazlarda NFC ayarları standart Android yolunu takip eder.
+                            </p>
+                            <div class="steps-list">
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-cog"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Adım 1: Bağlı Cihazlar</h4>
+                                        <div class="settings-path">
+                                            Ayarlar <span class="arrow">→</span> Connected devices <span class="arrow">→</span> Connection preferences
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-wifi"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Adım 2: NFC Aktivasyonu</h4>
+                                        <div class="settings-path">
+                                            NFC
+                                        </div>
+                                        <p style="margin-top: 0.75rem;">NFC anahtarını <strong>AÇIK (ON)</strong> konuma getirin.</p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Adım 3: Doğrulama</h4>
+                                        <p>Hızlı Ayarlar panelinde NFC simgesinin aktif olduğundan emin olun.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other Manufacturers -->
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                            <div class="accordion-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Diğer Üreticiler <span class="manufacturer-badge other">Genel</span></h4>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                                Oppo, Vivo, Realme, OnePlus gibi diğer Android üreticiler için genel NFC aktivasyon yolları:
+                            </p>
+                            <div class="steps-list">
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Yöntem 1: Ayarlar Arama</h4>
+                                        <p>Ayarlar uygulamasında üst kısımdaki arama kutusuna <strong>"NFC"</strong> yazın ve sonuçlara tıklayın.</p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-wifi"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Yöntem 2: Bağlantı Ayarları</h4>
+                                        <div class="settings-path">
+                                            Ayarlar <span class="arrow">→</span> Bağlantılar / Wireless & Networks <span class="arrow">→</span> NFC
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-bars"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Yöntem 3: Hızlı Ayarlar</h4>
+                                        <p>Ekranın üst kısmından aşağı kaydırarak Hızlı Ayarlar panelini açın ve NFC simgesine basın.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex gap-6 items-start bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-xl">
+                <div class="flex-shrink-0 text-blue-600 text-2xl">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <div class="flex-1">
+                    <h4 class="text-lg font-bold text-neutral-900 mb-2">NFC Sensör Konumu</h4>
+                    <p class="text-neutral-700 leading-relaxed">NFC sensörü genellikle telefonun arka kısmının üst veya orta bölümünde bulunur. NFC okuyucuya yaklaştırırken telefonu tam olarak temas ettirmeniz gerekmez, 1-2 cm mesafe yeterlidir.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 6: Troubleshooting -->
+        <section class="mb-24 fade-up" id="step6">
+            <div class="flex items-start gap-6 mb-12">
+                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center text-2xl font-bold shadow-medium">
+                    6
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-neutral-900 mb-3">Sorun <span class="gradient-text">Giderme</span></h2>
+                    <p class="text-xl text-neutral-600">Android'e özel sorunlar ve çözümleri</p>
+                </div>
+            </div>
+
+            <div class="accordion">
+                <!-- Google Play Services -->
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                            <div class="accordion-icon">
+                                <i class="fab fa-google-play"></i>
+                            </div>
+                            <h4>Google Play Services Güncel Değil</h4>
+                        </div>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                                Uygulama Google Play Services gerektirir. Güncel değilse sorun yaşayabilirsiniz.
+                            </p>
+                            <div class="steps-list">
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-store"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Google Play Store'u Açın</h4>
+                                        <p>Google Play Store uygulamasını açın ve arama çubuğuna "Google Play Services" yazın.</p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-sync"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Güncelleme Kontrolü</h4>
+                                        <p>Eğer "Güncelle" butonu görünüyorsa tıklayarak güncelleyin. Güncel ise "Açık" veya "Kaldır" butonları görünecektir.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MIUI/OneUI Permission Issues -->
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                            <div class="accordion-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h4>MIUI / One UI Özel İzin Sorunları</h4>
+                        </div>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                                Xiaomi (MIUI) ve Samsung (One UI) cihazlarda ek güvenlik katmanları bulunur.
+                            </p>
+                            <div class="steps-list">
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-lock"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>MIUI: Autostart İzni</h4>
+                                        <div class="settings-path">
+                                            Ayarlar <span class="arrow">→</span> Uygulamalar <span class="arrow">→</span> Manage apps <span class="arrow">→</span> Passgage <span class="arrow">→</span> Autostart
+                                        </div>
+                                        <p style="margin-top: 0.75rem;">Autostart iznini <strong>AÇIK</strong> konuma getirin.</p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-battery-three-quarters"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>MIUI: Pil Tasarrufu</h4>
+                                        <div class="settings-path">
+                                            Güvenlik <span class="arrow">→</span> Battery <span class="arrow">→</span> App battery saver <span class="arrow">→</span> Passgage
+                                        </div>
+                                        <p style="margin-top: 0.75rem;"><strong>"No restrictions"</strong> seçeneğini işaretleyin.</p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-rocket"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Samsung: Device Care Ayarları</h4>
+                                        <div class="settings-path">
+                                            Ayarlar <span class="arrow">→</span> Device care <span class="arrow">→</span> Battery <span class="arrow">→</span> App power management
+                                        </div>
+                                        <p style="margin-top: 0.75rem;">Passgage'i "Never sleeping apps" listesine ekleyin.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doze Mode -->
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                            <div class="accordion-icon">
+                                <i class="fas fa-moon"></i>
+                            </div>
+                            <h4>Doze Mode / Uykuda Bekletme</h4>
+                        </div>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                                Android'in Doze Mode özelliği uzun süre kullanılmayan uygulamaları uyku moduna alır.
+                            </p>
+                            <div class="steps-list">
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-cog"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Pil Optimizasyonu İstisnası</h4>
+                                        <div class="settings-path">
+                                            Ayarlar <span class="arrow">→</span> Uygulamalar <span class="arrow">→</span> Passgage <span class="arrow">→</span> Pil <span class="arrow">→</span> Optimize Etme
+                                        </div>
+                                        <p style="margin-top: 0.75rem;">Bu ayar yukarıdaki Adım 2'de detaylıca anlatılmıştır.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NFC Not Working -->
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                            <div class="accordion-icon">
+                                <i class="fas fa-wifi"></i>
+                            </div>
+                            <h4>NFC Çalışmıyor</h4>
+                        </div>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                                NFC okuma sorunları yaşıyorsanız aşağıdaki adımları deneyin.
+                            </p>
+                            <div class="steps-list">
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>NFC Açık mı Kontrol Edin</h4>
+                                        <p>Yukarıdaki <strong>Adım 5: NFC Kurulumu</strong> bölümündeki üretici özel talimatları takip ederek NFC'nin açık olduğundan emin olun.</p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Telefon Konumu</h4>
+                                        <p>Telefonun arka kısmını (genellikle üst veya orta bölüm) NFC okuyucuya yaklaştırın. 1-2 saniye tutun.</p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Kılıf Sorunu</h4>
+                                        <p>Kalın veya metalik kılıflar NFC sinyalini engelleyebilir. Kılıfı çıkarıp tekrar deneyin.</p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-sync-alt"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Telefonu Yeniden Başlatın</h4>
+                                        <p>Telefonu kapatıp açmak NFC modülünü yeniler ve çoğu sorunu çözebilir.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Location Accuracy -->
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                            <div class="accordion-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h4>Konum Doğruluğu Sorunları</h4>
+                        </div>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                                GPS konumunuz yanlış veya hassas değilse aşağıdaki ayarları kontrol edin.
+                            </p>
+                            <div class="steps-list">
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-satellite-dish"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Yüksek Doğruluk Modu</h4>
+                                        <div class="settings-path">
+                                            Ayarlar <span class="arrow">→</span> Konum <span class="arrow">→</span> Konum Servisleri <span class="arrow">→</span> Konum Modu
+                                        </div>
+                                        <p style="margin-top: 0.75rem;"><strong>"Yüksek doğruluk"</strong> veya <strong>"High accuracy"</strong> seçeneğini işaretleyin.</p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-wifi"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Wi-Fi ve Bluetooth Taraması</h4>
+                                        <div class="settings-path">
+                                            Ayarlar <span class="arrow">→</span> Konum <span class="arrow">→</span> Wi-Fi and Bluetooth scanning
+                                        </div>
+                                        <p style="margin-top: 0.75rem;">Her iki seçeneği de <strong>AÇIK</strong> konuma getirin.</p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-sync-alt"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>GPS'i Yenileyin</h4>
+                                        <p>Uçak modunu 10 saniye açıp kapatın. Bu GPS modülünü sıfırlar ve yeniden bağlanmasını sağlar.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Background App Restrictions -->
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                            <div class="accordion-icon">
+                                <i class="fas fa-ban"></i>
+                            </div>
+                            <h4>Arka Plan Uygulama Kısıtlamaları</h4>
+                        </div>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                                Android cihazınız uygulamanın arka planda çalışmasını kısıtlıyor olabilir.
+                            </p>
+                            <div class="steps-list">
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-infinity"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Arka Plan Veri Kullanımı</h4>
+                                        <div class="settings-path">
+                                            Ayarlar <span class="arrow">→</span> Uygulamalar <span class="arrow">→</span> Passgage <span class="arrow">→</span> Mobil veri ve Wi-Fi
+                                        </div>
+                                        <p style="margin-top: 0.75rem;"><strong>"Arka planda veri kullanımı"</strong> seçeneğini aktif edin.</p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-tasks"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Arka Plan Etkinliği</h4>
+                                        <div class="settings-path">
+                                            Ayarlar <span class="arrow">→</span> Uygulamalar <span class="arrow">→</span> Passgage <span class="arrow">→</span> Pil <span class="arrow">→</span> Arka plan kısıtlaması
+                                        </div>
+                                        <p style="margin-top: 0.75rem;">Arka plan kısıtlamasını <strong>KAPALI</strong> konuma getirin.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex gap-6 items-start bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-r-xl mt-8">
+                <div class="flex-shrink-0 text-yellow-600 text-2xl">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="flex-1">
+                    <h4 class="text-lg font-bold text-neutral-900 mb-2">Sorun Devam Ediyorsa</h4>
+                    <p class="text-neutral-700 leading-relaxed">Yukarıdaki adımlar sorunu çözmediyse, uygulamayı tamamen kapatıp tekrar açmayı deneyin. Telefonu yeniden başlatmak da çoğu sorunu çözer. Hala sorun yaşıyorsanız uygulamayı kaldırıp yeniden yükleyin veya destek ekibimizle iletişime geçin.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Contact Section -->
+    <section class="py-20 px-8 bg-gradient-to-br from-neutral-50 to-neutral-100">
+        <div class="max-w-2xl mx-auto text-center">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl mb-8 shadow-medium">
+                <i class="fas fa-headset text-3xl"></i>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-extrabold text-neutral-900 mb-6">Yardıma mı <span class="gradient-text">İhtiyacınız Var?</span></h2>
+            <p class="text-lg md:text-xl text-neutral-600 leading-relaxed mb-8">Her türlü soru, geri bildirim veya öneriniz için destek ekibimize ulaşmaktan çekinmeyin. Size yardımcı olmaktan mutluluk duyarız.</p>
+            <a href="mailto:deneyim@passgage.com" class="inline-flex items-center gap-3 bg-gradient-to-r from-passgage-red to-passgage-gold text-white px-8 py-4 rounded-full font-bold text-lg hover:scale-105 hover:shadow-strong transition-all duration-300 no-underline">
+                <i class="fas fa-envelope"></i>
+                deneyim@passgage.com
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-8 bg-white border-t border-neutral-200">
+        <p class="text-center text-neutral-600">© 2024 <a href="https://passgage.com" target="_blank" class="text-neutral-900 font-semibold hover:text-passgage-red transition-colors no-underline">Passgage</a>. Tüm hakları saklıdır. İK Süper Uygulaması</p>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/navigation.js"></script>
+
+    <script>
+        // Accordion Toggle
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            const wasActive = item.classList.contains('active');
+
+            // Close all
+            document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
+
+            // Open clicked if it wasn't active
+            if (!wasActive) {
+                item.classList.add('active');
+            }
+        }
+
+        // Progress Navigation
+        const progressSteps = document.querySelectorAll('.progress-step');
+        const sections = document.querySelectorAll('.section');
+
+        progressSteps.forEach(step => {
+            step.addEventListener('click', () => {
+                const target = step.dataset.target;
+                const targetElement = document.getElementById(target);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Update progress on scroll
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '-100px 0px -60% 0px'
+        };
+
+        let currentActiveStep = 1;
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const stepNum = parseInt(entry.target.id.replace('step', ''));
+                    if (stepNum !== currentActiveStep) {
+                        currentActiveStep = stepNum;
+                        updateProgress(stepNum);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => sectionObserver.observe(section));
+
+        function updateProgress(activeStep) {
+            progressSteps.forEach((step, index) => {
+                const stepNum = index + 1;
+                step.classList.remove('active', 'completed');
+
+                if (stepNum < activeStep) {
+                    step.classList.add('completed');
+                } else if (stepNum === activeStep) {
+                    step.classList.add('active');
+                }
+            });
+        }
+
+        // Initialize first step as active on page load
+        updateProgress(1);
+
+        // Fade in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-up');
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        fadeElements.forEach(el => fadeObserver.observe(el));
+
+        // Header shadow on scroll
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ========================================
+        // GOOGLE ANALYTICS CUSTOM EVENT TRACKING
+        // ========================================
+
+        // Android Google Play Download Click with Platform Tracking
+        document.getElementById('android-google-play-btn').addEventListener('click', function() {
+            gtag('event', 'download_click', {
+                'event_category': 'downloads',
+                'event_label': 'Android - Google Play',
+                'platform': 'android',
+                'value': 1
+            });
+            console.log('GA Event: Android Google Play download click');
+        });
+
+        // Android Huawei AppGallery Download Click with Platform Tracking
+        document.getElementById('android-huawei-btn').addEventListener('click', function() {
+            gtag('event', 'download_click', {
+                'event_category': 'downloads',
+                'event_label': 'Android - Huawei AppGallery',
+                'platform': 'android',
+                'value': 1
+            });
+            console.log('GA Event: Android Huawei AppGallery download click');
+        });
+
+        // Progress Step Navigation Clicks
+        document.querySelectorAll('.progress-step').forEach((step, index) => {
+            step.addEventListener('click', function() {
+                const stepNumber = index + 1;
+                const stepLabel = this.querySelector('.step-label')?.textContent || `Step ${stepNumber}`;
+                gtag('event', 'navigation_click', {
+                    'event_category': 'navigation',
+                    'event_label': `Android Step ${stepNumber}: ${stepLabel}`,
+                    'platform': 'android',
+                    'value': stepNumber
+                });
+                console.log('GA Event: Android Navigation click - Step', stepNumber);
+            });
+        });
+
+        // Accordion (FAQ) Interactions
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const faqTitle = this.querySelector('h4').textContent;
+                const isOpening = !this.parentElement.classList.contains('active');
+                gtag('event', isOpening ? 'faq_open' : 'faq_close', {
+                    'event_category': 'engagement',
+                    'event_label': `Android: ${faqTitle}`,
+                    'platform': 'android',
+                    'value': 1
+                });
+                console.log('GA Event: Android FAQ', isOpening ? 'opened' : 'closed', '-', faqTitle);
+            });
+        });
+
+        // Contact Email Click
+        document.querySelector('.contact-email')?.addEventListener('click', function() {
+            gtag('event', 'contact_click', {
+                'event_category': 'engagement',
+                'event_label': 'Android Guide - Email Contact',
+                'platform': 'android',
+                'value': 1
+            });
+            console.log('GA Event: Android Guide - Contact email clicked');
+        });
+
+        // Hero CTA Button Clicks
+        document.querySelectorAll('.hero-actions .btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const btnText = this.textContent.trim();
+                gtag('event', 'cta_click', {
+                    'event_category': 'engagement',
+                    'event_label': `Android Guide: ${btnText}`,
+                    'platform': 'android',
+                    'value': 1
+                });
+                console.log('GA Event: Android CTA clicked -', btnText);
+            });
+        });
+
+        // Back Button Click
+        document.querySelector('.back-button')?.addEventListener('click', function() {
+            gtag('event', 'back_button_click', {
+                'event_category': 'navigation',
+                'event_label': 'Android Guide - Back to Home',
+                'platform': 'android',
+                'value': 1
+            });
+            console.log('GA Event: Android Guide - Back button clicked');
+        });
+
+        // Scroll Depth Tracking
+        let scrollDepthMarkers = {
+            '25': false,
+            '50': false,
+            '75': false,
+            '100': false
+        };
+
+        window.addEventListener('scroll', function() {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight - windowHeight;
+            const scrolled = window.scrollY;
+            const scrollPercent = Math.round((scrolled / documentHeight) * 100);
+
+            Object.keys(scrollDepthMarkers).forEach(depth => {
+                if (scrollPercent >= parseInt(depth) && !scrollDepthMarkers[depth]) {
+                    scrollDepthMarkers[depth] = true;
+                    gtag('event', 'scroll_depth', {
+                        'event_category': 'engagement',
+                        'event_label': `Android Guide: ${depth}%`,
+                        'platform': 'android',
+                        'value': parseInt(depth)
+                    });
+                    console.log('GA Event: Android Guide scroll depth -', depth + '%');
+                }
+            });
+        });
+
+        // External Link Clicks
+        document.querySelectorAll('a[target="_blank"]').forEach(link => {
+            link.addEventListener('click', function() {
+                const linkText = this.textContent.trim() || this.href;
+                gtag('event', 'external_link', {
+                    'event_category': 'outbound',
+                    'event_label': `Android Guide: ${linkText}`,
+                    'platform': 'android',
+                    'value': 1
+                });
+                console.log('GA Event: Android Guide - External link -', linkText);
+            });
+        });
+
+        console.log('✅ Android Guide - Google Analytics custom event tracking initialized');
+    </script>
+</body>
+</html>

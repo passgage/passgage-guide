@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Tag Kurulum Rehberi | Passgage QR Kod Montajı</title>
+    <meta name="description" content="Passgage Access Tag QR kod etiketlerini kolayca kurun. Fiziksel montaj, dijital yapılandırma ve bakım için adım adım rehber.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="https://passgage.com/wp-content/uploads/2023/11/Passgage-Primary-Logo.svg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Primary colors
+                        'passgage-red': '#FF501D',
+                        'passgage-gold': '#FFD700',
+                        'passgage-blue': '#2872fa',
+
+                        // iOS colors
+                        'ios-black': '#1d1d1f',
+                        'ios-gray': '#86868b',
+
+                        // Android colors
+                        'android-green': '#3ddc84',
+                        'android-dark': '#073042',
+
+                        // Access Tag colors
+                        'tag-blue': '#2872fa',
+                        'tag-navy': '#1a5490',
+
+                        // Neutral colors
+                        'neutral-50': '#fafafa',
+                        'neutral-100': '#f5f5f5',
+                        'neutral-200': '#e5e5e5',
+                        'neutral-800': '#1f2937',
+                        'neutral-900': '#111827',
+                    },
+                    boxShadow: {
+                        'soft': '0 2px 20px rgba(0, 0, 0, 0.08)',
+                        'medium': '0 4px 30px rgba(0, 0, 0, 0.12)',
+                        'strong': '0 10px 60px rgba(0, 0, 0, 0.15)',
+                        'card': '0 4px 20px rgba(0, 0, 0, 0.1)',
+                        'phone': '0 20px 60px rgba(0, 0, 0, 0.3)',
+                    },
+                    fontFamily: {
+                        'sans': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+                    },
+                    fontSize: {
+                        'display': ['3.5rem', { lineHeight: '1.1', fontWeight: '800' }],
+                        'hero': ['2.5rem', { lineHeight: '1.2', fontWeight: '700' }],
+                    },
+                    spacing: {
+                        '18': '4.5rem',
+                        '88': '22rem',
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in-up': 'fadeInUp 0.6s ease-out',
+                        'slide-in-left': 'slideInLeft 0.6s ease-out',
+                        'slide-in-right': 'slideInRight 0.6s ease-out',
+                    },
+                },
+            },
+        }
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/custom-components.css">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-374JCV17P7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-374JCV17P7');
+    </script>
+
+    <style>
+        /* Access Tag Page-Specific Styles */
+
+        /* Back button styling */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            color: var(--tag-blue);
+            transform: translateX(-4px);
+        }
+
+        .back-button i {
+            font-size: 1rem;
+        }
+
+        /* Specifications table */
+        .specs-table {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            margin: 2rem 0;
+        }
+
+        .specs-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .specs-table th {
+            background: var(--tag-gradient);
+            color: white;
+            padding: 1.25rem;
+            text-align: left;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .specs-table td {
+            padding: 1.25rem;
+            border-bottom: 1px solid var(--gray-200);
+            color: var(--gray-700);
+            font-size: 0.95rem;
+        }
+
+        .specs-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .specs-table tr:hover {
+            background: var(--gray-50);
+        }
+
+        .specs-table .check-icon {
+            color: var(--success);
+            font-size: 1.2rem;
+        }
+
+        /* Checklist styling */
+        .checklist {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            background: white;
+            border-radius: 12px;
+            border: 2px solid var(--gray-200);
+            transition: all 0.3s ease;
+        }
+
+        .checklist-item:hover {
+            border-color: var(--tag-blue);
+            background: rgba(40, 114, 250, 0.02);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            accent-color: var(--tag-blue);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .checklist-item label {
+            color: var(--gray-700);
+            font-size: 1rem;
+            line-height: 1.6;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        /* Height diagram visualization */
+        .height-diagram {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+            position: relative;
+        }
+
+        .height-diagram-content {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .height-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--tag-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            box-shadow: 0 10px 40px rgba(40, 114, 250, 0.3);
+        }
+
+        .height-label {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--tag-blue);
+            letter-spacing: -0.5px;
+        }
+
+        .height-description {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+            max-width: 400px;
+        }
+
+        /* Mounting method cards */
+        .mounting-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .mounting-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2.5rem;
+            border: 2px solid var(--gray-200);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mounting-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--tag-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .mounting-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .mounting-card:hover {
+            border-color: var(--tag-blue);
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-8px);
+        }
+
+        .mounting-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(40, 114, 250, 0.1) 0%, rgba(26, 95, 217, 0.1) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            color: var(--tag-blue);
+        }
+
+        .mounting-card h4 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+        }
+
+        .mounting-card .best-for {
+            display: inline-block;
+            background: rgba(40, 114, 250, 0.1);
+            color: var(--tag-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+        }
+
+        .mounting-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .mounting-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--gray-700);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .mounting-step .step-number {
+            background: var(--tag-blue);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Maintenance schedule cards */
+        .maintenance-schedule {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .schedule-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid var(--gray-200);
+            transition: all 0.3s ease;
+        }
+
+        .schedule-card:hover {
+            border-color: var(--tag-blue);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .schedule-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .schedule-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--tag-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+        }
+
+        .schedule-card h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .schedule-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .schedule-card li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--gray-700);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .schedule-card li i {
+            color: var(--tag-blue);
+            margin-top: 4px;
+            font-size: 0.9rem;
+        }
+
+        /* Admin portal box */
+        .admin-portal-box {
+            background: linear-gradient(135deg, rgba(40, 114, 250, 0.08) 0%, rgba(26, 95, 217, 0.08) 100%);
+            border-left: 5px solid var(--tag-blue);
+            border-radius: 0 20px 20px 0;
+            padding: 2rem;
+            margin: 2rem 0;
+            display: flex;
+            gap: 1.25rem;
+            align-items: flex-start;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .admin-portal-box i {
+            color: var(--tag-blue);
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .admin-portal-box h4 {
+            color: var(--tag-blue);
+            font-weight: 800;
+            margin-bottom: 0.6rem;
+            font-size: 1.1rem;
+        }
+
+        .admin-portal-box p {
+            color: var(--gray-800);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Cleaning instructions */
+        .cleaning-instructions {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid var(--gray-200);
+            margin: 2rem 0;
+        }
+
+        .cleaning-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .cleaning-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem;
+            background: var(--gray-50);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .cleaning-item:hover {
+            background: rgba(40, 114, 250, 0.05);
+        }
+
+        .cleaning-item i {
+            font-size: 1.5rem;
+            color: var(--tag-blue);
+        }
+
+        .cleaning-item.warning i {
+            color: var(--error);
+        }
+
+        .cleaning-item span {
+            color: var(--gray-700);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Package contents list */
+        .package-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.25rem;
+            margin: 2rem 0;
+        }
+
+        .package-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 16px;
+            border: 2px solid var(--gray-200);
+            transition: all 0.3s ease;
+        }
+
+        .package-item:hover {
+            border-color: var(--tag-blue);
+            box-shadow: var(--shadow-sm);
+            transform: translateX(4px);
+        }
+
+        .package-item i {
+            font-size: 1.8rem;
+            color: var(--tag-blue);
+        }
+
+        .package-item span {
+            color: var(--gray-700);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* Tools list */
+        .tools-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .tools-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid var(--gray-200);
+        }
+
+        .tools-card h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .tools-card h4 i {
+            color: var(--tag-blue);
+        }
+
+        .tools-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .tools-card li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--gray-700);
+            font-size: 0.95rem;
+            padding: 0.5rem 0;
+        }
+
+        .tools-card li i {
+            color: var(--tag-blue);
+            font-size: 0.9rem;
+        }
+
+        /* QR Code placeholder */
+        .qr-placeholder {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            border: 2px dashed var(--gray-300);
+            margin: 2rem 0;
+        }
+
+        .qr-placeholder i {
+            font-size: 4rem;
+            color: var(--tag-blue);
+            margin-bottom: 1rem;
+        }
+
+        .qr-placeholder h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .qr-placeholder p {
+            color: var(--gray-600);
+            font-size: 1rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .mounting-methods,
+            .maintenance-schedule,
+            .tools-section {
+                grid-template-columns: 1fr;
+            }
+
+            .height-diagram {
+                padding: 2rem;
+                min-height: 250px;
+            }
+
+            .height-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 2.5rem;
+            }
+
+            .height-label {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="logo-container">
+            <a href="index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+                Ana Sayfa
+            </a>
+            <img src="https://passgage.com/wp-content/uploads/2023/11/Passgage-Primary-Logo.svg" alt="Passgage" class="logo">
+            <span class="logo-badge">Access Tag Kurulumu</span>
+        </div>
+        <nav class="progress-nav" role="navigation" aria-label="Kurulum adımları">
+            <div class="progress-step-wrapper">
+                <div class="progress-step active"
+                     role="button"
+                     tabindex="0"
+                     aria-current="step"
+                     aria-label="Adım 1 / 5: Paket içeriğini kontrol edin"
+                     data-target="step1">
+                    <span class="step-num" aria-hidden="true">1</span>
+                    <span class="visually-hidden">Paket içeriğini kontrol edin</span>
+                </div>
+                <div class="progress-line" aria-hidden="true"></div>
+            </div>
+
+            <div class="progress-step-wrapper">
+                <div class="progress-step"
+                     role="button"
+                     tabindex="0"
+                     aria-label="Adım 2 / 5: Lokasyon belirleyin"
+                     data-target="step2">
+                    <span class="step-num" aria-hidden="true">2</span>
+                    <span class="visually-hidden">Lokasyon belirleyin</span>
+                </div>
+                <div class="progress-line" aria-hidden="true"></div>
+            </div>
+
+            <div class="progress-step-wrapper">
+                <div class="progress-step"
+                     role="button"
+                     tabindex="0"
+                     aria-label="Adım 3 / 5: Montaj yapın"
+                     data-target="step3">
+                    <span class="step-num" aria-hidden="true">3</span>
+                    <span class="visually-hidden">Montaj yapın</span>
+                </div>
+                <div class="progress-line" aria-hidden="true"></div>
+            </div>
+
+            <div class="progress-step-wrapper">
+                <div class="progress-step"
+                     role="button"
+                     tabindex="0"
+                     aria-label="Adım 4 / 5: QR Kod okutun"
+                     data-target="step4">
+                    <span class="step-num" aria-hidden="true">4</span>
+                    <span class="visually-hidden">QR Kod okutun</span>
+                </div>
+                <div class="progress-line" aria-hidden="true"></div>
+            </div>
+
+            <div class="progress-step-wrapper">
+                <div class="progress-step"
+                     role="button"
+                     tabindex="0"
+                     aria-label="Adım 5 / 5: Bakım ve güncelleme"
+                     data-target="step5">
+                    <span class="step-num" aria-hidden="true">5</span>
+                    <span class="visually-hidden">Bakım ve güncelleme</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-content">
+            <div class="hero-icon">
+                <i class="fas fa-qrcode"></i>
+            </div>
+            <h1>Passgage <span class="gradient-text">Access Tag</span> Kurulumu</h1>
+            <p>QR kod etiketlerinizi profesyonelce kurun. Fiziksel montajdan dijital yapılandırmaya kadar eksiksiz rehber.</p>
+            <div class="hero-actions">
+                <a href="#step1" class="btn btn-primary">
+                    <i class="fas fa-play"></i>
+                    Başlayalım
+                </a>
+                <a href="#step5" class="btn btn-secondary">
+                    <i class="fas fa-tools"></i>
+                    Bakım & Sorun Giderme
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Step 1: Unboxing & Components -->
+        <section class="mb-24 fade-up" id="step1">
+            <div class="flex items-start gap-6 mb-12">
+                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center text-2xl font-bold shadow-medium">
+                    1
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-neutral-900 mb-3">Paket İçeriği ve <span class="gradient-text">Hazırlık</span></h2>
+                    <p class="text-xl text-neutral-600">Access Tag paketinizi açın ve içeriği kontrol edin</p>
+                </div>
+            </div>
+
+            <!-- Package Contents -->
+            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin-bottom: 1rem;">Paket İçeriği</h3>
+            <div class="package-list">
+                <div class="package-item">
+                    <i class="fas fa-qrcode"></i>
+                    <span>Access Tag (QR kod etiketi)</span>
+                </div>
+                <div class="package-item">
+                    <i class="fas fa-screwdriver"></i>
+                    <span>Montaj donanımı (vida, dübel)</span>
+                </div>
+                <div class="package-item">
+                    <i class="fas fa-sticky-note"></i>
+                    <span>Yapışkan pad</span>
+                </div>
+                <div class="package-item">
+                    <i class="fas fa-book"></i>
+                    <span>Kullanım kılavuzu</span>
+                </div>
+                <div class="package-item">
+                    <i class="fas fa-tag"></i>
+                    <span>Passgage logosu ve markalama</span>
+                </div>
+            </div>
+
+            <!-- Technical Specifications -->
+            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin: 3rem 0 1rem;">Teknik Özellikler</h3>
+            <div class="specs-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Özellik</th>
+                            <th>Değer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Boyutlar</strong></td>
+                            <td>150mm x 150mm (Standart) / 200mm x 200mm (Büyük)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Malzeme</strong></td>
+                            <td>Yüksek dayanıklı PVC / Metal (paslanmaz çelik)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Su geçirmezlik derecesi</strong></td>
+                            <td>IP65 (Dış mekan kullanımı için uygun)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Operasyon sıcaklığı</strong></td>
+                            <td>-20°C ile +60°C arası</td>
+                        </tr>
+                        <tr>
+                            <td><strong>UV koruması</strong></td>
+                            <td><i class="fas fa-check-circle check-icon"></i> Evet</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ömür beklentisi</strong></td>
+                            <td>5+ yıl (dış mekan koşullarında)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Required Tools -->
+            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin: 3rem 0 1rem;">Gerekli Araçlar</h3>
+            <div class="tools-section">
+                <div class="tools-card">
+                    <h4><i class="fas fa-tools"></i> Zorunlu Araçlar</h4>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Matkap (vida montajı için)</li>
+                        <li><i class="fas fa-check"></i> Seviye ölçer (düz montaj için)</li>
+                        <li><i class="fas fa-check"></i> Metre/mezura (yükseklik ölçümü)</li>
+                        <li><i class="fas fa-check"></i> Temizlik malzemeleri (yüzey temizliği)</li>
+                        <li><i class="fas fa-check"></i> Kalem/işaretleyici</li>
+                    </ul>
+                </div>
+                <div class="tools-card">
+                    <h4><i class="fas fa-plus-circle"></i> Opsiyonel Araçlar</h4>
+                    <ul>
+                        <li><i class="fas fa-circle"></i> Duvar dedektörü (kablo/boru kontrolü)</li>
+                        <li><i class="fas fa-circle"></i> Sıcak hava tabancası (yapışkan aktivasyonu)</li>
+                        <li><i class="fas fa-circle"></i> Tork tornavidası (hassas sıkma)</li>
+                        <li><i class="fas fa-circle"></i> Koruyucu eldiven</li>
+                        <li><i class="fas fa-circle"></i> Güvenlik gözlüğü</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 2: Location Planning -->
+        <section class="mb-24 fade-up" id="step2">
+            <div class="flex items-start gap-6 mb-12">
+                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center text-2xl font-bold shadow-medium">
+                    2
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-neutral-900 mb-3">Kurulum Lokasyonunu <span class="gradient-text">Planlayın</span></h2>
+                    <p class="text-xl text-neutral-600">Optimal yerleşim için dikkat edilmesi gerekenler</p>
+                </div>
+            </div>
+
+            <!-- Ideal Height Diagram -->
+            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin-bottom: 1rem;">İdeal Yerleşim Yüksekliği</h3>
+            <div class="height-diagram">
+                <div class="height-diagram-content">
+                    <div class="height-icon">
+                        <i class="fas fa-arrows-alt-v"></i>
+                    </div>
+                    <div class="height-label">1.2m - 1.5m</div>
+                    <p class="height-description">Göz hizası yüksekliği, kolay tarama ve erişim için optimal</p>
+                </div>
+            </div>
+
+            <!-- Site Survey Checklist -->
+            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin: 3rem 0 1rem;">Lokasyon Kontrol Listesi</h3>
+            <div class="checklist">
+                <div class="checklist-item">
+                    <input type="checkbox" id="check1">
+                    <label for="check1"><strong>Yüksek trafik alanı:</strong> Çalışanların sık kullandığı giriş-çıkış noktaları</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check2">
+                    <label for="check2"><strong>İyi aydınlatma:</strong> Doğal veya yapay ışık ile QR kod net görünür</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check3">
+                    <label for="check3"><strong>Hava koşullarından korunma:</strong> Dış mekanda saçak veya koruma altında</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check4">
+                    <label for="check4"><strong>Wi-Fi/cellular erişimi:</strong> Doğrulama için internet bağlantısı (mobil cihaz)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check5">
+                    <label for="check5"><strong>Temiz, düz yüzey:</strong> Montaj için uygun, düzgün yüzey</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check6">
+                    <label for="check6"><strong>Engelsiz görüş hattı:</strong> Kullanıcıların kolayca görebileceği konum</label>
+                </div>
+            </div>
+
+            <!-- Environmental Considerations -->
+            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin: 3rem 0 1rem;">Çevresel Faktörler</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>İç Mekan vs Dış Mekan</h3>
+                    <p><strong>İç mekan:</strong> Standart PVC tag yeterlidir. Daha uzun ömürlü.<br><br><strong>Dış mekan:</strong> Metal tag veya UV korumalı PVC tercih edin. IP65 standart.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <h3>Güneş Işığı Etkisi</h3>
+                    <p>Doğrudan güneş ışığı QR kodunu zamanla soluklaştırabilir. Mümkünse gölgeli alan tercih edin veya UV korumalı laminasyon kullanın.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3>Nem ve Yağmur</h3>
+                    <p>IP65 sertifikası yağmur ve nemden korur. Saçak veya çatı altına montaj ideal. Su birikintisi oluşmayacak konumlandırma yapın.</p>
+                </div>
+            </div>
+
+            <!-- Visibility Factors -->
+            <div class="admin-portal-box">
+                <i class="fas fa-eye"></i>
+                <div>
+                    <h4>Görünürlük İpuçları</h4>
+                    <p><strong>Yaklaşma yönü:</strong> Kullanıcıların tag'e hangi yönden yaklaştığını düşünün. Doğal yürüme yolu üzerinde olmalı.<br><br>
+                    <strong>Arka plan kontrast:</strong> QR kodun net görünmesi için arka plan ile yüksek kontrast sağlayın. Açık duvar üzerinde koyu QR veya tersi.<br><br>
+                    <strong>Aydınlatma seviyeleri:</strong> Karanlık alanlarda ek aydınlatma düşünün. Gece vardiyaları için önemli.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 3: Physical Installation -->
+        <section class="mb-24 fade-up" id="step3">
+            <div class="flex items-start gap-6 mb-12">
+                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center text-2xl font-bold shadow-medium">
+                    3
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-neutral-900 mb-3">Access Tag'i <span class="gradient-text">Monte Edin</span></h2>
+                    <p class="text-xl text-neutral-600">Fiziksel kurulum için üç farklı yöntem</p>
+                </div>
+            </div>
+
+            <!-- Surface Preparation -->
+            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin-bottom: 1rem;">Yüzey Hazırlığı</h3>
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-item-icon">
+                        <i class="fas fa-broom"></i>
+                    </div>
+                    <div class="step-item-content">
+                        <h4>1. Yüzey Temizliği</h4>
+                        <p>Montaj yapılacak yüzeyi iyice temizleyin. Toz, kir, yağ ve pas gibi artıkları tamamen çıkarın. Temiz, kuru bir bez kullanın.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-item-icon">
+                        <i class="fas fa-spray-can"></i>
+                    </div>
+                    <div class="step-item-content">
+                        <h4>2. Yağ ve Kir Giderme</h4>
+                        <p>İzopropil alkol veya yüzey temizleyici ile yüzeyi silin. Bu, yapışkanın optimum tutuşunu sağlar. Aşındırıcı temizleyiciler kullanmayın.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-item-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="step-item-content">
+                        <h4>3. Kuruma Süresi</h4>
+                        <p>Temizlikten sonra yüzeyin tamamen kurumasını bekleyin. En az 5-10 dakika kuruma süresi verin. Nemli yüzeye montaj yapmayın.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mounting Methods -->
+            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin: 3rem 0 1rem;">Montaj Yöntemleri</h3>
+            <div class="mounting-methods">
+                <!-- Adhesive Mounting -->
+                <div class="mounting-card">
+                    <div class="mounting-icon">
+                        <i class="fas fa-sticky-note"></i>
+                    </div>
+                    <h4>Yapışkan Montaj</h4>
+                    <span class="best-for">En Kolay - Hızlı Kurulum</span>
+                    <div class="mounting-steps">
+                        <div class="mounting-step">
+                            <span class="step-number">1</span>
+                            <span>Yüzey temizliği ve kurulama (yukarıdaki adımlar)</span>
+                        </div>
+                        <div class="mounting-step">
+                            <span class="step-number">2</span>
+                            <span>Yapışkan padın koruyucu filmini çıkarın</span>
+                        </div>
+                        <div class="mounting-step">
+                            <span class="step-number">3</span>
+                            <span>Tag'i yüzeye yerleştirin ve 30 saniye sabit basınç uygulayın</span>
+                        </div>
+                        <div class="mounting-step">
+                            <span class="step-number">4</span>
+                            <span>24 saat boyunca tam yapışma için bekleme süresi</span>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1rem; color: var(--gray-600); font-size: 0.9rem; line-height: 1.6;">
+                        <strong>Uygun:</strong> Düz yüzeyler, cam, metal, plastik. Geçici kurulumlar için ideal.
+                    </p>
+                </div>
+
+                <!-- Screw Mounting -->
+                <div class="mounting-card">
+                    <div class="mounting-icon">
+                        <i class="fas fa-screwdriver"></i>
+                    </div>
+                    <h4>Vida Montaj</h4>
+                    <span class="best-for">En Güvenli - Kalıcı Kurulum</span>
+                    <div class="mounting-steps">
+                        <div class="mounting-step">
+                            <span class="step-number">1</span>
+                            <span>Tag'i yüzeye tutun ve montaj noktalarını kalemle işaretleyin</span>
+                        </div>
+                        <div class="mounting-step">
+                            <span class="step-number">2</span>
+                            <span>Matkap ile pilot delikler açın (genellikle 6mm)</span>
+                        </div>
+                        <div class="mounting-step">
+                            <span class="step-number">3</span>
+                            <span>Dübelleri deliklere yerleştirin (beton/tuğla için)</span>
+                        </div>
+                        <div class="mounting-step">
+                            <span class="step-number">4</span>
+                            <span>Vidaları tornavida ile sıkıştırın, aşırı sıkmayın</span>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1rem; color: var(--gray-600); font-size: 0.9rem; line-height: 1.6;">
+                        <strong>Uygun:</strong> Kalıcı kurulumlar, yüksek trafik alanları, dış mekan. En dayanıklı yöntem.
+                    </p>
+                </div>
+
+                <!-- Magnetic Mounting -->
+                <div class="mounting-card">
+                    <div class="mounting-icon">
+                        <i class="fas fa-magnet"></i>
+                    </div>
+                    <h4>Manyetik Montaj</h4>
+                    <span class="best-for">En Esnek - Kolay Pozisyon Değişimi</span>
+                    <div class="mounting-steps">
+                        <div class="mounting-step">
+                            <span class="step-number">1</span>
+                            <span>Manyetik tabanı metal yüzeye yapıştırın veya vidalayın</span>
+                        </div>
+                        <div class="mounting-step">
+                            <span class="step-number">2</span>
+                            <span>Access Tag'in arka yüzeyini manyetik tabana yaklaştırın</span>
+                        </div>
+                        <div class="mounting-step">
+                            <span class="step-number">3</span>
+                            <span>Pozisyon testini yapın, gerekirse ayarlayın</span>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1rem; color: var(--gray-600); font-size: 0.9rem; line-height: 1.6;">
+                        <strong>Uygun:</strong> Metal yüzeyler, kapılar, dolap kenarları. Esnek konumlandırma gerektiğinde.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Installation Tips -->
+            <div class="tip-box">
+                <i class="fas fa-lightbulb"></i>
+                <div>
+                    <h4>Montaj İpuçları</h4>
+                    <p><strong>Seviye kontrolü:</strong> Tag'i monte etmeden önce seviye ölçer kullanın. Eğik montaj görsel olarak rahatsız edici olabilir.<br><br>
+                    <strong>Son pozisyon testi:</strong> Tag'i sabitlemeden önce 2-3 metre uzaklıktan görünürlüğü kontrol edin.<br><br>
+                    <strong>Yedek delikler:</strong> Vida montajında ilk denemenin başarısız olması durumunda yedek konumlar işaretleyin.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 4: QR Code Configuration -->
+        <section class="mb-24 fade-up" id="step4">
+            <div class="flex items-start gap-6 mb-12">
+                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center text-2xl font-bold shadow-medium">
+                    4
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-neutral-900 mb-3">Dijital <span class="gradient-text">Yapılandırma</span></h2>
+                    <p class="text-xl text-neutral-600">QR kodu sisteme tanıtın ve yapılandırın</p>
+                </div>
+            </div>
+
+            <!-- Admin Portal Setup -->
+            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin-bottom: 1rem;">Admin Portal Kurulumu</h3>
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-item-icon">
+                        <i class="fas fa-sign-in-alt"></i>
+                    </div>
+                    <div class="step-item-content">
+                        <h4>1. Passgage Admin Panel'e Giriş</h4>
+                        <p>Web tarayıcınızdan Passgage Admin Panel'e giriş yapın. Yönetici hesabınızın aktif olduğundan emin olun. Admin URL'si genellikle: <strong>admin.passgage.com</strong></p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-item-icon">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <div class="step-item-content">
+                        <h4>2. "Access Tag Ekle" Seçeneği</h4>
+                        <p>Sol menüden "Lokasyonlar" veya "Access Tags" bölümüne gidin. "Yeni Tag Ekle" veya "+" butonuna tıklayın. Yeni bir QR kod kaydı oluşturun.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-item-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="step-item-content">
+                        <h4>3. Lokasyon Bilgilerini Girin</h4>
+                        <p>Tag adı (örn: "Ana Giriş", "Depo Kapısı"), lokasyon açıklaması, GPS koordinatları (otomatik algılama mevcut) veya manuel adres girişi yapın. Şube/departman ataması yapın.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-item-icon">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <div class="step-item-content">
+                        <h4>4. QR Kod Oluştur ve Kaydet</h4>
+                        <p>"QR Kod Oluştur" butonuna tıklayın. Sistem benzersiz bir QR kod oluşturur ve lokasyonla eşleştirir. Kaydı tamamlamak için "Kaydet" butonuna basın.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QR Code Linking -->
+            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin: 3rem 0 1rem;">QR Kod Eşleştirme</h3>
+            <div class="qr-placeholder">
+                <i class="fas fa-qrcode"></i>
+                <h4>QR Kod Örneği</h4>
+                <p>Her Access Tag benzersiz bir QR kod ile dijital lokasyon kaydına bağlanır</p>
+            </div>
+
+            <div class="admin-portal-box">
+                <i class="fas fa-link"></i>
+                <div>
+                    <h4>Fiziksel ve Dijital Eşleştirme</h4>
+                    <p><strong>Tag ID kontrolü:</strong> Fiziksel tag'in üzerindeki seri numarası ile dijital kayıttaki ID'nin eşleştiğinden emin olun.<br><br>
+                    <strong>Konum ataması:</strong> GPS koordinatları veya manuel adres ile lokasyonu tanımlayın. Mobil cihazdan check-in yapıldığında konum doğrulaması bu bilgiyi kullanır.<br><br>
+                    <strong>İsim ve açıklama:</strong> Kullanıcı dostu isimler verin. "B Binası 2. Kat Giriş" gibi açıklayıcı isimler tercih edin.</p>
+                </div>
+            </div>
+
+            <!-- Testing Process -->
+            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin: 3rem 0 1rem;">Test ve Doğrulama</h3>
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-item-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="step-item-content">
+                        <h4>QR Kod Tarama Testi</h4>
+                        <p>Passgage mobil uygulamasını açın ve QR tarayıcıyı başlatın. Monte edilmiş Access Tag'i tarayın. QR kodun hızlıca okunduğunu doğrulayın (1-2 saniye).</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-item-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="step-item-content">
+                        <h4>Doğru Lokasyon Gösterimini Kontrol</h4>
+                        <p>Tarama sonrası ekranda görünen lokasyon adının doğru olduğunu kontrol edin. GPS konumu otomatik doğrulanır. Yanlış lokasyon gösteriliyorsa admin panelden düzeltin.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-item-icon">
+                        <i class="fas fa-user-clock"></i>
+                    </div>
+                    <div class="step-item-content">
+                        <h4>Check-in Simülasyonu</h4>
+                        <p>Test kullanıcısı ile gerçek bir check-in yapın. Admin panelden check-in kaydını görüntüleyin. Saat, tarih, lokasyon ve kullanıcı bilgilerinin doğru kaydedildiğini onaylayın.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Employee Notification -->
+            <div class="tip-box">
+                <i class="fas fa-users"></i>
+                <div>
+                    <h4>Personele Bilgilendirme</h4>
+                    <p><strong>Duyuru yapın:</strong> Yeni Access Tag kurulumunu tüm personele duyurun. E-posta, Slack veya dahili iletişim kanalları kullanın.<br><br>
+                    <strong>Kullanım rehberi:</strong> Passgage mobil uygulama kurulum rehberlerini paylaşın (iOS/Android).<br><br>
+                    <strong>İlk kullanım desteği:</strong> İlk hafta boyunca teknik destek ekibinizin hazır olmasını sağlayın.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 5: Maintenance & Troubleshooting -->
+        <section class="mb-24 fade-up" id="step5">
+            <div class="flex items-start gap-6 mb-12">
+                <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl flex items-center justify-center text-2xl font-bold shadow-medium">
+                    5
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-neutral-900 mb-3">Bakım ve <span class="gradient-text">Uzun Vadeli Yönetim</span></h2>
+                    <p class="text-xl text-neutral-600">Access Tag'lerinizi optimal durumda tutun</p>
+                </div>
+            </div>
+
+            <!-- Maintenance Schedule -->
+            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin-bottom: 1rem;">Bakım Takvimi</h3>
+            <div class="maintenance-schedule">
+                <!-- Weekly -->
+                <div class="schedule-card">
+                    <div class="schedule-header">
+                        <div class="schedule-icon">
+                            <i class="fas fa-calendar-week"></i>
+                        </div>
+                        <h4>Haftalık</h4>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-eye"></i> Görsel kontrol (hasar, kir, konum)</li>
+                        <li><i class="fas fa-broom"></i> Yüzey temizliği (toz ve kir)</li>
+                        <li><i class="fas fa-qrcode"></i> Hızlı QR kod tarama testi</li>
+                    </ul>
+                </div>
+
+                <!-- Monthly -->
+                <div class="schedule-card">
+                    <div class="schedule-header">
+                        <div class="schedule-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h4>Aylık</h4>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-spray-can"></i> Detaylı temizlik (dezenfektan ile)</li>
+                        <li><i class="fas fa-mobile-alt"></i> QR kod okunabilirlik testi (farklı cihazlar)</li>
+                        <li><i class="fas fa-screwdriver"></i> Montaj sağlamlığı kontrolü</li>
+                        <li><i class="fas fa-chart-line"></i> Kullanım istatistiklerini inceleme</li>
+                    </ul>
+                </div>
+
+                <!-- Quarterly -->
+                <div class="schedule-card">
+                    <div class="schedule-header">
+                        <div class="schedule-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h4>3 Aylık</h4>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-cloud-rain"></i> Hava hasarı değerlendirmesi (dış mekan)</li>
+                        <li><i class="fas fa-sun"></i> UV solması kontrolü</li>
+                        <li><i class="fas fa-box"></i> Yedek tag ihtiyacı analizi</li>
+                        <li><i class="fas fa-cogs"></i> Sistem entegrasyon testi</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Cleaning Instructions -->
+            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin: 3rem 0 1rem;">Temizlik Talimatları</h3>
+            <div class="cleaning-instructions">
+                <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--gray-900); margin-bottom: 1rem;">Doğru Temizlik Yöntemleri</h4>
+                <div class="cleaning-grid">
+                    <div class="cleaning-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span><strong>Yumuşak bez ve ılık su</strong> kullanın</span>
+                    </div>
+                    <div class="cleaning-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span><strong>Hafif sabunlu su</strong> yağlı kirler için</span>
+                    </div>
+                    <div class="cleaning-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span><strong>Microfiber bez</strong> çizilme riski azaltır</span>
+                    </div>
+                    <div class="cleaning-item warning">
+                        <i class="fas fa-times-circle"></i>
+                        <span><strong>Alkol bazlı temizleyici KULLANMAYIN</strong></span>
+                    </div>
+                    <div class="cleaning-item warning">
+                        <i class="fas fa-times-circle"></i>
+                        <span><strong>Aşındırıcı malzeme KULLANMAYIN</strong></span>
+                    </div>
+                    <div class="cleaning-item warning">
+                        <i class="fas fa-times-circle"></i>
+                        <span><strong>Basınçlı su sıkmayın</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Common Issues (Accordion) -->
+            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin: 3rem 0 1rem;">Yaygın Sorunlar ve Çözümleri</h3>
+            <div class="accordion">
+                <div class="accordion-item active">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                            <div class="accordion-icon">
+                                <i class="fas fa-fade"></i>
+                            </div>
+                            <h4>QR Kod Soluk veya Bozuk</h4>
+                        </div>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                                <strong>Neden oluşur:</strong> Doğrudan güneş ışığı, UV maruziyeti, hava koşulları, fiziksel aşınma.
+                            </p>
+                            <div class="steps-list">
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-sync-alt"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Çözüm: QR Kod Etiketi Değiştirin</h4>
+                                        <p>Admin panelden aynı lokasyon için yeni QR kod oluşturun. Eski tag'i çıkarın, yeni tag'i monte edin. Sistemi test edin ve personele bildirin.</p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Önleme: Güneşten Koruyun</h4>
+                                        <p>Tag'i gölgeli alana taşıyın veya saçak altına monte edin. UV koruyucu laminasyon uygulayın. Metal tag kullanımını düşünün (daha dayanıklı).</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                            <div class="accordion-icon">
+                                <i class="fas fa-wrench"></i>
+                            </div>
+                            <h4>Montaj Gevşemesi</h4>
+                        </div>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                                <strong>Neden oluşur:</strong> Yapışkan eskimesi, vibrasyon, sıcaklık değişimleri, vida gevşemesi.
+                            </p>
+                            <div class="steps-list">
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-redo"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Yapışkan Montaj İçin</h4>
+                                        <p>Tag'i çıkarın, eski yapışkan artığını temizleyin. Yüzeyi yeniden hazırlayın. Yeni yapışkan pad ile tekrar monte edin. 24 saat bekleme süresi verin.</p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-screwdriver"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Vida Montaj İçin</h4>
+                                        <p>Vidaları sıkıştırın (aşırı sıkmadan). Dübeller hasarlı ise yenisiyle değiştirin. Titreşim varsa kauçuk aralayıcı ekleyin.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                            <div class="accordion-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h4>Aydınlatma Yetersizliği</h4>
+                        </div>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                                <strong>Neden oluşur:</strong> Karanlık koridor, gece vardiyası, yetersiz doğal/yapay ışık.
+                            </p>
+                            <div class="steps-list">
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-sun"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Çözüm 1: Ek Aydınlatma</h4>
+                                        <p>LED spot lamba ekleyin (QR kod'u aydınlatacak şekilde). Pilli LED ışık kullanabilirsiniz (elektrik gerektirmez). Aydınlatma yeterli olana kadar test edin.</p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Çözüm 2: Tag Pozisyonu Değişikliği</h4>
+                                        <p>Tag'i daha aydınlık bir alana taşıyın. Pencere veya lamba yakınına monte edin. Daha açık renkli arka plan tercih edin (kontrast artar).</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                            <div class="accordion-icon">
+                                <i class="fas fa-cloud-rain"></i>
+                            </div>
+                            <h4>Hava Koşulları Hasarı</h4>
+                        </div>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                                <strong>Neden oluşur:</strong> Yağmur, kar, dolu, aşırı sıcaklık, rüzgar, nem birikimi.
+                            </p>
+                            <div class="steps-list">
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-umbrella"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Koruyucu Önlemler</h4>
+                                        <p>Şeffaf akrilik koruyucu kaplama ekleyin. Saçak veya çatı altına taşıyın. IP65+ sertifikalı tag kullanın. Düzenli bakım yapın (3 ayda bir).</p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-home"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>İç Mekana Taşıma</h4>
+                                        <p>Mümkünse tag'i iç mekana taşıyın (giriş holü). Dış kapı yerine iç kapıya monte edin. Ömrü önemli ölçüde uzar.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header-left">
+                            <div class="accordion-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h4>QR Kod Tarama Hataları</h4>
+                        </div>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p style="color: var(--gray-700); line-height: 1.8; margin-bottom: 1rem;">
+                                <strong>Neden oluşur:</strong> Kamera odaklanma sorunu, QR kod kirli, kontrast yetersiz, barkod hasarlı.
+                            </p>
+                            <div class="steps-list">
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-broom"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Adım 1: Temizlik</h4>
+                                        <p>QR kod yüzeyini yumuşak bez ile temizleyin. Parmak izleri, toz, kir çıkarın. Kuru bez ile silip kurutun. Tekrar tarayın.</p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-adjust"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Adım 2: Kontrast Kontrolü</h4>
+                                        <p>QR kod ile arka plan arasında yeterli kontrast var mı kontrol edin. Açık arka plan üzerinde koyu QR veya tam tersi olmalı. Gerekirse arka plan rengini değiştirin veya tag pozisyonunu ayarlayın.</p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <div class="step-item-icon">
+                                        <i class="fas fa-sync-alt"></i>
+                                    </div>
+                                    <div class="step-item-content">
+                                        <h4>Adım 3: Tag Değişimi</h4>
+                                        <p>Yukarıdaki çözümler işe yaramazsa QR kod hasar görmüş olabilir. Yeni bir Access Tag ile değiştirin. Admin panelden yeni QR kod oluşturun ve aynı lokasyona atayın.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- When to Replace -->
+            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--gray-900); margin: 3rem 0 1rem;">Ne Zaman Değiştirmeli?</h3>
+            <div class="admin-portal-box">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div>
+                    <h4>Tag Değiştirme Kriterleri</h4>
+                    <p><strong>QR kod %50'den fazla hasarlı:</strong> Barkod çizikleri, soluklaşma veya yırtık nedeniyle taranamıyorsa.<br><br>
+                    <strong>Montaj kurtarılamaz şekilde hasar görmüş:</strong> Tag kırık, çatlak veya yapışma yüzeyi hasarlı ise.<br><br>
+                    <strong>Yeni lokasyon gereksinimi:</strong> Ofis düzenlemesi, taşınma veya yeni şube açılması durumunda.<br><br>
+                    <strong>Teknoloji güncellemesi:</strong> Yeni nesil tag'ler (NFC destekli, dijital ekran vb.) kullanmak isterseniz.</p>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <i class="fas fa-phone-alt"></i>
+                <div>
+                    <h4>Destek ve Yedek Parça</h4>
+                    <p><strong>Yedek tag sipariş:</strong> Passgage satış ekibi ile iletişime geçin. Toplu siparişlerde indirim mevcuttur.<br><br>
+                    <strong>Teknik destek:</strong> Kurulum veya yapılandırma sorunlarında destek ekibimiz 7/24 hizmetinizdedir.<br><br>
+                    <strong>Garanti:</strong> Üretim hatası durumunda 2 yıl garanti kapsamındadır.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Contact Section -->
+    <section class="py-20 px-8 bg-gradient-to-br from-neutral-50 to-neutral-100">
+        <div class="max-w-2xl mx-auto text-center">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl mb-8 shadow-medium">
+                <i class="fas fa-headset text-3xl"></i>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-extrabold text-neutral-900 mb-6">Yardıma mı <span class="gradient-text">İhtiyacınız Var?</span></h2>
+            <p class="text-lg md:text-xl text-neutral-600 leading-relaxed mb-8">Her türlü soru, geri bildirim veya öneriniz için destek ekibimize ulaşmaktan çekinmeyin. Size yardımcı olmaktan mutluluk duyarız.</p>
+            <a href="mailto:deneyim@passgage.com" class="inline-flex items-center gap-3 bg-gradient-to-r from-passgage-red to-passgage-gold text-white px-8 py-4 rounded-full font-bold text-lg hover:scale-105 hover:shadow-strong transition-all duration-300 no-underline contact-email">
+                <i class="fas fa-envelope"></i>
+                deneyim@passgage.com
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-8 bg-white border-t border-neutral-200">
+        <p class="text-center text-neutral-600">© 2024 <a href="https://passgage.com" target="_blank" class="text-neutral-900 font-semibold hover:text-passgage-red transition-colors no-underline">Passgage</a>. Tüm hakları saklıdır. İK Süper Uygulaması</p>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/navigation.js"></script>
+
+    <script>
+        // ========================================
+        // GOOGLE ANALYTICS CUSTOM EVENT TRACKING
+        // ========================================
+
+        // Progress Step Navigation Clicks
+        document.querySelectorAll('.progress-step').forEach((step, index) => {
+            step.addEventListener('click', function() {
+                const stepNumber = index + 1;
+                const stepLabel = this.querySelector('.step-label')?.textContent || `Step ${stepNumber}`;
+                gtag('event', 'installation_step', {
+                    'event_category': 'access_tag',
+                    'event_label': `Step ${stepNumber}: ${stepLabel}`,
+                    'installation_type': 'access_tag',
+                    'value': stepNumber
+                });
+                console.log('GA Event: Access Tag Navigation - Step', stepNumber);
+            });
+        });
+
+        // Mounting Method Selection (Accordion opens)
+        document.querySelectorAll('.mounting-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const methodName = this.querySelector('h4').textContent;
+                gtag('event', 'mounting_method_view', {
+                    'event_category': 'access_tag',
+                    'event_label': methodName,
+                    'installation_type': 'access_tag',
+                    'value': 1
+                });
+                console.log('GA Event: Mounting method viewed -', methodName);
+            });
+        });
+
+        // Maintenance Schedule Views
+        document.querySelectorAll('.schedule-card').forEach(card => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.dataset.viewed) {
+                        entry.target.dataset.viewed = 'true';
+                        const scheduleName = entry.target.querySelector('h4').textContent;
+                        gtag('event', 'maintenance_schedule_view', {
+                            'event_category': 'access_tag',
+                            'event_label': scheduleName,
+                            'installation_type': 'access_tag',
+                            'value': 1
+                        });
+                        console.log('GA Event: Maintenance schedule viewed -', scheduleName);
+                    }
+                });
+            }, { threshold: 0.5 });
+            observer.observe(card);
+        });
+
+        // Troubleshooting Accordion Interactions
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const issueTitle = this.querySelector('h4').textContent;
+                const isOpening = !this.parentElement.classList.contains('active');
+                gtag('event', isOpening ? 'troubleshooting_open' : 'troubleshooting_close', {
+                    'event_category': 'access_tag',
+                    'event_label': issueTitle,
+                    'installation_type': 'access_tag',
+                    'value': 1
+                });
+                console.log('GA Event: Troubleshooting', isOpening ? 'opened' : 'closed', '-', issueTitle);
+            });
+        });
+
+        // Checklist Interactions
+        document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const checklistText = this.nextElementSibling.textContent.substring(0, 50);
+                gtag('event', 'checklist_item', {
+                    'event_category': 'access_tag',
+                    'event_label': this.checked ? 'Checked' : 'Unchecked',
+                    'installation_type': 'access_tag',
+                    'value': this.checked ? 1 : 0
+                });
+                console.log('GA Event: Checklist item', this.checked ? 'checked' : 'unchecked');
+            });
+        });
+
+        // Contact Email Click
+        document.querySelector('.contact-email')?.addEventListener('click', function() {
+            gtag('event', 'contact_click', {
+                'event_category': 'access_tag',
+                'event_label': 'Access Tag Guide - Email Contact',
+                'installation_type': 'access_tag',
+                'value': 1
+            });
+            console.log('GA Event: Access Tag Guide - Contact email clicked');
+        });
+
+        // Hero CTA Button Clicks
+        document.querySelectorAll('.hero-actions .btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const btnText = this.textContent.trim();
+                gtag('event', 'cta_click', {
+                    'event_category': 'access_tag',
+                    'event_label': `Access Tag Guide: ${btnText}`,
+                    'installation_type': 'access_tag',
+                    'value': 1
+                });
+                console.log('GA Event: Access Tag CTA clicked -', btnText);
+            });
+        });
+
+        // Back Button Click
+        document.querySelector('.back-button')?.addEventListener('click', function() {
+            gtag('event', 'back_button_click', {
+                'event_category': 'access_tag',
+                'event_label': 'Access Tag Guide - Back to Home',
+                'installation_type': 'access_tag',
+                'value': 1
+            });
+            console.log('GA Event: Access Tag Guide - Back button clicked');
+        });
+
+        // Scroll Depth Tracking
+        let scrollDepthMarkers = {
+            '25': false,
+            '50': false,
+            '75': false,
+            '100': false
+        };
+
+        window.addEventListener('scroll', function() {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight - windowHeight;
+            const scrolled = window.scrollY;
+            const scrollPercent = Math.round((scrolled / documentHeight) * 100);
+
+            Object.keys(scrollDepthMarkers).forEach(depth => {
+                if (scrollPercent >= parseInt(depth) && !scrollDepthMarkers[depth]) {
+                    scrollDepthMarkers[depth] = true;
+                    gtag('event', 'scroll_depth', {
+                        'event_category': 'access_tag',
+                        'event_label': `Access Tag Guide: ${depth}%`,
+                        'installation_type': 'access_tag',
+                        'value': parseInt(depth)
+                    });
+                    console.log('GA Event: Access Tag Guide scroll depth -', depth + '%');
+                }
+            });
+        });
+
+        // External Link Clicks
+        document.querySelectorAll('a[target="_blank"]').forEach(link => {
+            link.addEventListener('click', function() {
+                const linkText = this.textContent.trim() || this.href;
+                gtag('event', 'external_link', {
+                    'event_category': 'access_tag',
+                    'event_label': `Access Tag Guide: ${linkText}`,
+                    'installation_type': 'access_tag',
+                    'value': 1
+                });
+                console.log('GA Event: Access Tag Guide - External link -', linkText);
+            });
+        });
+
+        console.log('✅ Access Tag Guide - Google Analytics custom event tracking initialized');
+    </script>
+</body>
+</html>
