@@ -1959,6 +1959,117 @@
                 }
             });
         });
+
+        // ========================================
+        // GOOGLE ANALYTICS CUSTOM EVENT TRACKING
+        // ========================================
+
+        // 1. Download Button Clicks
+        document.querySelectorAll('.download-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const storeName = this.querySelector('h3').textContent;
+                gtag('event', 'download_click', {
+                    'event_category': 'downloads',
+                    'event_label': storeName,
+                    'value': 1
+                });
+                console.log('GA Event: Download click -', storeName);
+            });
+        });
+
+        // 2. Progress Step Navigation Clicks
+        document.querySelectorAll('.progress-step').forEach((step, index) => {
+            step.addEventListener('click', function() {
+                const stepNumber = index + 1;
+                const stepLabel = this.querySelector('.step-label')?.textContent || `Step ${stepNumber}`;
+                gtag('event', 'navigation_click', {
+                    'event_category': 'navigation',
+                    'event_label': `Step ${stepNumber}: ${stepLabel}`,
+                    'value': stepNumber
+                });
+                console.log('GA Event: Navigation click - Step', stepNumber);
+            });
+        });
+
+        // 3. Accordion (FAQ) Interactions
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const faqTitle = this.querySelector('h4').textContent;
+                const isOpening = !this.parentElement.classList.contains('active');
+                gtag('event', isOpening ? 'faq_open' : 'faq_close', {
+                    'event_category': 'engagement',
+                    'event_label': faqTitle,
+                    'value': 1
+                });
+                console.log('GA Event: FAQ', isOpening ? 'opened' : 'closed', '-', faqTitle);
+            });
+        });
+
+        // 4. Contact Email Click
+        document.querySelector('.contact-email')?.addEventListener('click', function() {
+            gtag('event', 'contact_click', {
+                'event_category': 'engagement',
+                'event_label': 'Email Contact',
+                'value': 1
+            });
+            console.log('GA Event: Contact email clicked');
+        });
+
+        // 5. Hero CTA Button Clicks
+        document.querySelectorAll('.hero-actions .btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const btnText = this.textContent.trim();
+                gtag('event', 'cta_click', {
+                    'event_category': 'engagement',
+                    'event_label': btnText,
+                    'value': 1
+                });
+                console.log('GA Event: CTA clicked -', btnText);
+            });
+        });
+
+        // 6. Scroll Depth Tracking
+        let scrollDepthMarkers = {
+            '25': false,
+            '50': false,
+            '75': false,
+            '100': false
+        };
+
+        window.addEventListener('scroll', function() {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight - windowHeight;
+            const scrolled = window.scrollY;
+            const scrollPercent = Math.round((scrolled / documentHeight) * 100);
+
+            // Track 25%, 50%, 75%, 100% scroll depths
+            Object.keys(scrollDepthMarkers).forEach(depth => {
+                if (scrollPercent >= parseInt(depth) && !scrollDepthMarkers[depth]) {
+                    scrollDepthMarkers[depth] = true;
+                    gtag('event', 'scroll_depth', {
+                        'event_category': 'engagement',
+                        'event_label': `${depth}%`,
+                        'value': parseInt(depth)
+                    });
+                    console.log('GA Event: Scroll depth -', depth + '%');
+                }
+            });
+        });
+
+        // 7. External Link Clicks (App Store, Google Play, Huawei links)
+        document.querySelectorAll('a[target="_blank"]').forEach(link => {
+            link.addEventListener('click', function() {
+                const linkText = this.textContent.trim() || this.href;
+                gtag('event', 'external_link', {
+                    'event_category': 'outbound',
+                    'event_label': linkText,
+                    'value': 1
+                });
+                console.log('GA Event: External link -', linkText);
+            });
+        });
+
+        console.log('✅ Google Analytics custom event tracking initialized');
     </script>
 </body>
 </html>
