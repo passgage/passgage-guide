@@ -1,6 +1,9 @@
 # Vercel
 .vercel
 
+# Claude Code (local settings)
+.claude/
+
 # macOS
 .DS_Store
 
@@ -22,7 +25,28 @@ npm-debug.log*
 .env
 .env.local
 .env.*.local
+.env.production
+
+# API Keys & Secrets (for public repos)
+secrets/
+*.secret
+*.key
+*.pem
+*.p12
+*.pfx
+credentials.json
+service-account*.json
 
 # Temporary files
 *.tmp
 temp/
+
+# Node modules (if added in future)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build outputs (if added in future)
+dist/
+build/
+out/
