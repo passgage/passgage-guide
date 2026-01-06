@@ -4,15 +4,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a **professional, interactive installation guide website** for Passgage, an HR mobile application. The repository contains a modern, single-page HTML application with phone mockup support for mobile screenshots.
+**Passgage Installation Guide** - A modern, multi-page installation guide website for Passgage HR mobile application. Platform-specific guides (iOS, Android, Access Tag) with visual step-by-step instructions.
+
+**Live URL:** https://kilavuz.passgage.com
 
 **Key Characteristics:**
-- Single-page HTML application with advanced CSS and vanilla JavaScript
-- Professional design aligned with Passgage.com branding
-- Phone mockup frames for displaying mobile app screenshots
-- Optimized for Vercel deployment
-- All content in Turkish language
-- No build system or framework dependencies
+- Multi-page HTML application (4 pages: landing + 3 platform guides)
+- Tailwind CSS + Custom CSS hybrid architecture
+- Mobile-first responsive design
+- Turkish language content
+- No build system required - static HTML deployment
+- Deployed on Vercel with auto-deployment from main branch
 
 ## Development Workflow
 
@@ -22,302 +24,439 @@ This is a **professional, interactive installation guide website** for Passgage,
 # Option 1: Open directly in browser
 open index.html
 
-# Option 2: Serve with Python
+# Option 2: Serve with Python (recommended for testing all pages)
 python3 -m http.server 8000
 # Then visit http://localhost:8000
 
-# Option 3: Serve with Node.js (if http-server is installed)
+# Option 3: Serve with Node.js
 npx http-server -p 8000
 ```
 
+**Test all pages:**
+- Landing: `http://localhost:8000/index.html`
+- iOS guide: `http://localhost:8000/ios.html`
+- Android guide: `http://localhost:8000/android.html`
+- Access Tag guide: `http://localhost:8000/access-tag.html`
+
 ### Making Changes
 
-1. Edit `index.html` directly
-2. Refresh browser to see changes
-3. No compilation or build step required
+1. Edit relevant HTML file (index.html, ios.html, android.html, access-tag.html)
+2. Use Tailwind utilities for styling where possible
+3. Only add custom CSS for complex components (see Architecture section)
+4. Refresh browser to see changes (no build step)
 
-### Adding Screenshots
+### Deployment
 
-1. Take mobile app screenshots (iPhone/Android)
-2. Optimize images (max 500KB, 1170x2532px recommended)
-3. Save to `screenshots/` directory with descriptive names
-4. Update `index.html` screenshot placeholders
-5. See `screenshots/README.md` for detailed instructions
-
-## Architecture
-
-### New File Structure (Updated 2024)
-
-```
-passgage_guide/
-├── index.html                          # Main application (NEW - modern version)
-├── passgage-kurulum-rehberi.html       # Legacy version (kept for reference)
-├── CLAUDE.md                            # This file
-├── DEPLOYMENT.md                        # Vercel deployment guide
-├── vercel.json                          # Vercel configuration
-├── .gitignore                           # Git ignore rules
-├── screenshots/                         # Screenshot assets
-│   └── README.md                        # Screenshot guide
-├── Passgage-Primary-Logo.png           # Brand logo asset
-└── Passgage_Tam_Kullanım_Kılavuzu.pdf  # Full usage manual (Turkish)
-```
-
-### HTML Document Structure
-
-The `index.html` file is organized into these main sections:
-
-1. **Header Navigation** (Fixed)
-   - Passgage logo and branding badge
-   - 6-step progress indicator with active/completed states
-   - Smooth scroll navigation between sections
-
-2. **Hero Section**
-   - Animated gradient background with moving grid pattern
-   - Floating icon with animation
-   - Call-to-action buttons
-
-3. **Six Content Steps** (Main sections)
-   - **Step 1:** App download (App Store, Google Play, Huawei AppGallery) + screenshot showcase
-   - **Step 2:** Login process (username, password, device pairing) + screenshot showcase
-   - **Step 3:** Check-in methods (NFC, QR code) + screenshot showcase
-   - **Step 4:** NFC activation (device-specific guides for Android, iOS, Huawei)
-   - **Step 5:** Troubleshooting (accordion-based FAQ)
-   - **Step 6:** Admin panel instructions
-
-4. **Contact Section**
-   - Support email and contact information
-   - Animated contact icon
-
-5. **Footer**
-   - Copyright and branding
-
-### Technical Components
-
-**Design System (Aligned with Passgage.com):**
-- **Font Family:** 'Plus Jakarta Sans' (Google Fonts) - matches main site
-- **Primary Colors:**
-  - Red: #FF501D (primary brand color)
-  - Gold: #FFD700 (accent)
-  - Blue: #2872fa (secondary accent)
-- **Gradients:** `linear-gradient(135deg, #FF501D 0%, #FFD700 100%)`
-- **Typography:** Weights 300-800, responsive sizing with `clamp()`
-- **Spacing:** rem-based measurements
-- **Shadows:** Multiple levels (sm, md, lg, xl, 2xl, glow, glow-lg)
-
-**CSS Architecture:**
-- CSS Custom Properties (variables) for theming
-- Mobile-first responsive design
-- Flexbox and Grid layouts
-- Advanced animations:
-  - Float animation for hero icons
-  - Grid movement animation
-  - Pulse animation for contact section
-  - Fade-up animations on scroll
-  - Hover transforms and transitions
-- Responsive breakpoints: 480px, 768px, 1024px
-
-**JavaScript Features:**
-- `toggleAccordion(header)` - Controls FAQ accordion (single active state)
-- Progress step navigation with smooth scrolling
-- Intersection Observer API for:
-  - Progress tracking during scroll
-  - Fade-in animations on content visibility
-- Header shadow on scroll detection
-- Smooth scroll for anchor links
-
-**Phone Mockup System (NEW):**
-- `.phone-mockup` - Container for phone frame
-- `.phone-frame` - Device frame with realistic shadows
-- `.phone-screen` - Screen content area (9:19.5 aspect ratio)
-- `.phone-notch` - iPhone-style notch at top
-- `.screenshot-placeholder` - Placeholder UI for missing screenshots
-- `.screenshot-showcase` - Grid layout for phone + info points
-- `.info-point` - Feature highlights next to screenshots
-
-### External Dependencies (CDN-loaded)
-- Google Fonts: 'Plus Jakarta Sans' font family
-- Font Awesome 6.5.1: Icon library
-- Passgage logo (hosted at passgage.com)
-
-## Deployment
-
-### Vercel (Recommended)
-
-This project is optimized for Vercel deployment:
-
+Deployed automatically to Vercel:
 ```bash
-# Install Vercel CLI
-npm install -g vercel
+# Commit and push triggers auto-deployment
+git add .
+git commit -m "Your changes"
+git push origin main
+```
 
-# Deploy
-vercel
-
-# Deploy to production
+Manual deployment:
+```bash
 vercel --prod
 ```
 
-See `DEPLOYMENT.md` for complete deployment instructions.
+See `DEPLOYMENT.md` for detailed deployment instructions.
 
-**Vercel Configuration (`vercel.json`):**
-- Static site build
-- Cache headers for performance
-- Security headers (X-Frame-Options, X-XSS-Protection, etc.)
-- Special cache rules for screenshots (24h immutable)
+## Architecture
 
-### Alternative Deployment
+### File Structure
 
-Can be deployed to any static hosting:
-- **Netlify:** Drag and drop or Git deploy
-- **GitHub Pages:** Push to `gh-pages` branch
-- **Cloudflare Pages:** Git integration
-- **Traditional hosting:** Upload via FTP/SFTP
+```
+passgage_guide/
+├── index.html                  # Landing page (platform choice cards)
+├── ios.html                    # iOS installation guide (6 steps)
+├── android.html                # Android installation guide (6 steps)
+├── access-tag.html             # Access Tag installation guide (5 steps)
+├── index-backup.html           # Legacy single-page version
+│
+├── assets/
+│   ├── css/
+│   │   ├── animations.css      # Keyframe animations (KEEP - not migrated)
+│   │   ├── custom-components.css  # Complex custom components only
+│   │   ├── common.css          # DEPRECATED - to be removed
+│   │   └── components.css      # DEPRECATED - to be removed
+│   └── js/
+│       ├── common.js           # Analytics, scroll effects, accordion
+│       └── navigation.js       # Progress tracking, section observer
+│
+├── screenshots/
+│   ├── ios/                    # iOS app screenshots + README
+│   ├── android/                # Android app screenshots + README
+│   └── access-tag/             # Access Tag photos + README
+│
+├── vercel.json                 # Vercel config (cache, security headers)
+├── DEPLOYMENT.md               # Deployment guide
+├── CLAUDE.md                   # This file
+└── README.md                   # Project README
+```
 
-## Important Development Notes
+### CSS Architecture (Hybrid: Tailwind + Custom)
 
-### Language
-All UI text and content is in **Turkish**. When making content changes, maintain Turkish language consistency and cultural appropriateness.
+**Tailwind CSS (via CDN):**
+- **Primary approach** for all new components
+- Loaded in `<head>` of all 4 HTML files with custom config
+- Custom config includes:
+  - Platform colors: `passgage-red`, `ios-black`, `android-green`, `tag-blue`
+  - Custom shadows: `shadow-soft`, `shadow-card`, `shadow-phone`
+  - Custom fonts: `font-sans` (Plus Jakarta Sans)
+  - Custom animations: `animate-float`, `animate-fade-in-up`
+
+**Custom CSS (Keep minimal):**
+- `animations.css` - Keyframe definitions (@keyframes)
+- `custom-components.css` - Only for complex components that can't be Tailwinded:
+  - `.phone-mockup` / `.phone-frame` - Complex pseudo-elements
+  - `.progress-nav` - Complex state management
+  - `.accordion` - Toggle logic with transforms
+  - `.hero-bg` / `.hero-grid` - Background effects with pseudo-elements
+
+**When to use what:**
+- ✅ **Tailwind**: Layout, spacing, colors, typography, simple hover states
+- ⚠️ **Custom CSS**: Complex pseudo-elements, intricate animations, component-specific logic
+- ❌ **Avoid**: Inline styles, duplicating Tailwind utilities as custom CSS
+
+### Page Structure
+
+#### Landing Page (index.html)
+```
+- Header (logo + badge)
+- Hero Section (gradient background, floating icon)
+- Platform Cards (3 cards):
+  - iOS (black/gray gradient) → links to ios.html
+  - Android (green gradient) → links to android.html
+  - Access Tag (blue gradient) → links to access-tag.html
+- Features Overview (4 feature cards)
+- Contact Section
+- Footer
+```
+
+#### Platform Guides (ios.html, android.html, access-tag.html)
+```
+- Header (logo + badge)
+- Progress Navigation (sticky - 5 or 6 steps)
+- Hero Section (platform-specific gradient)
+- Step Sections (5-6 sections):
+  - Section header (number + title)
+  - Step content
+  - Screenshots in phone mockups (where applicable)
+  - Subsections with icon bullets
+- Contact Section
+- Footer
+```
+
+**Step Counts:**
+- iOS: 6 steps (Download, Permissions, Login, Check-in, NFC, Troubleshooting)
+- Android: 6 steps (Download, Permissions, Login, Device Pairing, NFC, Troubleshooting)
+- Access Tag: 5 steps (Contents, Planning, Installation, Configuration, Maintenance)
+
+### JavaScript Architecture
+
+**common.js** - Shared utilities:
+- `toggleAccordion(header)` - FAQ accordion (single-active state)
+- `initHeaderScrollEffect()` - Header shadow on scroll
+- `initFadeUpAnimations()` - Scroll-triggered fade animations (Intersection Observer)
+- Google Analytics event tracking
+
+**navigation.js** - Progress tracking:
+- `navigationConfig` - Configurable for different step counts
+- `initProgressNavigation()` - Smooth scroll navigation
+- `initSectionObserver()` - Active section tracking (Intersection Observer)
+- Auto-updates progress steps as user scrolls
+
+**Key behavior:**
+- Progress nav updates based on scroll position
+- Click on step → smooth scroll to section
+- Accordion allows only 1 item open at a time
+- All animations use Intersection Observer for performance
+
+### Design System
+
+**Colors (Tailwind config):**
+```javascript
+// Primary brand colors
+'passgage-red': '#FF501D'
+'passgage-gold': '#FFD700'
+'passgage-blue': '#2872fa'
+
+// Platform-specific
+'ios-black': '#1d1d1f'
+'ios-gray': '#86868b'
+'android-green': '#3ddc84'
+'android-dark': '#073042'
+'tag-blue': '#2872fa'
+'tag-navy': '#1a5490'
+
+// Neutrals
+'neutral-{50,100,200,800,900}'
+```
+
+**Typography:**
+- Font: 'Plus Jakarta Sans' (Google Fonts)
+- Weights: 300, 400, 500, 600, 700, 800
+- Responsive sizing: Use Tailwind's responsive text utilities
+
+**Shadows:**
+- `shadow-soft`: Subtle depth
+- `shadow-card`: Card elevations
+- `shadow-medium`: Medium depth
+- `shadow-strong`: High emphasis
+- `shadow-phone`: Phone mockup depth
+
+**Responsive Breakpoints:**
+- Mobile: < 768px (base, mobile-first)
+- Tablet: `md:` (≥768px)
+- Desktop: `lg:` (≥1024px)
+- Large: `xl:` (≥1280px)
 
 ### Screenshot Integration
 
-To replace placeholder screenshots with real ones:
+**File naming convention:** `stepX-description.jpg`
 
-1. Locate the placeholder div:
+**Examples:**
+```
+screenshots/ios/step1-appstore.png
+screenshots/android/step2-location-permission.jpg
+screenshots/android/step3-1-login-screen.jpg  # Multiple per step
+screenshots/access-tag/step3-adhesive-mounting.jpg
+```
+
+**Integration in HTML:**
 ```html
-<div class="screenshot-placeholder">
-    <i class="fas fa-mobile-alt"></i>
-    <p>Ekran görüntüsü eklenecek:<br>App Store indirme</p>
+<!-- Phone mockup with screenshot -->
+<div class="phone-mockup">
+    <div class="phone-frame android">  <!-- or 'ios' -->
+        <div class="phone-notch android"></div>  <!-- iOS/Android specific -->
+        <div class="phone-screen">
+            <img src="screenshots/android/step3-1-login-screen.jpg"
+                 alt="Passgage giriş ekranı"
+                 loading="lazy">
+        </div>
+    </div>
 </div>
 ```
 
-2. Replace with actual image:
+**Placeholder (when screenshot missing):**
 ```html
-<img src="screenshots/step1-appstore.png" alt="App Store'da Passgage uygulaması">
+<div class="screenshot-placeholder">
+    <i class="fas fa-camera"></i>
+    <p>Screenshot Placeholder</p>
+</div>
 ```
 
-3. Ensure image is optimized (see `screenshots/README.md`)
+See `screenshots/README.md` for detailed screenshot requirements.
 
-### Accordion Behavior
-The FAQ section in Step 5 uses single-active accordion behavior - only one FAQ can be open at a time. This is intentional UX design for better readability.
+### Platform-Specific Features
 
-### Progress Navigation
-The progress steps in the header are both informational and interactive:
-- Click on any step to scroll to that section
-- Steps update automatically as user scrolls through content
-- Visual states: pending (gray), active (gradient), completed (red border)
+**iOS Guide (ios.html):**
+- Automatic NFC (no setup required)
+- Face ID / Touch ID authentication
+- Safari-specific troubleshooting
+- App Store download only
 
-### Animations
-Multiple animation effects are implemented:
-- **Hero icon:** Floating animation (3s infinite)
-- **Hero grid:** Moving pattern (20s infinite)
-- **Contact icon:** Pulse animation (2s infinite)
-- **Fade-up:** Scroll-triggered content reveal
-- **Hover effects:** Transforms, shadows, color transitions
+**Android Guide (android.html):**
+- Battery optimization section (CRITICAL for Android users)
+- Manufacturer-specific NFC paths (Samsung, Huawei, Xiaomi, Stock)
+- Google Play + Huawei AppGallery download options
+- MIUI/OneUI specific permissions
+- SMS-based device pairing (banking app style, one device only)
 
-All animations use `cubic-bezier` timing for smooth, professional feel.
+**Access Tag Guide (access-tag.html):**
+- Physical installation (3 methods: adhesive, screw, magnetic)
+- Location planning (height, visibility, environment)
+- QR configuration via admin panel
+- Maintenance schedule
 
-### Browser Compatibility
-The code uses modern JavaScript and CSS:
-- Intersection Observer API
-- ES6+ syntax (arrow functions, template literals, const/let)
-- CSS Grid and Flexbox
-- CSS Custom Properties (variables)
-- CSS backdrop-filter
+## Common Development Tasks
 
-**Target:** Modern browsers (Chrome, Firefox, Safari, Edge - latest 2-3 versions)
-**Note:** IE11 is not supported
+### Adding a New Section to a Guide
 
-## Performance Optimization
-
-### Current Optimizations
-- Single HTML file (no external CSS/JS except CDN fonts)
-- Optimized CSS (critical styles inline)
-- Lazy-loaded animations (triggered by Intersection Observer)
-- Efficient event listeners (delegated where possible)
-
-### Before Deployment
-1. Optimize all screenshot images (TinyPNG, ImageOptim, etc.)
-2. Keep images under 500KB each
-3. Use modern image formats (WebP with PNG fallback if needed)
-4. Test on slow 3G connection
-5. Check Lighthouse scores (aim for 90+ on all metrics)
-
-## Best Practices When Editing
-
-### Adding New Sections
-1. Follow existing section structure:
+1. Add section HTML:
 ```html
-<section class="section fade-up" id="stepX">
+<section class="section fade-up" id="step7">
     <div class="section-header">
-        <div class="section-number">X</div>
+        <div class="section-number">7</div>
         <div>
-            <h2 class="section-title">Başlık</h2>
-            <p class="section-subtitle">Alt başlık</p>
+            <h2 class="section-title">Yeni Adım</h2>
+            <p class="section-subtitle">Açıklama</p>
         </div>
     </div>
-    <!-- Content here -->
+    <!-- Content -->
 </section>
 ```
 
-2. Add corresponding progress step in header
-3. Update JavaScript observers if needed
+2. Add progress step to header navigation
+3. Update step count in `navigation.js` if needed
+4. Ensure `fade-up` class is present for scroll animation
 
-### Modifying Colors
-Use CSS custom properties (variables) instead of hardcoded values:
-```css
-/* Good */
-background: var(--primary-red);
+### Updating Tailwind Configuration
 
-/* Avoid */
-background: #FF501D;
-```
-
-### Adding Icons
-Use Font Awesome 6.5.1 icons:
+Edit the `<script>` block in HTML `<head>`:
 ```html
-<i class="fas fa-icon-name"></i>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          'new-color': '#hexcode'
+        }
+      }
+    }
+  }
+</script>
 ```
 
-Browse icons: https://fontawesome.com/icons
+Apply to all 4 HTML files for consistency.
 
-## Related Projects
+### Adding Custom Animations
 
-This repository is part of the larger Passgage ecosystem:
-- `passgage-main` - Main application
-- `passgage-mobile` - Mobile application (source of screenshots)
-- `web-api` - Backend API
-- `portal` - Web portal (admin interface)
-- `workflow-engine` - Workflow processing
-- And others in the parent `/passgage/` directory
+Add to `animations.css` (kept separate):
+```css
+@keyframes myAnimation {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
+}
+```
+
+Reference in Tailwind config:
+```javascript
+animation: {
+    'my-anim': 'myAnimation 2s ease-in-out infinite'
+}
+```
+
+Use: `class="animate-my-anim"`
+
+### Creating a New Platform Guide
+
+1. Duplicate existing guide HTML (e.g., `ios.html`)
+2. Update platform-specific:
+   - Tailwind color classes (gradients, buttons)
+   - Step content and count
+   - Screenshot paths
+   - Page title and meta description
+3. Add link from `index.html` platform cards
+4. Update Tailwind config if new colors needed
+
+## Google Analytics
+
+**Tracking ID:** `G-374JCV17P7`
+
+**Custom Events Tracked:**
+- `platform_choice` - Landing page platform card clicks
+- `download_click` - App store download buttons
+- `navigation_click` - Progress step clicks
+- `faq_open` / `faq_close` - Accordion interactions
+- `contact_click` - Email clicks
+- `scroll_depth` - 25%, 50%, 75%, 100% scroll milestones
+
+Event tracking code is in `common.js` and inline `<script>` blocks.
+
+## Best Practices
+
+### Content Updates
+- All content is **Turkish** - maintain language consistency
+- Use formal but friendly tone (professional HR context)
+- Target audience: Retail workers, couriers, warehouse staff (low technical literacy)
+- Keep instructions simple, visual-first
+
+### Styling Approach
+1. **Try Tailwind first** - Use utility classes for layout, spacing, colors
+2. **Check if pattern exists** - Review existing sections for similar patterns
+3. **Custom CSS last resort** - Only for truly complex components
+4. **Mobile-first** - Start with mobile layout, add `md:` and `lg:` breakpoints
+
+### Performance
+- Keep images < 500KB (optimize with TinyPNG, ImageOptim)
+- Use `loading="lazy"` for all images
+- Avoid large custom CSS - leverage Tailwind's purge (automatic with CDN)
+- Test on slow 3G connection before deployment
+
+### Accessibility
+- All images must have descriptive `alt` text
+- Use semantic HTML (`<section>`, `<nav>`, `<header>`, `<footer>`)
+- Ensure sufficient color contrast (WCAG AA minimum)
+- Test keyboard navigation for progress steps
 
 ## Troubleshooting
 
-### Screenshots Not Displaying
-- Check file paths (case-sensitive)
-- Verify files exist in `screenshots/` directory
-- Check browser console for 404 errors
+### Tailwind classes not working
+- Check if Tailwind CDN script is loaded in `<head>`
+- Verify custom config is present
+- Check browser console for errors
 - Clear browser cache (Cmd/Ctrl + Shift + R)
 
-### Animations Not Working
-- Check browser compatibility (needs modern browser)
-- Verify Intersection Observer support
-- Check console for JavaScript errors
+### Screenshots not displaying
+- Verify file path (case-sensitive on Linux/Vercel)
+- Check `screenshots/` directory structure
+- Look for 404 errors in Network tab
+- Ensure image file extension matches HTML (`.jpg` vs `.png`)
 
-### Layout Issues on Mobile
-- Test on actual devices, not just browser devtools
-- Check responsive breakpoints (480px, 768px, 1024px)
-- Verify viewport meta tag is present
+### Progress navigation not updating
+- Check `navigation.js` is loaded
+- Verify section IDs match step hrefs
+- Check browser console for JavaScript errors
+- Ensure Intersection Observer is supported (modern browsers only)
 
-### Deployment Issues
+### Deployment issues
 - See `DEPLOYMENT.md` for detailed troubleshooting
-- Check Vercel logs: `vercel logs`
+- Check Vercel deployment logs: `vercel logs`
 - Verify `vercel.json` configuration
+- Test locally before deploying
 
-## Version History
+### Animations not working
+- Check browser supports Intersection Observer
+- Verify `animations.css` is loaded
+- Check `common.js` is loaded and executing
+- Test in modern browser (Chrome, Firefox, Safari latest)
 
-- **v2.0 (2024):** Complete redesign with Passgage.com branding, phone mockups, enhanced animations
-- **v1.0 (2023):** Initial version (see `passgage-kurulum-rehberi.html`)
+## Migration Status (Tailwind CSS)
+
+**Current state:** Partial migration in progress
+
+**Completed:**
+- ✅ Tailwind CDN added to all 4 HTML files
+- ✅ `index.html` fully migrated (~90% Tailwind)
+
+**In Progress:**
+- ⏳ `ios.html` - Pending
+- ⏳ `android.html` - Pending (most complex due to new screenshot layout)
+- ⏳ `access-tag.html` - Pending
+
+**To be created:**
+- ⏳ `custom-components.css` - Extract complex components from `components.css`
+
+**To be removed (after migration):**
+- ❌ `common.css` - Replace with Tailwind config
+- ❌ `components.css` - Replace with Tailwind utilities + custom-components.css
+
+**Keep:**
+- ✅ `animations.css` - Keyframe animations (can't be Tailwinded)
+
+See migration plan in `/Users/gokhanalmas/.claude/plans/peppy-popping-fiddle.md`
+
+## Related Documentation
+
+- **README.md** - Project overview, features, tech stack
+- **DEPLOYMENT.md** - Vercel deployment guide
+- **screenshots/README.md** - Screenshot requirements and naming conventions
+- **screenshots/ios/README.md** - iOS-specific screenshot checklist
+- **screenshots/android/README.md** - Android-specific screenshot checklist
+- **screenshots/access-tag/README.md** - Access Tag photo checklist
+
+## External Resources
+
+- **Live Site:** https://kilavuz.passgage.com
+- **Passgage Main Site:** https://passgage.com
+- **Support Email:** deneyim@passgage.com
+- **Tailwind Docs:** https://tailwindcss.com/docs
+- **Font Awesome:** https://fontawesome.com/icons
+- **Google Fonts:** https://fonts.google.com/specimen/Plus+Jakarta+Sans
 
 ---
 
-**Last Updated:** 2024
-**Maintained by:** Passgage Development Team
+**Last Updated:** 2026-01-06
+**Maintained by:** Passgage Development Team with Claude Code

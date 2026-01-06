@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Passgage Kurulum Rehberi | Adım Adım İnteraktif Kurulum</title>
-    <meta name="description" content="Passgage mobil uygulamasını kolayca kurun. Adım adım görsel rehber ile indirme, giriş, NFC aktivasyonu ve daha fazlası.">
+    <title>Passgage Kurulum Rehberi | iOS, Android ve Access Tag</title>
+    <meta name="description" content="Passgage kurulum rehberinizi seçin: iOS (iPhone/iPad), Android (Google Play/Huawei) veya Access Tag (fiziksel QR kod etiket). Adım adım görsel rehberle kolayca kurun.">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="https://passgage.com/wp-content/uploads/2023/11/Passgage-Primary-Logo.svg">
@@ -14,6 +14,71 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Primary colors
+                        'passgage-red': '#FF501D',
+                        'passgage-gold': '#FFD700',
+                        'passgage-blue': '#2872fa',
+
+                        // iOS colors
+                        'ios-black': '#1d1d1f',
+                        'ios-gray': '#86868b',
+
+                        // Android colors
+                        'android-green': '#3ddc84',
+                        'android-dark': '#073042',
+
+                        // Access Tag colors
+                        'tag-blue': '#2872fa',
+                        'tag-navy': '#1a5490',
+
+                        // Neutral colors
+                        'neutral-50': '#fafafa',
+                        'neutral-100': '#f5f5f5',
+                        'neutral-200': '#e5e5e5',
+                        'neutral-800': '#1f2937',
+                        'neutral-900': '#111827',
+                    },
+                    boxShadow: {
+                        'soft': '0 2px 20px rgba(0, 0, 0, 0.08)',
+                        'medium': '0 4px 30px rgba(0, 0, 0, 0.12)',
+                        'strong': '0 10px 60px rgba(0, 0, 0, 0.15)',
+                        'card': '0 4px 20px rgba(0, 0, 0, 0.1)',
+                        'phone': '0 20px 60px rgba(0, 0, 0, 0.3)',
+                    },
+                    fontFamily: {
+                        'sans': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+                    },
+                    fontSize: {
+                        'display': ['3.5rem', { lineHeight: '1.1', fontWeight: '800' }],
+                        'hero': ['2.5rem', { lineHeight: '1.2', fontWeight: '700' }],
+                    },
+                    spacing: {
+                        '18': '4.5rem',
+                        '88': '22rem',
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in-up': 'fadeInUp 0.6s ease-out',
+                        'slide-in-left': 'slideInLeft 0.6s ease-out',
+                        'slide-in-right': 'slideInRight 0.6s ease-out',
+                    },
+                },
+            },
+        }
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/custom-components.css">
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-374JCV17P7"></script>
@@ -25,1252 +90,298 @@
     </script>
 
     <style>
-        :root {
-            /* Passgage Brand Colors */
-            --primary-red: #FF501D;
-            --primary-gold: #FFD700;
-            --primary-blue: #2872fa;
-            --orange-gradient: linear-gradient(135deg, #FF501D 0%, #FFD700 100%);
-
-            /* Dark Shades */
-            --dark-900: #0f0f1a;
-            --dark-800: #1a1a2e;
-            --dark-700: #252542;
-
-            /* Gray Scale */
-            --gray-900: #111827;
-            --gray-800: #1f2937;
-            --gray-700: #374151;
-            --gray-600: #4b5563;
-            --gray-500: #6b7280;
-            --gray-400: #9ca3af;
-            --gray-300: #d1d5db;
-            --gray-200: #e5e7eb;
-            --gray-100: #f3f4f6;
-            --gray-50: #f9fafb;
-            --white: #ffffff;
-
-            /* Semantic Colors */
-            --success: #10b981;
-            --warning: #f59e0b;
-            --error: #ef4444;
-            --info: #3b82f6;
-
-            /* Shadows */
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
-            --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,0.25);
-            --shadow-glow: 0 0 40px rgba(255,80,29,0.3);
-            --shadow-glow-lg: 0 0 60px rgba(255,80,29,0.4);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--gray-50);
-            color: var(--gray-900);
-            min-height: 100vh;
-            overflow-x: hidden;
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--gray-100);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--orange-gradient);
-            border-radius: 5px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-red);
-        }
-
-        /* Header */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 1000;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(0,0,0,0.06);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .header.scrolled {
-            box-shadow: var(--shadow-lg);
-            padding: 0.75rem 2rem;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .logo {
-            height: 36px;
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
-        .logo-badge {
-            background: var(--orange-gradient);
-            color: white;
-            font-size: 0.65rem;
-            font-weight: 800;
-            padding: 6px 12px;
-            border-radius: 20px;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            box-shadow: var(--shadow-md);
-        }
-
-        /* Progress Navigation */
-        .progress-nav {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .progress-step {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 14px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progress-step::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--orange-gradient);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-
-        .progress-step:hover {
-            background: var(--gray-100);
-            transform: translateY(-2px);
-        }
-
-        .progress-step.active::before {
-            opacity: 1;
-        }
-
-        .progress-step.active {
-            color: white;
-            box-shadow: var(--shadow-glow);
-        }
-
-        .progress-step.completed {
-            background: rgba(255,80,29,0.1);
-            border-color: var(--primary-red);
-            color: var(--primary-red);
-        }
-
-        .progress-step .step-num {
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            font-weight: 800;
-            background: var(--gray-200);
-            color: var(--gray-600);
-            transition: all 0.3s ease;
-        }
-
-        .progress-step.active .step-num {
-            background: rgba(255,255,255,0.3);
-            color: white;
-        }
-
-        .progress-step.completed .step-num {
-            background: var(--primary-red);
-            color: white;
-        }
-
-        .progress-step .step-label {
-            font-size: 0.8rem;
-            font-weight: 600;
-            display: none;
-        }
-
-        @media (min-width: 1024px) {
-            .progress-step .step-label {
-                display: block;
-            }
-        }
-
-        /* Hero Section */
+        /* Landing page specific styles */
         .hero {
-            padding: 160px 2rem 120px;
-            background: var(--dark-800);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            opacity: 0.15;
-            background-image:
-                radial-gradient(circle at 20% 50%, var(--primary-red) 0%, transparent 50%),
-                radial-gradient(circle at 80% 50%, var(--primary-gold) 0%, transparent 50%),
-                radial-gradient(circle at 50% 80%, var(--primary-blue) 0%, transparent 50%);
-        }
-
-        .hero-grid {
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
-            animation: gridMove 20s linear infinite;
-        }
-
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(60px, 60px); }
+            padding: 180px 2rem 100px;
         }
 
         .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .hero-icon {
-            width: 90px;
-            height: 90px;
-            background: var(--orange-gradient);
-            border-radius: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 2.5rem;
-            font-size: 2.5rem;
-            color: white;
-            box-shadow: var(--shadow-glow-lg);
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(5deg); }
+            max-width: 800px;
         }
 
         .hero h1 {
-            color: white;
-            font-size: clamp(2.5rem, 7vw, 4.5rem);
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-            letter-spacing: -2px;
-        }
-
-        .hero h1 .gradient-text {
-            background: var(--orange-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
         }
 
         .hero p {
-            color: var(--gray-400);
-            font-size: clamp(1rem, 2vw, 1.3rem);
-            margin-bottom: 3rem;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.8;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            max-width: 600px;
         }
 
-        .hero-actions {
-            display: flex;
-            gap: 1.25rem;
-            justify-content: center;
-            flex-wrap: wrap;
+        /* Choice Cards Section */
+        .choice-section {
+            padding: 4rem 2rem 6rem;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 18px 36px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1rem;
+        .choice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .choice-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-lg);
             text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            border: none;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .choice-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 60px -12px rgba(0,0,0,0.25);
+        }
+
+        .choice-card-header {
+            padding: 3rem 2.5rem;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            min-height: 260px;
         }
 
-        .btn::before {
+        .choice-card-header::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            opacity: 0.1;
+            background-image: radial-gradient(circle at 50% 50%, white 0%, transparent 70%);
         }
 
-        .btn:hover::before {
-            opacity: 1;
+        /* iOS Card Styling */
+        .choice-card.ios .choice-card-header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #434343 100%);
         }
 
-        .btn-primary {
-            background: var(--orange-gradient);
-            color: white;
-            box-shadow: 0 6px 24px rgba(255,80,29,0.4);
+        .choice-card.ios:hover {
+            box-shadow: 0 30px 60px -12px rgba(26, 26, 26, 0.4);
         }
 
-        .btn-primary:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 10px 35px rgba(255,80,29,0.5);
+        /* Android Card Styling */
+        .choice-card.android .choice-card-header {
+            background: linear-gradient(135deg, #3DDC84 0%, #34a853 100%);
         }
 
-        .btn-secondary {
-            background: rgba(255,255,255,0.1);
-            color: white;
-            border: 2px solid rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
+        .choice-card.android:hover {
+            box-shadow: 0 30px 60px -12px rgba(61, 220, 132, 0.4);
         }
 
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.2);
-            border-color: rgba(255,255,255,0.4);
+        /* Access Tag Card Styling */
+        .choice-card.access-tag .choice-card-header {
+            background: linear-gradient(135deg, #2872fa 0%, #5b9eff 100%);
         }
 
-        /* Main Content */
-        .main-content {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 5rem 1.5rem;
+        .choice-card.access-tag:hover {
+            box-shadow: 0 30px 60px -12px rgba(40, 114, 250, 0.4);
         }
 
-        /* Section */
-        .section {
-            margin-bottom: 6rem;
-            scroll-margin-top: 120px;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .section-number {
-            width: 70px;
-            height: 70px;
-            background: var(--orange-gradient);
+        .choice-card-icon {
+            width: 90px;
+            height: 90px;
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 3rem;
             color: white;
-            font-size: 2rem;
-            font-weight: 800;
-            flex-shrink: 0;
-            box-shadow: var(--shadow-glow);
+            margin-bottom: 1.5rem;
             position: relative;
+            z-index: 1;
         }
 
-        .section-number::after {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            border-radius: 26px;
-            background: var(--orange-gradient);
-            opacity: 0.3;
-            z-index: -1;
-        }
-
-        .section-title {
-            font-size: 2rem;
+        .choice-card-title {
+            font-size: 1.8rem;
             font-weight: 800;
-            color: var(--gray-900);
+            color: white;
             margin-bottom: 0.5rem;
-            letter-spacing: -0.5px;
+            position: relative;
+            z-index: 1;
         }
 
-        .section-subtitle {
-            color: var(--gray-600);
-            font-size: 1.1rem;
+        .choice-card-subtitle {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
             font-weight: 500;
-        }
-
-        /* Phone Mockup */
-        .screenshot-showcase {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-            margin: 3rem 0;
-        }
-
-        .phone-mockup {
             position: relative;
-            max-width: 320px;
-            margin: 0 auto;
+            z-index: 1;
         }
 
-        .phone-frame {
-            position: relative;
-            background: #1f2937;
-            border-radius: 42px;
-            padding: 14px;
-            box-shadow:
-                0 25px 50px -12px rgba(0, 0, 0, 0.25),
-                0 0 0 1px rgba(255,255,255,0.1),
-                inset 0 2px 4px rgba(255,255,255,0.05);
-        }
-
-        .phone-screen {
-            background: var(--gray-100);
-            border-radius: 32px;
-            overflow: hidden;
-            aspect-ratio: 9/19.5;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .phone-screen img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .phone-notch {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 140px;
-            height: 26px;
-            background: #1f2937;
-            border-radius: 0 0 20px 20px;
-            z-index: 10;
-        }
-
-        .screenshot-placeholder {
-            width: 100%;
-            height: 100%;
+        .choice-card-body {
+            padding: 2.5rem;
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
+        }
+
+        .choice-card-description {
+            color: var(--gray-700);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+        .choice-card-button {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--gray-200) 0%, var(--gray-100) 100%);
-            color: var(--gray-500);
-            padding: 2rem;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: white;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .choice-card.ios .choice-card-button {
+            background: linear-gradient(135deg, #1a1a1a 0%, #434343 100%);
+        }
+
+        .choice-card.android .choice-card-button {
+            background: linear-gradient(135deg, #3DDC84 0%, #34a853 100%);
+        }
+
+        .choice-card.access-tag .choice-card-button {
+            background: linear-gradient(135deg, #2872fa 0%, #5b9eff 100%);
+        }
+
+        .choice-card-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Features Overview Section */
+        .features-overview {
+            padding: 5rem 2rem;
+            background: var(--gray-100);
+        }
+
+        .features-overview-content {
+            max-width: 1200px;
+            margin: 0 auto;
             text-align: center;
         }
 
-        .screenshot-placeholder i {
-            font-size: 3rem;
+        .features-overview h2 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 800;
+            color: var(--gray-900);
             margin-bottom: 1rem;
-            opacity: 0.5;
         }
 
-        .screenshot-placeholder p {
-            font-size: 0.9rem;
-            font-weight: 600;
+        .features-overview-subtitle {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
         }
 
-        .screenshot-info {
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .info-point {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            padding: 1.25rem;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
             background: white;
-            border-radius: 16px;
-            border-left: 4px solid var(--primary-red);
-            box-shadow: var(--shadow-sm);
+            border-radius: 20px;
             transition: all 0.3s ease;
         }
 
-        .info-point:hover {
+        .feature-item:hover {
+            transform: translateY(-4px);
             box-shadow: var(--shadow-md);
-            transform: translateX(8px);
         }
 
-        .info-point-icon {
-            width: 44px;
-            height: 44px;
+        .feature-item-icon {
+            width: 64px;
+            height: 64px;
             background: linear-gradient(135deg, rgba(255,80,29,0.1) 0%, rgba(255,215,0,0.1) 100%);
-            border-radius: 12px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--primary-red);
-            font-size: 1.2rem;
-            flex-shrink: 0;
+            font-size: 1.8rem;
+            margin-bottom: 1.25rem;
         }
 
-        .info-point-content h4 {
-            font-size: 1.05rem;
+        .feature-item h3 {
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--gray-900);
             margin-bottom: 0.5rem;
         }
 
-        .info-point-content p {
+        .feature-item p {
             color: var(--gray-600);
             font-size: 0.95rem;
             line-height: 1.6;
         }
 
-        /* Download Section */
-        .download-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .download-card {
-            background: white;
-            border-radius: 24px;
-            padding: 2rem;
-            border: 2px solid var(--gray-200);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            text-decoration: none;
-            display: block;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .download-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--orange-gradient);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .download-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .download-card:hover {
-            border-color: var(--primary-red);
-            box-shadow: var(--shadow-xl), 0 0 0 6px rgba(255,80,29,0.1);
-            transform: translateY(-6px);
-        }
-
-        .download-card-header {
-            display: flex;
-            align-items: center;
-            gap: 1.25rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .store-icon {
-            width: 64px;
-            height: 64px;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: white;
-            box-shadow: var(--shadow-md);
-        }
-
-        .store-icon.apple { background: linear-gradient(135deg, #1a1a1a 0%, #434343 100%); }
-        .store-icon.google { background: linear-gradient(135deg, #34a853 0%, #4285f4 50%, #ea4335 100%); }
-        .store-icon.huawei { background: linear-gradient(135deg, #c7112b 0%, #fa1a3c 100%); }
-
-        .download-card-info h3 {
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: var(--gray-900);
-            margin-bottom: 0.3rem;
-        }
-
-        .download-card-info p {
-            color: var(--gray-600);
-            font-size: 0.95rem;
-        }
-
-        .download-card-body {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1.25rem;
-            background: var(--gray-50);
-            border-radius: 14px;
-        }
-
-        .download-card-body span {
-            color: var(--gray-700);
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .download-card-body i {
-            color: var(--primary-red);
-            font-size: 1.4rem;
-            transition: transform 0.3s ease;
-        }
-
-        .download-card:hover .download-card-body i {
-            transform: translateX(4px);
-        }
-
-        /* Feature Grid */
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: white;
-            border-radius: 24px;
-            padding: 2.5rem;
-            border: 1px solid var(--gray-200);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: var(--orange-gradient);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
-        }
-
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .feature-card:hover {
-            box-shadow: var(--shadow-xl);
-            transform: translateY(-8px);
-        }
-
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, rgba(255,80,29,0.1) 0%, rgba(255,215,0,0.1) 100%);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            color: var(--primary-red);
-        }
-
-        .feature-card h3 {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--gray-900);
-            margin-bottom: 1rem;
-        }
-
-        .feature-card p {
-            color: var(--gray-600);
-            font-size: 1rem;
-            line-height: 1.7;
-        }
-
-        /* Steps List */
-        .steps-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-        }
-
-        .step-item {
-            display: flex;
-            gap: 1.5rem;
-            padding: 2rem;
-            background: white;
-            border-radius: 20px;
-            border: 1px solid var(--gray-200);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            align-items: flex-start;
-        }
-
-        .step-item:hover {
-            border-color: var(--primary-red);
-            background: linear-gradient(135deg, rgba(255,80,29,0.02) 0%, rgba(255,215,0,0.02) 100%);
-            transform: translateX(10px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .step-item-icon {
-            width: 56px;
-            height: 56px;
-            background: var(--orange-gradient);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.4rem;
-            flex-shrink: 0;
-            box-shadow: var(--shadow-md);
-        }
-
-        .step-item-content h4 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--gray-900);
-            margin-bottom: 0.6rem;
-        }
-
-        .step-item-content p {
-            color: var(--gray-600);
-            font-size: 1rem;
-            line-height: 1.7;
-        }
-
-        /* Device Cards */
-        .device-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .device-card {
-            background: white;
-            border-radius: 24px;
-            overflow: hidden;
-            border: 1px solid var(--gray-200);
-            transition: all 0.4s ease;
-        }
-
-        .device-card:hover {
-            box-shadow: var(--shadow-xl);
-            transform: translateY(-6px);
-        }
-
-        .device-card-header {
-            padding: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1.25rem;
-        }
-
-        .device-card-header.android {
-            background: linear-gradient(135deg, #3DDC84 0%, #34a853 100%);
-        }
-
-        .device-card-header.ios {
-            background: linear-gradient(135deg, #1a1a1a 0%, #434343 100%);
-        }
-
-        .device-card-header i {
-            font-size: 2.5rem;
-            color: white;
-        }
-
-        .device-card-header h3 {
-            color: white;
-            font-size: 1.3rem;
-            font-weight: 800;
-        }
-
-        .device-card-header p {
-            color: rgba(255,255,255,0.9);
-            font-size: 0.9rem;
-        }
-
-        .device-card-body {
-            padding: 2rem;
-        }
-
-        .device-card-body .instruction {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--gray-100);
-        }
-
-        .device-card-body .instruction:last-child {
-            border-bottom: none;
-        }
-
-        .device-card-body .instruction i {
-            color: var(--primary-red);
-            font-size: 1.1rem;
-            width: 24px;
-        }
-
-        .device-card-body .instruction span {
-            color: var(--gray-700);
-            font-size: 1rem;
-        }
-
-        /* Accordion */
-        .accordion {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-        }
-
-        .accordion-item {
-            background: white;
-            border-radius: 20px;
-            border: 2px solid var(--gray-200);
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .accordion-item:hover {
-            border-color: var(--gray-300);
-        }
-
-        .accordion-item.active {
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary-red);
-        }
-
-        .accordion-header {
-            padding: 1.5rem 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .accordion-header:hover {
-            background: var(--gray-50);
-        }
-
-        .accordion-header-left {
-            display: flex;
-            align-items: center;
-            gap: 1.25rem;
-        }
-
-        .accordion-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, rgba(255,80,29,0.1) 0%, rgba(255,215,0,0.1) 100%);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary-red);
-            font-size: 1.3rem;
-        }
-
-        .accordion-header h4 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--gray-900);
-        }
-
-        .accordion-header .chevron {
-            color: var(--gray-400);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 1.2rem;
-        }
-
-        .accordion-item.active .chevron {
-            transform: rotate(180deg);
-            color: var(--primary-red);
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .accordion-item.active .accordion-content {
-            max-height: 800px;
-        }
-
-        .accordion-body {
-            padding: 0 2rem 2rem;
-        }
-
-        /* Tip Box */
-        .tip-box {
-            background: linear-gradient(135deg, rgba(255,80,29,0.08) 0%, rgba(255,215,0,0.08) 100%);
-            border-left: 5px solid var(--primary-red);
-            border-radius: 0 20px 20px 0;
-            padding: 2rem;
-            margin-top: 2rem;
-            display: flex;
-            gap: 1.25rem;
-            align-items: flex-start;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .tip-box i {
-            color: var(--primary-red);
-            font-size: 1.8rem;
-            flex-shrink: 0;
-        }
-
-        .tip-box h4 {
-            color: var(--primary-red);
-            font-weight: 800;
-            margin-bottom: 0.6rem;
-            font-size: 1.1rem;
-        }
-
-        .tip-box p {
-            color: var(--gray-800);
-            font-size: 1rem;
-            line-height: 1.7;
-        }
-
-        /* Admin Grid */
-        .admin-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .admin-card {
-            background: white;
-            border-radius: 24px;
-            padding: 2.5rem;
-            border: 1px solid var(--gray-200);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-        }
-
-        .admin-card:hover {
-            box-shadow: var(--shadow-xl);
-            transform: translateY(-6px);
-        }
-
-        .admin-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: var(--orange-gradient);
-        }
-
-        .admin-card-icon {
-            width: 72px;
-            height: 72px;
-            background: var(--orange-gradient);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 2rem;
-            font-size: 2rem;
-            color: white;
-            box-shadow: 0 10px 30px rgba(255,80,29,0.3);
-        }
-
-        .admin-card h3 {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--gray-900);
-            margin-bottom: 1rem;
-        }
-
-        .admin-card p {
-            color: var(--gray-600);
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-        }
-
-        .admin-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 0.9rem;
-        }
-
-        .admin-step {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem 1.25rem;
-            background: var(--gray-50);
-            border-radius: 12px;
-            font-size: 0.95rem;
-            color: var(--gray-800);
-            transition: all 0.3s ease;
-        }
-
-        .admin-step:hover {
-            background: var(--gray-100);
-            transform: translateX(4px);
-        }
-
-        .admin-step i {
-            color: var(--primary-red);
-            font-size: 1rem;
-        }
-
-        /* Contact Section */
-        .contact-section {
-            background: var(--dark-800);
-            padding: 6rem 2rem;
-            margin-top: 6rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-section::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            opacity: 0.12;
-            background-image:
-                radial-gradient(circle at 30% 50%, var(--primary-red) 0%, transparent 40%),
-                radial-gradient(circle at 70% 50%, var(--primary-gold) 0%, transparent 40%);
-        }
-
-        .contact-content {
-            position: relative;
-            z-index: 1;
-            max-width: 700px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .contact-icon {
-            width: 90px;
-            height: 90px;
-            background: var(--orange-gradient);
-            border-radius: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 2.5rem;
-            font-size: 2.5rem;
-            color: white;
-            box-shadow: var(--shadow-glow-lg);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .contact-section h2 {
-            color: white;
-            font-size: clamp(2rem, 5vw, 2.8rem);
-            font-weight: 800;
-            margin-bottom: 1.25rem;
-            letter-spacing: -1px;
-        }
-
-        .contact-section > .contact-content > p {
-            color: var(--gray-400);
-            font-size: 1.15rem;
-            margin-bottom: 3rem;
-            line-height: 1.8;
-        }
-
-        .contact-email {
-            display: inline-flex;
-            align-items: center;
-            gap: 16px;
-            background: var(--orange-gradient);
-            color: white;
-            padding: 22px 44px;
-            border-radius: 50px;
-            font-weight: 800;
-            font-size: 1.3rem;
-            text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 10px 35px rgba(255,80,29,0.4);
-        }
-
-        .contact-email:hover {
-            transform: translateY(-4px) scale(1.03);
-            box-shadow: 0 15px 50px rgba(255,80,29,0.5);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--dark-900);
-            padding: 2.5rem;
-            text-align: center;
-        }
-
-        .footer p {
-            color: var(--gray-500);
-            font-size: 0.95rem;
-        }
-
-        .footer a {
-            color: var(--primary-red);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .footer a:hover {
-            color: var(--primary-gold);
-        }
-
-        /* Animations */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
-            .header {
-                padding: 0.75rem 1.25rem;
-                flex-wrap: wrap;
-                gap: 0.75rem;
-            }
-
-            .logo-container {
-                width: 100%;
-                justify-content: space-between;
-            }
-
-            .progress-nav {
-                width: 100%;
-                gap: 6px;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-                -ms-overflow-style: none;
-                padding-bottom: 0.25rem;
-            }
-
-            .progress-nav::-webkit-scrollbar {
-                display: none;
-            }
-
-            .progress-step {
-                padding: 8px 10px;
-                flex-shrink: 0;
-            }
-
-            .progress-step .step-num {
-                width: 22px;
-                height: 22px;
-                font-size: 0.7rem;
-            }
-
             .hero {
-                padding: 140px 1.5rem 100px;
+                padding: 140px 1.5rem 80px;
             }
 
-            .section-header {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
+            .choice-section {
+                padding: 3rem 1.5rem 4rem;
             }
 
-            .main-content {
-                padding: 4rem 1.25rem;
-            }
-
-            .screenshot-showcase {
+            .choice-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
 
-            .phone-mockup {
-                max-width: 280px;
+            .choice-card-header {
+                min-height: 240px;
+                padding: 2.5rem 2rem;
             }
 
-            .download-grid,
-            .feature-grid,
-            .device-grid,
-            .admin-grid {
+            .choice-card-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 2.5rem;
+            }
+
+            .choice-card-title {
+                font-size: 1.6rem;
+            }
+
+            .features-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
         }
 
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2rem;
+        @media (min-width: 769px) and (max-width: 1200px) {
+            .choice-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .btn {
-                padding: 14px 28px;
-                font-size: 0.9rem;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
+            .choice-card:last-child {
+                grid-column: 1 / -1;
+                max-width: 600px;
+                margin: 0 auto;
             }
         }
     </style>
@@ -1282,32 +393,6 @@
             <img src="https://passgage.com/wp-content/uploads/2023/11/Passgage-Primary-Logo.svg" alt="Passgage" class="logo">
             <span class="logo-badge">Kurulum Rehberi</span>
         </div>
-        <nav class="progress-nav">
-            <div class="progress-step active" data-target="step1">
-                <span class="step-num">1</span>
-                <span class="step-label">İndir</span>
-            </div>
-            <div class="progress-step" data-target="step2">
-                <span class="step-num">2</span>
-                <span class="step-label">Giriş</span>
-            </div>
-            <div class="progress-step" data-target="step3">
-                <span class="step-num">3</span>
-                <span class="step-label">Kayıt</span>
-            </div>
-            <div class="progress-step" data-target="step4">
-                <span class="step-num">4</span>
-                <span class="step-label">NFC</span>
-            </div>
-            <div class="progress-step" data-target="step5">
-                <span class="step-num">5</span>
-                <span class="step-label">Sorun</span>
-            </div>
-            <div class="progress-step" data-target="step6">
-                <span class="step-num">6</span>
-                <span class="step-label">Yönetici</span>
-            </div>
-        </nav>
     </header>
 
     <!-- Hero Section -->
@@ -1321,11 +406,11 @@
             <h1>Passgage <span class="gradient-text">Kurulum</span> Rehberi</h1>
             <p>Birkaç dakikada uygulamayı kurun ve kullanmaya başlayın. Size adım adım, görsel ve interaktif olarak rehberlik ediyoruz.</p>
             <div class="hero-actions">
-                <a href="#step1" class="btn btn-primary">
+                <a href="#choice-cards" class="btn btn-primary">
                     <i class="fas fa-play"></i>
                     Başlayalım
                 </a>
-                <a href="#step5" class="btn btn-secondary">
+                <a href="#contact" class="btn btn-secondary">
                     <i class="fas fa-question-circle"></i>
                     Sorun mu Var?
                 </a>
@@ -1333,517 +418,119 @@
         </div>
     </section>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Step 1: Download -->
-        <section class="section fade-up" id="step1">
-            <div class="section-header">
-                <div class="section-number">1</div>
-                <div>
-                    <h2 class="section-title">Uygulamayı İndirin</h2>
-                    <p class="section-subtitle">Cihazınıza uygun mağazadan ücretsiz indirin</p>
-                </div>
-            </div>
-
-            <div class="download-grid">
-                <!-- App Store -->
-                <a href="https://apps.apple.com/tr/app/passgage/id1603629297" target="_blank" class="download-card">
-                    <div class="download-card-header">
-                        <div class="store-icon apple">
-                            <i class="fab fa-apple"></i>
-                        </div>
-                        <div class="download-card-info">
-                            <h3>App Store</h3>
-                            <p>iPhone & iPad için</p>
-                        </div>
+    <!-- Choice Cards Section -->
+    <section class="py-16 md:py-24 px-8 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-12">
+            <!-- iOS Card -->
+            <a href="ios.html" class="bg-white rounded-3xl overflow-hidden shadow-card hover:shadow-strong transition-all duration-500 hover:-translate-y-3 no-underline flex flex-col group" id="ios-choice-card">
+                <div class="relative bg-gradient-to-br from-ios-black to-ios-gray p-12 flex flex-col items-center text-center min-h-[260px] overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-radial from-white/10 to-transparent opacity-50"></div>
+                    <div class="relative z-10 w-24 h-24 bg-white/20 rounded-3xl flex items-center justify-center text-white text-5xl mb-6">
+                        <i class="fab fa-apple"></i>
                     </div>
-                    <div class="download-card-body">
-                        <span>Ücretsiz İndir</span>
+                    <h2 class="relative z-10 text-3xl font-bold text-white mb-2">iOS Kurulumu</h2>
+                    <p class="relative z-10 text-white/80 text-sm">iPhone ve iPad kullanıcıları için</p>
+                </div>
+                <div class="p-8 flex flex-col flex-1">
+                    <p class="text-neutral-600 leading-relaxed mb-8 flex-1">App Store'dan indirme, izinler ayarlama, NFC kurulumu ve daha fazlası. iPhone 7 ve üzeri modeller için optimize edilmiştir.</p>
+                    <div class="inline-flex items-center gap-3 text-neutral-900 font-semibold group-hover:gap-4 transition-all">
+                        <span>iOS Rehberi</span>
                         <i class="fas fa-arrow-right"></i>
                     </div>
-                </a>
+                </div>
+            </a>
 
-                <!-- Google Play -->
-                <a href="https://play.google.com/store/apps/details?id=com.passgage" target="_blank" class="download-card">
-                    <div class="download-card-header">
-                        <div class="store-icon google">
-                            <i class="fab fa-google-play"></i>
-                        </div>
-                        <div class="download-card-info">
-                            <h3>Google Play</h3>
-                            <p>Android cihazlar için</p>
-                        </div>
+            <!-- Android Card -->
+            <a href="android.html" class="bg-white rounded-3xl overflow-hidden shadow-card hover:shadow-strong transition-all duration-500 hover:-translate-y-3 no-underline flex flex-col group" id="android-choice-card">
+                <div class="relative bg-gradient-to-br from-android-green to-green-600 p-12 flex flex-col items-center text-center min-h-[260px] overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-radial from-white/10 to-transparent opacity-50"></div>
+                    <div class="relative z-10 w-24 h-24 bg-white/20 rounded-3xl flex items-center justify-center text-white text-5xl mb-6">
+                        <i class="fab fa-android"></i>
                     </div>
-                    <div class="download-card-body">
-                        <span>Ücretsiz İndir</span>
+                    <h2 class="relative z-10 text-3xl font-bold text-white mb-2">Android Kurulumu</h2>
+                    <p class="relative z-10 text-white/80 text-sm">Android ve Huawei cihazlar için</p>
+                </div>
+                <div class="p-8 flex flex-col flex-1">
+                    <p class="text-neutral-600 leading-relaxed mb-8 flex-1">Google Play ve Huawei AppGallery'den indirme, izinler, NFC aktivasyonu ve sorun giderme rehberi.</p>
+                    <div class="inline-flex items-center gap-3 text-neutral-900 font-semibold group-hover:gap-4 transition-all">
+                        <span>Android Rehberi</span>
                         <i class="fas fa-arrow-right"></i>
                     </div>
-                </a>
-
-                <!-- AppGallery -->
-                <a href="https://appgallery.huawei.com/app/C106558653" target="_blank" class="download-card">
-                    <div class="download-card-header">
-                        <div class="store-icon huawei">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <div class="download-card-info">
-                            <h3>Huawei AppGallery</h3>
-                            <p>Huawei cihazlar için</p>
-                        </div>
-                    </div>
-                    <div class="download-card-body">
-                        <span>Ücretsiz İndir</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Screenshot Showcase -->
-            <div class="screenshot-showcase">
-                <div class="phone-mockup">
-                    <div class="phone-frame">
-                        <div class="phone-notch"></div>
-                        <div class="phone-screen">
-                            <div class="screenshot-placeholder">
-                                <i class="fas fa-mobile-alt"></i>
-                                <p>Ekran görüntüsü eklenecek:<br>App Store indirme</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <div class="screenshot-info">
-                    <div class="info-point">
-                        <div class="info-point-icon">
-                            <i class="fas fa-download"></i>
-                        </div>
-                        <div class="info-point-content">
-                            <h4>Hızlı İndirme</h4>
-                            <p>Uygulama boyutu optimize edilmiştir. Birkaç saniyede indirme tamamlanır.</p>
-                        </div>
-                    </div>
-                    <div class="info-point">
-                        <div class="info-point-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <div class="info-point-content">
-                            <h4>Güvenli ve Onaylı</h4>
-                            <p>Tüm resmi mağazalarda onaylı ve güvenlik kontrollünden geçmiştir.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </a>
 
-        <!-- Step 2: Login -->
-        <section class="section fade-up" id="step2">
-            <div class="section-header">
-                <div class="section-number">2</div>
-                <div>
-                    <h2 class="section-title">Giriş Yapın</h2>
-                    <p class="section-subtitle">Kurumsal bilgilerinizle oturum açın</p>
-                </div>
-            </div>
-
-            <div class="steps-list">
-                <div class="step-item">
-                    <div class="step-item-icon">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div class="step-item-content">
-                        <h4>Kullanıcı Adınızı Girin</h4>
-                        <p>İK departmanınız tarafından size verilen kurumsal kullanıcı adınızı veya e-posta adresinizi girin.</p>
-                    </div>
-                </div>
-
-                <div class="step-item">
-                    <div class="step-item-icon">
-                        <i class="fas fa-lock"></i>
-                    </div>
-                    <div class="step-item-content">
-                        <h4>Şifrenizi Girin</h4>
-                        <p>Size iletilen geçici şifreyi kullanın. İlk girişinizde güvenliğiniz için yeni bir şifre belirlemeniz istenecektir.</p>
-                    </div>
-                </div>
-
-                <div class="step-item">
-                    <div class="step-item-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <div class="step-item-content">
-                        <h4>Cihaz Eşleştirme</h4>
-                        <p>İlk girişte cihazınız hesabınıza otomatik olarak bağlanır. Bu, güvenliğiniz için önemli bir adımdır.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Screenshot Showcase -->
-            <div class="screenshot-showcase">
-                <div class="screenshot-info">
-                    <div class="info-point">
-                        <div class="info-point-icon">
-                            <i class="fas fa-key"></i>
-                        </div>
-                        <div class="info-point-content">
-                            <h4>İlk Giriş</h4>
-                            <p>Geçici şifrenizi girdikten sonra sistem otomatik olarak yeni şifre belirlemenizi isteyecektir.</p>
-                        </div>
-                    </div>
-                    <div class="info-point">
-                        <div class="info-point-icon">
-                            <i class="fas fa-lock"></i>
-                        </div>
-                        <div class="info-point-content">
-                            <h4>Güçlü Şifre</h4>
-                            <p>Şifreniz en az 8 karakter olmalı, büyük/küçük harf ve rakam içermelidir.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="phone-mockup">
-                    <div class="phone-frame">
-                        <div class="phone-notch"></div>
-                        <div class="phone-screen">
-                            <div class="screenshot-placeholder">
-                                <i class="fas fa-sign-in-alt"></i>
-                                <p>Ekran görüntüsü eklenecek:<br>Giriş ekranı</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tip-box">
-                <i class="fas fa-lightbulb"></i>
-                <div>
-                    <h4>Şifrenizi mi unuttunuz?</h4>
-                    <p>Giriş ekranındaki "Şifremi Unuttum" bağlantısına tıklayın. Kayıtlı e-posta adresinize şifre sıfırlama linki gönderilecektir.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Step 3: Check-in Methods -->
-        <section class="section fade-up" id="step3">
-            <div class="section-header">
-                <div class="section-number">3</div>
-                <div>
-                    <h2 class="section-title">Giriş-Çıkış Kayıt Yöntemleri</h2>
-                    <p class="section-subtitle">NFC veya QR kod ile hızlıca kayıt yapın</p>
-                </div>
-            </div>
-
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-wifi"></i>
-                    </div>
-                    <h3>NFC ile Kayıt</h3>
-                    <p>Telefonunuzu NFC okuyucuya yaklaştırın. Tek dokunuşla giriş veya çıkış kaydınız anında oluşturulur. Hızlı ve pratik!</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
+            <!-- Access Tag Card -->
+            <a href="access-tag.html" class="bg-white rounded-3xl overflow-hidden shadow-card hover:shadow-strong transition-all duration-500 hover:-translate-y-3 no-underline flex flex-col group md:col-span-2 lg:col-span-1" id="access-tag-choice-card">
+                <div class="relative bg-gradient-to-br from-tag-blue to-blue-500 p-12 flex flex-col items-center text-center min-h-[260px] overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-radial from-white/10 to-transparent opacity-50"></div>
+                    <div class="relative z-10 w-24 h-24 bg-white/20 rounded-3xl flex items-center justify-center text-white text-5xl mb-6">
                         <i class="fas fa-qrcode"></i>
                     </div>
-                    <h3>QR Kod ile Kayıt</h3>
-                    <p>Uygulamadaki QR tarayıcı ile şubenizdeki kodu okutun. Konum doğrulaması otomatik yapılır ve kaydınız tamamlanır.</p>
+                    <h2 class="relative z-10 text-3xl font-bold text-white mb-2">Access Tag Kurulumu</h2>
+                    <p class="relative z-10 text-white/80 text-sm">Fiziksel QR kod etiket montajı için</p>
+                </div>
+                <div class="p-8 flex flex-col flex-1">
+                    <p class="text-neutral-600 leading-relaxed mb-8 flex-1">Lokasyon planlama, montaj, yapılandırma ve bakım rehberi. İşyeriniz için optimal QR kod etiket yerleşimi.</p>
+                    <div class="inline-flex items-center gap-3 text-neutral-900 font-semibold group-hover:gap-4 transition-all">
+                        <span>Kurulum Rehberi</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Overview -->
+    <section class="py-20 md:py-28 px-8 bg-gradient-to-br from-neutral-50 to-neutral-100">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 text-center mb-4">Neden Passgage Kurulum Rehberi?</h2>
+            <p class="text-lg text-neutral-600 text-center mb-16 max-w-2xl mx-auto">Size özel hazırlanmış, adım adım görsel rehberle kolay kurulum</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="flex flex-col items-center text-center p-8 bg-white rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+                    <div class="w-16 h-16 bg-gradient-to-br from-passgage-red/10 to-passgage-gold/10 rounded-2xl flex items-center justify-center text-passgage-red text-3xl mb-5">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-neutral-900 mb-2">Görsel Rehber</h3>
+                    <p class="text-neutral-600 text-sm leading-relaxed">Her adım için ekran görüntüleri ve detaylı açıklamalar</p>
+                </div>
+
+                <div class="flex flex-col items-center text-center p-8 bg-white rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+                    <div class="w-16 h-16 bg-gradient-to-br from-passgage-red/10 to-passgage-gold/10 rounded-2xl flex items-center justify-center text-passgage-red text-3xl mb-5">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-neutral-900 mb-2">Platform Özel</h3>
+                    <p class="text-neutral-600 text-sm leading-relaxed">iOS, Android ve Access Tag için ayrı hazırlanmış rehberler</p>
+                </div>
+
+                <div class="flex flex-col items-center text-center p-8 bg-white rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+                    <div class="w-16 h-16 bg-gradient-to-br from-passgage-red/10 to-passgage-gold/10 rounded-2xl flex items-center justify-center text-passgage-red text-3xl mb-5">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-neutral-900 mb-2">7/24 Destek</h3>
+                    <p class="text-neutral-600 text-sm leading-relaxed">Takıldığınız her adımda size yardımcı olmaya hazırız</p>
+                </div>
+
+                <div class="flex flex-col items-center text-center p-8 bg-white rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+                    <div class="w-16 h-16 bg-gradient-to-br from-passgage-red/10 to-passgage-gold/10 rounded-2xl flex items-center justify-center text-passgage-red text-3xl mb-5">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-neutral-900 mb-2">Hızlı Kurulum</h3>
+                    <p class="text-neutral-600 text-sm leading-relaxed">Sadece birkaç dakika içinde kurulumunuzu tamamlayın</p>
                 </div>
             </div>
-
-            <!-- Screenshot Showcase -->
-            <div class="screenshot-showcase">
-                <div class="phone-mockup">
-                    <div class="phone-frame">
-                        <div class="phone-notch"></div>
-                        <div class="phone-screen">
-                            <div class="screenshot-placeholder">
-                                <i class="fas fa-qrcode"></i>
-                                <p>Ekran görüntüsü eklenecek:<br>QR kod tarama</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="screenshot-info">
-                    <div class="info-point">
-                        <div class="info-point-icon">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <div class="info-point-content">
-                            <h4>Otomatik Konum Doğrulama</h4>
-                            <p>Sistem GPS konumunuzu kontrol eder ve şube konumu ile eşleştirir.</p>
-                        </div>
-                    </div>
-                    <div class="info-point">
-                        <div class="info-point-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="info-point-content">
-                            <h4>Anında Kayıt</h4>
-                            <p>Giriş ve çıkışlarınız gerçek zamanlı olarak sisteme kaydedilir.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Step 4: NFC Activation -->
-        <section class="section fade-up" id="step4">
-            <div class="section-header">
-                <div class="section-number">4</div>
-                <div>
-                    <h2 class="section-title">NFC Aktivasyonu</h2>
-                    <p class="section-subtitle">Cihazınızda NFC özelliğini aktifleştirin</p>
-                </div>
-            </div>
-
-            <div class="device-grid">
-                <div class="device-card">
-                    <div class="device-card-header android">
-                        <i class="fab fa-android"></i>
-                        <div>
-                            <h3>Android & Huawei</h3>
-                            <p>NFC'yi manuel aktifleştirin</p>
-                        </div>
-                    </div>
-                    <div class="device-card-body">
-                        <div class="instruction">
-                            <i class="fas fa-cog"></i>
-                            <span><strong>Ayarlar</strong> uygulamasını açın</span>
-                        </div>
-                        <div class="instruction">
-                            <i class="fas fa-exchange-alt"></i>
-                            <span><strong>Bağlantılar</strong> veya <strong>Bağlı Cihazlar</strong>'a gidin</span>
-                        </div>
-                        <div class="instruction">
-                            <i class="fas fa-wifi"></i>
-                            <span><strong>NFC</strong> seçeneğini bulun</span>
-                        </div>
-                        <div class="instruction">
-                            <i class="fas fa-toggle-on"></i>
-                            <span>Anahtarı <strong>açık</strong> konuma getirin</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="device-card">
-                    <div class="device-card-header ios">
-                        <i class="fab fa-apple"></i>
-                        <div>
-                            <h3>iPhone</h3>
-                            <p>Varsayılan olarak aktif</p>
-                        </div>
-                    </div>
-                    <div class="device-card-body">
-                        <div class="instruction">
-                            <i class="fas fa-check-circle"></i>
-                            <span>NFC <strong>varsayılan olarak açıktır</strong></span>
-                        </div>
-                        <div class="instruction">
-                            <i class="fas fa-info-circle"></i>
-                            <span>Ek bir ayar yapmanıza <strong>gerek yoktur</strong></span>
-                        </div>
-                        <div class="instruction">
-                            <i class="fas fa-mobile-alt"></i>
-                            <span>iPhone 7 ve üzeri modellerde desteklenir</span>
-                        </div>
-                        <div class="instruction">
-                            <i class="fas fa-hand-pointer"></i>
-                            <span>Doğrudan NFC okuyucuya yaklaştırın</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Step 5: Troubleshooting -->
-        <section class="section fade-up" id="step5">
-            <div class="section-header">
-                <div class="section-number">5</div>
-                <div>
-                    <h2 class="section-title">Sorun Giderme</h2>
-                    <p class="section-subtitle">Konum hatası mı alıyorsunuz? Çözümler burada!</p>
-                </div>
-            </div>
-
-            <div class="accordion">
-                <div class="accordion-item active">
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <div class="accordion-header-left">
-                            <div class="accordion-icon">
-                                <i class="fas fa-bolt"></i>
-                            </div>
-                            <h4>Hızlı Çözümler</h4>
-                        </div>
-                        <i class="fas fa-chevron-down chevron"></i>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <div class="steps-list">
-                                <div class="step-item">
-                                    <div class="step-item-icon">
-                                        <i class="fas fa-hourglass-half"></i>
-                                    </div>
-                                    <div class="step-item-content">
-                                        <h4>3-5 Saniye Bekleyin</h4>
-                                        <p>QR kodu okutmadan önce birkaç saniye bekleyin. GPS sinyalinin güncellenmesi için zamana ihtiyacı var.</p>
-                                    </div>
-                                </div>
-                                <div class="step-item">
-                                    <div class="step-item-icon">
-                                        <i class="fas fa-wifi"></i>
-                                    </div>
-                                    <div class="step-item-content">
-                                        <h4>Wi-Fi'ı Açın</h4>
-                                        <p>Bağlı olmasanız bile Wi-Fi açıkken konum doğruluğu önemli ölçüde artar.</p>
-                                    </div>
-                                </div>
-                                <div class="step-item">
-                                    <div class="step-item-icon">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                    </div>
-                                    <div class="step-item-content">
-                                        <h4>Konum Servislerini Yenileyin</h4>
-                                        <p>Telefon ayarlarından konum servislerini kapatıp tekrar açın.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <div class="accordion-header-left">
-                            <div class="accordion-icon">
-                                <i class="fas fa-tools"></i>
-                            </div>
-                            <h4>Gelişmiş Çözümler</h4>
-                        </div>
-                        <i class="fas fa-chevron-down chevron"></i>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <div class="steps-list">
-                                <div class="step-item">
-                                    <div class="step-item-icon">
-                                        <i class="fas fa-map"></i>
-                                    </div>
-                                    <div class="step-item-content">
-                                        <h4>GPS'i Zorla Güncelleyin</h4>
-                                        <p>Google Maps veya WhatsApp açarak konum paylaşımı başlatın. Bu işlem GPS'in yenilenmesini sağlar.</p>
-                                    </div>
-                                </div>
-                                <div class="step-item">
-                                    <div class="step-item-icon">
-                                        <i class="fas fa-plane"></i>
-                                    </div>
-                                    <div class="step-item-content">
-                                        <h4>Bağlantıları Sıfırlayın</h4>
-                                        <p>Uçak modunu açıp 10 saniye bekleyin, sonra kapatın. Tüm kablosuz bağlantılar yenilenecektir.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <div class="accordion-header-left">
-                            <div class="accordion-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <h4>Herkes Aynı Hatayı Alıyorsa</h4>
-                        </div>
-                        <i class="fas fa-chevron-down chevron"></i>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <p style="color: var(--gray-700); line-height: 1.8; padding: 1.25rem; background: var(--gray-50); border-radius: 14px; font-size: 1rem;">
-                                <i class="fas fa-exclamation-triangle" style="color: var(--primary-red); margin-right: 10px;"></i>
-                                Şubenizdeki tüm çalışanlar aynı konum hatasını alıyorsa, bu genellikle <strong>şube konum ayarlarıyla</strong> ilgilidir.
-                                Lütfen <strong>şube yöneticinize</strong> veya <strong>İK departmanınıza</strong> başvurun.
-                                Yöneticiler için çözüm bir sonraki bölümde açıklanmaktadır.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Step 6: Admin Panel -->
-        <section class="section fade-up" id="step6">
-            <div class="section-header">
-                <div class="section-number">6</div>
-                <div>
-                    <h2 class="section-title">Yöneticiler İçin</h2>
-                    <p class="section-subtitle">Portal üzerinden yönetim işlemleri</p>
-                </div>
-            </div>
-
-            <div class="admin-grid">
-                <div class="admin-card">
-                    <div class="admin-card-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <h3>Şube Konumu Ekleme</h3>
-                    <p>Buradayım modülünün çalışması için şubelere enlem ve boylam girilmesi gerekir.</p>
-                    <div class="admin-steps">
-                        <div class="admin-step">
-                            <i class="fas fa-chevron-right"></i>
-                            <span>Tanımlar → Şubeler menüsüne gidin</span>
-                        </div>
-                        <div class="admin-step">
-                            <i class="fas fa-chevron-right"></i>
-                            <span>İlgili şubenin yanındaki Düzenle'ye tıklayın</span>
-                        </div>
-                        <div class="admin-step">
-                            <i class="fas fa-chevron-right"></i>
-                            <span>Enlem ve Boylam alanlarını doldurun</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="admin-card">
-                    <div class="admin-card-icon">
-                        <i class="fas fa-unlink"></i>
-                    </div>
-                    <h3>Cihaz Eşleşme Kaldırma</h3>
-                    <p>Kullanıcının yeni bir telefon kaydetmesine izin vermek için mevcut eşleşmeyi kaldırın.</p>
-                    <div class="admin-steps">
-                        <div class="admin-step">
-                            <i class="fas fa-chevron-right"></i>
-                            <span>Telefon Eşleşme → Liste'ye gidin</span>
-                        </div>
-                        <div class="admin-step">
-                            <i class="fas fa-chevron-right"></i>
-                            <span>Filtre ile kullanıcıyı bulun</span>
-                        </div>
-                        <div class="admin-step">
-                            <i class="fas fa-chevron-right"></i>
-                            <span>Satır sonundaki sil butonuna tıklayın</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tip-box">
-                <i class="fas fa-lightbulb"></i>
-                <div>
-                    <h4>İpucu: Koordinat Nasıl Bulunur?</h4>
-                    <p>Google Haritalar'da ilgili konuma sağ tıklayın, en üstte çıkan ondalık koordinatları kopyalayın. Virgülden önceki kısım <strong>Enlem</strong>, sonraki kısım <strong>Boylam</strong> değeridir.</p>
-                </div>
-            </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <!-- Contact Section -->
-    <section class="contact-section">
-        <div class="contact-content">
-            <div class="contact-icon">
-                <i class="fas fa-headset"></i>
+    <section class="py-20 px-8 bg-gradient-to-br from-neutral-50 to-neutral-100">
+        <div class="max-w-2xl mx-auto text-center">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-passgage-red to-passgage-gold text-white rounded-2xl mb-8 shadow-medium">
+                <i class="fas fa-headset text-3xl"></i>
             </div>
-            <h2>Yardıma mı İhtiyacınız Var?</h2>
-            <p>Her türlü soru, geri bildirim veya öneriniz için destek ekibimize ulaşmaktan çekinmeyin. Size yardımcı olmaktan mutluluk duyarız.</p>
-            <a href="mailto:deneyim@passgage.com" class="contact-email">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-neutral-900 mb-6">Yardıma mı <span class="gradient-text">İhtiyacınız Var?</span></h2>
+            <p class="text-lg md:text-xl text-neutral-600 leading-relaxed mb-8">Her türlü soru, geri bildirim veya öneriniz için destek ekibimize ulaşmaktan çekinmeyin. Size yardımcı olmaktan mutluluk duyarız.</p>
+            <a href="mailto:deneyim@passgage.com" class="inline-flex items-center gap-3 bg-gradient-to-r from-passgage-red to-passgage-gold text-white px-8 py-4 rounded-full font-bold text-lg hover:scale-105 hover:shadow-strong transition-all duration-300 no-underline" id="contact-email-link">
                 <i class="fas fa-envelope"></i>
                 deneyim@passgage.com
             </a>
@@ -1851,184 +538,57 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <p>© 2024 <a href="https://passgage.com" target="_blank">Passgage</a>. Tüm hakları saklıdır. İK Süper Uygulaması</p>
+    <footer class="py-8 px-8 bg-white border-t border-neutral-200">
+        <p class="text-center text-neutral-600">© 2024 <a href="https://passgage.com" target="_blank" class="text-neutral-900 font-semibold hover:text-passgage-red transition-colors no-underline">Passgage</a>. Tüm hakları saklıdır. İK Süper Uygulaması</p>
     </footer>
 
+    <!-- JavaScript -->
+    <script src="assets/js/common.js"></script>
+
     <script>
-        // Accordion Toggle
-        function toggleAccordion(header) {
-            const item = header.parentElement;
-            const wasActive = item.classList.contains('active');
-
-            // Close all
-            document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
-
-            // Open clicked if it wasn't active
-            if (!wasActive) {
-                item.classList.add('active');
-            }
-        }
-
-        // Progress Navigation
-        const progressSteps = document.querySelectorAll('.progress-step');
-        const sections = document.querySelectorAll('.section');
-
-        progressSteps.forEach(step => {
-            step.addEventListener('click', () => {
-                const target = step.dataset.target;
-                const targetElement = document.getElementById(target);
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Update progress on scroll
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '-100px 0px -60% 0px'
-        };
-
-        let currentActiveStep = 1; // Track current active step
-
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const stepNum = parseInt(entry.target.id.replace('step', ''));
-                    if (stepNum !== currentActiveStep) {
-                        currentActiveStep = stepNum;
-                        updateProgress(stepNum);
-                    }
-                }
-            });
-        }, observerOptions);
-
-        sections.forEach(section => sectionObserver.observe(section));
-
-        function updateProgress(activeStep) {
-            progressSteps.forEach((step, index) => {
-                const stepNum = index + 1;
-                step.classList.remove('active', 'completed');
-
-                if (stepNum < activeStep) {
-                    step.classList.add('completed');
-                } else if (stepNum === activeStep) {
-                    step.classList.add('active');
-                }
-            });
-        }
-
-        // Initialize first step as active on page load
-        updateProgress(1);
-
-        // Fade in animation on scroll
-        const fadeElements = document.querySelectorAll('.fade-up');
-        const fadeObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.15 });
-
-        fadeElements.forEach(el => fadeObserver.observe(el));
-
-        // Header shadow on scroll
-        let lastScroll = 0;
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            const currentScroll = window.pageYOffset;
-
-            if (currentScroll > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-
-            lastScroll = currentScroll;
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
         // ========================================
         // GOOGLE ANALYTICS CUSTOM EVENT TRACKING
         // ========================================
 
-        // 1. Download Button Clicks
-        document.querySelectorAll('.download-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const storeName = this.querySelector('h3').textContent;
-                gtag('event', 'download_click', {
-                    'event_category': 'downloads',
-                    'event_label': storeName,
-                    'value': 1
-                });
-                console.log('GA Event: Download click -', storeName);
-            });
-        });
-
-        // 2. Progress Step Navigation Clicks
-        document.querySelectorAll('.progress-step').forEach((step, index) => {
-            step.addEventListener('click', function() {
-                const stepNumber = index + 1;
-                const stepLabel = this.querySelector('.step-label')?.textContent || `Step ${stepNumber}`;
-                gtag('event', 'navigation_click', {
-                    'event_category': 'navigation',
-                    'event_label': `Step ${stepNumber}: ${stepLabel}`,
-                    'value': stepNumber
-                });
-                console.log('GA Event: Navigation click - Step', stepNumber);
-            });
-        });
-
-        // 3. Accordion (FAQ) Interactions
-        document.querySelectorAll('.accordion-header').forEach(header => {
-            header.addEventListener('click', function() {
-                const faqTitle = this.querySelector('h4').textContent;
-                const isOpening = !this.parentElement.classList.contains('active');
-                gtag('event', isOpening ? 'faq_open' : 'faq_close', {
-                    'event_category': 'engagement',
-                    'event_label': faqTitle,
-                    'value': 1
-                });
-                console.log('GA Event: FAQ', isOpening ? 'opened' : 'closed', '-', faqTitle);
-            });
-        });
-
-        // 4. Contact Email Click
-        document.querySelector('.contact-email')?.addEventListener('click', function() {
-            gtag('event', 'contact_click', {
-                'event_category': 'engagement',
-                'event_label': 'Email Contact',
+        // 1. Platform Choice Card Clicks
+        document.getElementById('ios-choice-card').addEventListener('click', function(e) {
+            gtag('event', 'platform_choice', {
+                'event_category': 'navigation',
+                'event_label': 'iOS',
                 'value': 1
             });
-            console.log('GA Event: Contact email clicked');
+            console.log('GA Event: Platform choice - iOS');
         });
 
-        // 5. Hero CTA Button Clicks
-        document.querySelectorAll('.hero-actions .btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const btnText = this.textContent.trim();
-                gtag('event', 'cta_click', {
-                    'event_category': 'engagement',
-                    'event_label': btnText,
-                    'value': 1
-                });
-                console.log('GA Event: CTA clicked -', btnText);
+        document.getElementById('android-choice-card').addEventListener('click', function(e) {
+            gtag('event', 'platform_choice', {
+                'event_category': 'navigation',
+                'event_label': 'Android',
+                'value': 1
             });
+            console.log('GA Event: Platform choice - Android');
         });
 
-        // 6. Scroll Depth Tracking
+        document.getElementById('access-tag-choice-card').addEventListener('click', function(e) {
+            gtag('event', 'platform_choice', {
+                'event_category': 'navigation',
+                'event_label': 'AccessTag',
+                'value': 1
+            });
+            console.log('GA Event: Platform choice - Access Tag');
+        });
+
+        // 2. Contact Email Click
+        document.getElementById('contact-email-link')?.addEventListener('click', function() {
+            gtag('event', 'contact_click', {
+                'event_category': 'engagement',
+                'event_label': 'Landing Page - Email Contact',
+                'value': 1
+            });
+            console.log('GA Event: Landing Page - Contact email clicked');
+        });
+
+        // 3. Scroll Depth Tracking
         let scrollDepthMarkers = {
             '25': false,
             '50': false,
@@ -2048,28 +608,36 @@
                     scrollDepthMarkers[depth] = true;
                     gtag('event', 'scroll_depth', {
                         'event_category': 'engagement',
-                        'event_label': `${depth}%`,
+                        'event_label': `Landing Page: ${depth}%`,
                         'value': parseInt(depth)
                     });
-                    console.log('GA Event: Scroll depth -', depth + '%');
+                    console.log('GA Event: Landing Page scroll depth -', depth + '%');
                 }
             });
         });
 
-        // 7. External Link Clicks (App Store, Google Play, Huawei links)
+        // 4. External Link Clicks (Footer Passgage.com link)
         document.querySelectorAll('a[target="_blank"]').forEach(link => {
             link.addEventListener('click', function() {
                 const linkText = this.textContent.trim() || this.href;
                 gtag('event', 'external_link', {
                     'event_category': 'outbound',
-                    'event_label': linkText,
+                    'event_label': `Landing Page: ${linkText}`,
                     'value': 1
                 });
-                console.log('GA Event: External link -', linkText);
+                console.log('GA Event: Landing Page - External link -', linkText);
             });
         });
 
-        console.log('✅ Google Analytics custom event tracking initialized');
+        // 5. Page View (Landing Page)
+        gtag('event', 'page_view', {
+            'event_category': 'navigation',
+            'event_label': 'Landing Page View',
+            'page_title': 'Passgage Kurulum Rehberi',
+            'page_location': window.location.href
+        });
+
+        console.log('✅ Landing Page - Google Analytics custom event tracking initialized');
     </script>
 </body>
 </html>
